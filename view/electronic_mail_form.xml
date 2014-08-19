@@ -36,6 +36,12 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <label name="flag_recent"/>
         <field name="flag_recent"/>
     </group>
-    <separator name="email" colspan="4"/>
-    <field name="email"/>
+    <separator id="body_plain" name="body_plain" colspan="2"/>
+    <separator id="body_html" name="body_html" colspan="2"/>
+    <field name="body_plain" colspan="2"/>
+    <field name="body_html" colspan="2"/>
+    <separator id="email" name="email" colspan="2"/>
+    <separator id="attach" name="num_attach" colspan="2"/>
+    <field name="email" colspan="2"/>
+    <field name="num_attach" colspan="2"/>
 </form>

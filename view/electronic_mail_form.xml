@@ -23,6 +23,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <group colspan="4" col="10" id="send_area">
         <label name="flag_send"/>
         <field name="flag_send"/>
+        <label name="flag_received"/>
+        <field name="flag_received"/>
     </group>
     <group colspan="4" col="10" id="flags_area">
         <label name="flag_seen"/>

@@ -237,7 +237,6 @@ class ElectronicMail(ModelSQL, ModelView):
     bcc = fields.Char('BCC')
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
-
     body_html = fields.Function(fields.Text('Body HTML'), 'get_email')
     body_plain = fields.Function(fields.Text('Body Plain'), 'get_email')
     deliveredto = fields.Char('Deliveret-To')
@@ -245,7 +244,6 @@ class ElectronicMail(ModelSQL, ModelView):
     reply_to = fields.Char('Reply-To')
     num_attach = fields.Function(fields.Integer('Number of attachments'),
         'get_email')
-
     message_id = fields.Char('Message-ID', help='Unique Message Identifier')
     in_reply_to = fields.Char('In-Reply-To')
     digest = fields.Char('MD5 Digest', size=32)
@@ -253,6 +251,7 @@ class ElectronicMail(ModelSQL, ModelView):
     email = fields.Function(fields.Binary('Email'), 'get_email',
         setter='set_email')
     flag_send = fields.Boolean('Sent', readonly=True)
+    flag_received = fields.Boolean('Received', readonly=True)
     flag_seen = fields.Boolean('Seen')
     flag_answered = fields.Boolean('Answered')
     flag_flagged = fields.Boolean('Flagged')
@@ -365,7 +364,8 @@ class ElectronicMail(ModelSQL, ModelView):
                     maintype_text['body_html'] = maintype_multipart['body_html']
         return maintype_text
 
-    def get_attachments(self, msg):
+    @staticmethod
+    def get_attachments(msg):
         attachments = []
         if msg:
             counter = 1
@@ -453,8 +453,7 @@ class ElectronicMail(ModelSQL, ModelView):
             body = cls.get_body(mail, message)
             result['body_plain'][mail.id] = body.get('body_plain')
             result['body_html'][mail.id] = body.get('body_html')
-            result['num_attach'][mail.id] = len(cls.get_attachments(
-                    mail, message))
+            result['num_attach'][mail.id] = len(cls.get_attachments(message))
         return result
 
     @classmethod

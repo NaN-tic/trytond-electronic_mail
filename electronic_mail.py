@@ -11,7 +11,7 @@ from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
 from trytond.transaction import Transaction
 from email import message_from_string
-from email.utils import parsedate, parseaddr
+from email.utils import parsedate, getaddresses
 from email.header import decode_header
 import logging
 import os
@@ -29,6 +29,29 @@ except ImportError:
     CHECK_EMAIL = False
     msg = "Unable to import emailvalid. Email validation disabled."
     logging.getLogger('Electronic Mail').warning(msg)
+
+def _decode_header(data):
+    if data is None:
+        return
+    decoded_headers = decode_header(data)
+    headers = []
+    for decoded_str, charset in decoded_headers:
+        if charset:
+            headers.append(unicode(decoded_str, charset))
+        else:
+            headers.append(unicode(decoded_str))
+    return "".join(headers)
+
+def _decode_body(part):
+    charset = str(part.get_content_charset())
+    payload = part.get_payload(decode=True)
+    if not charset or charset == 'None':
+        charset = chardet.detect(payload).get('encoding')
+    return payload.decode(charset).strip()
+
+def msg_from_string(buffer_):
+    " Convert mail file (buffer) to Email class"
+    return message_from_string(buffer_)
 
 __all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
 
@@ -248,7 +271,7 @@ class ElectronicMail(ModelSQL, ModelView):
     in_reply_to = fields.Char('In-Reply-To')
     digest = fields.Char('MD5 Digest', size=32)
     collision = fields.Integer('Collision')
-    email = fields.Function(fields.Binary('Email'), 'get_email',
+    email_file = fields.Function(fields.Binary('Email File'), 'get_email',
         setter='set_email')
     flag_send = fields.Boolean('Sent', readonly=True)
     flag_received = fields.Boolean('Received', readonly=True)
@@ -278,19 +301,33 @@ class ElectronicMail(ModelSQL, ModelView):
                     'Please, check the email before save it.',
                 })
 
-    @classmethod
-    def validate(cls, emails):
-        super(ElectronicMail, cls).validate(emails)
-        if CHECK_EMAIL:
-            for email in emails:
-                if email.from_ and not check_email(parseaddr(email.from_)[1]):
-                    cls.raise_user_error('email_invalid', email.from_)
-                if email.to and not check_email(parseaddr(email.to)[1]):
-                    cls.raise_user_error('email_invalid', email.to)
-                if email.cc and not check_email(parseaddr(email.cc)[1]):
-                    cls.raise_user_error('email_invalid', email.cc)
-                if email.bcc and not check_email(parseaddr(email.bcc)[1]):
-                    cls.raise_user_error('email_invalid', email.bcc)
+    @property
+    def all_to(self):
+        email = msg_from_string(self.email_file)
+        all_to = getaddresses(email.get_all('to', []))
+        parse_all_to = []
+        for to in all_to:
+            parse_all_to.append((_decode_header(to[0]), _decode_header(to[1])))
+        return parse_all_to
+
+    @property
+    def all_cc(self):
+        email = msg_from_string(self.email_file)
+        all_cc = getaddresses(email.get_all('cc', []))
+        parse_all_cc = []
+        for cc in all_cc:
+            parse_all_cc.append((_decode_header(cc[0]), _decode_header(cc[1])))
+        return parse_all_cc
+
+    @property
+    def all_bcc(self):
+        email = msg_from_string(self.email_file)
+        all_bcc = getaddresses(email.get_all('bcc', []))
+        parse_all_bcc = []
+        for bcc in all_bcc:
+            parse_all_bcc.append(
+                (_decode_header(bcc[0]), _decode_header(bcc[1])))
+        return parse_all_bcc
 
     @staticmethod
     def default_collision():
@@ -331,7 +368,7 @@ class ElectronicMail(ModelSQL, ModelView):
         maintype_multipart = maintype_text.copy()
         if msg:
             if not msg.is_multipart():
-                decode_body = self._decode_body(msg)
+                decode_body = _decode_body(msg)
                 if msg.get_content_subtype() == "html":
                     maintype_text['body_html'] = decode_body
                 else:
@@ -340,7 +377,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 for part in msg.walk():
                     maintype = part.get_content_maintype()
                     if maintype == 'text':
-                        decode_body = self._decode_body(part)
+                        decode_body = _decode_body(part)
                         if part.get_content_subtype() == "html":
                             maintype_text['body_html'] = decode_body
                         else:
@@ -350,13 +387,13 @@ class ElectronicMail(ModelSQL, ModelView):
                     if maintype == 'multipart':
                         for p in part.get_payload():
                             if p.get_content_maintype() == 'text':
-                                decode_body = self._decode_body(p)
+                                decode_body = _decode_body(p)
                                 if p.get_content_subtype() == 'html':
                                     maintype_multipart['body_html'] = decode_body
                                 else:
                                     maintype_multipart['body_plain'] = decode_body
                     elif maintype != 'multipart' and not part.get_filename():
-                        decode_body = self._decode_body(part)
+                        decode_body = _decode_body(part)
                         if not maintype_multipart['body_plain']:
                             maintype_multipart['body_plain'] = decode_body
                         if not maintype_multipart['body_html']:
@@ -447,16 +484,16 @@ class ElectronicMail(ModelSQL, ModelView):
     @classmethod
     def get_email(cls, mails, names):
         result = {}
-        for fname in names:
+        for fname in ['body_plain', 'body_html', 'num_attach', 'email_file']:
             result[fname] = {}
         for mail in mails:
-            email = cls._get_email(mail) or False
-            result['email'][mail.id] = email
-            message = message_from_string(email)
-            body = cls.get_body(mail, message)
+            email_file = cls._get_email(mail) or False
+            result['email_file'][mail.id] = email_file
+            email = msg_from_string(email_file)
+            body = cls.get_body(mail, email)
             result['body_plain'][mail.id] = body.get('body_plain')
             result['body_html'][mail.id] = body.get('body_html')
-            result['num_attach'][mail.id] = len(cls.get_attachments(message))
+            result['num_attach'][mail.id] = len(cls.get_attachments(email))
         return result
 
     @classmethod
@@ -534,66 +571,46 @@ class ElectronicMail(ModelSQL, ModelView):
         return digest
 
     @classmethod
-    def create_from_email(cls, mail, mailbox, context={}):
+    def create_from_email(cls, mail, mailbox):
         """
         Creates a mail record from a given mail
         :param mail: email object
         :param mailbox: ID of the mailbox
         :param context: dict
         """
-        email_date = (cls._decode_header(mail.get('date', "")) and
+        email_date = (_decode_header(mail.get('date', "")) and
             datetime.fromtimestamp(
                 mktime(parsedate(mail.get('date')))))
         values = {
             'mailbox': mailbox,
-            'from_': cls._decode_header(mail.get('from')),
-            'sender': cls._decode_header(mail.get('sender')),
-            'to': cls._decode_header(mail.get('to')),
-            'cc': cls._decode_header(mail.get('cc')),
-            'bcc': context.get('bcc'),
-            'subject': cls._decode_header(mail.get('subject')),
+            'from_': _decode_header(mail.get('from')),
+            'sender': _decode_header(mail.get('sender')),
+            'to': _decode_header(mail.get('to')),
+            'cc': _decode_header(mail.get('cc')),
+            'bcc': _decode_header(mail.get('bcc')),
+            'subject': _decode_header(mail.get('subject')),
             'date': email_date,
-            'message_id': cls._decode_header(mail.get('message-id')),
-            'in_reply_to': cls._decode_header(mail.get('in-reply-to')),
-            'deliveredto': cls._decode_header(mail.get('deliveret-to')),
-            'reference': cls._decode_header(mail.get('references')),
-            'reply_to': cls._decode_header(mail.get('reply-to')),
-            'email': mail.as_string(),
-            'size': getsizeof(mail.as_string()),
+            'message_id': _decode_header(mail.get('message-id')),
+            'in_reply_to': _decode_header(mail.get('in-reply-to')),
+            'deliveredto': _decode_header(mail.get('delivered-to')),
+            'reference': _decode_header(mail.get('references')),
+            'reply_to': _decode_header(mail.get('reply-to')),
+            'email_file': mail.__str__(),
+            'size': getsizeof(mail.__str__()),
             }
 
         email = cls.create([values])[0]
         return email
 
-    @classmethod
-    def validate_emails(cls, emails):
-        '''Validate Emails is a email
+    @staticmethod
+    def validate_emails(emails):
+        '''Validate if emails ara corect formated.
         :param emails: list strings
+        Return only the correct mails.
         '''
         if CHECK_EMAIL:
+            correct_mails = []
             for email in emails:
-                if not check_email(email):
-                    cls.raise_user_error('email_invalid',
-                        error_args=(email,))
-        return True
-
-    @classmethod
-    def _decode_header(cls, data):
-        if data is None:
-            return
-        decoded_headers = decode_header(data)
-        headers = []
-        for decoded_str, charset in decoded_headers:
-            if charset:
-                headers.append(unicode(decoded_str, charset))
-            else:
-                headers.append(unicode(decoded_str))
-        return "".join(headers)
-
-    @classmethod
-    def _decode_body(cls, part):
-        charset = str(part.get_content_charset())
-        payload = part.get_payload(decode=True)
-        if not charset or charset == 'None':
-            charset = chardet.detect(payload).get('encoding')
-        return payload.decode(charset).strip()
+                if check_email(email):
+                    correct_mails.append(email)
+        return correct_mails

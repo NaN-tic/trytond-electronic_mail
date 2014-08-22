@@ -4,6 +4,7 @@
 from trytond.model import ModelView, ModelSingleton, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.transaction import Transaction
+
 __all__ = [
     'ElectronicMailConfiguration',
     'ElectronicMailConfigurationCompany',

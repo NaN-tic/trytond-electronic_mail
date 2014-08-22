@@ -42,8 +42,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <separator id="body_html" name="body_html" colspan="2"/>
     <field name="body_plain" colspan="2"/>
     <field name="body_html" colspan="2"/>
-    <separator id="email" name="email" colspan="2"/>
+    <separator id="email_file" name="email_file" colspan="2"/>
     <separator id="attach" name="num_attach" colspan="2"/>
-    <field name="email" colspan="2"/>
+    <field name="email_file" colspan="2"/>
     <field name="num_attach" colspan="2"/>
 </form>

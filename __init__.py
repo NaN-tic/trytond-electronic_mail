@@ -5,14 +5,16 @@
 from trytond.pool import Pool
 from .electronic_mail import *
 from .configuration import *
+from .user import *
 
 
 def register():
     Pool.register(
-        Mailbox,
-        ReadUser,
-        WriteUser,
         ElectronicMail,
         ElectronicMailConfiguration,
         ElectronicMailConfigurationCompany,
+        Mailbox,
+        ReadUser,
+        User,
+        WriteUser,
         module='electronic_mail', type_='model')

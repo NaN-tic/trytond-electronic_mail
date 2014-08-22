@@ -4,8 +4,8 @@ this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath expr="/form/notebook/page[@id='user']/separator[@name='signature']" position="replace" />
     <xpath expr="/form/notebook/page[@id='user']/field[@name='signature']" position="replace" >
-        <notebook colspan="4">
-            <page id="signature" string="Signature">
+        <notebook id="signature" colspan="4">
+            <page id="signature_plain" string="Signature">
                 <field name="signature" colspan="4"/>
             </page>
             <page id="signature_html" string="Signature (HTML)">

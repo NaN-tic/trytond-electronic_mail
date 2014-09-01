@@ -12,7 +12,7 @@ from trytond.pyson import Bool, Eval
 from trytond.transaction import Transaction
 from email import message_from_string
 from email.utils import parsedate, getaddresses
-from email.header import decode_header
+from email.header import decode_header, make_header
 import logging
 import os
 import chardet
@@ -30,6 +30,10 @@ except ImportError:
     msg = "Unable to import emailvalid. Email validation disabled."
     logging.getLogger('Electronic Mail').warning(msg)
 
+
+def _make_header(data, charset='utf-8'):
+    return str(make_header([(data, charset)]))
+
 def _decode_header(data):
     if data is None:
         return
@@ -40,7 +44,7 @@ def _decode_header(data):
             headers.append(unicode(decoded_str, charset))
         else:
             headers.append(unicode(decoded_str))
-    return "".join(headers)
+    return " ".join(headers)
 
 def _decode_body(part):
     charset = str(part.get_content_charset())
@@ -52,6 +56,7 @@ def _decode_body(part):
 def msg_from_string(buffer_):
     " Convert mail file (buffer) to Email class"
     return message_from_string(buffer_)
+
 
 __all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
 

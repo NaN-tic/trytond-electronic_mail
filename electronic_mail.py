@@ -613,8 +613,8 @@ class ElectronicMail(ModelSQL, ModelView):
         :param emails: list strings
         Return only the correct mails.
         '''
+        correct_mails = []
         if CHECK_EMAIL:
-            correct_mails = []
             for email in emails:
                 if check_email(email):
                     correct_mails.append(email)

@@ -55,7 +55,9 @@ def _decode_body(part):
 
 def msg_from_string(buffer_):
     " Convert mail file (buffer) to Email class"
-    return message_from_string(buffer_)
+    if isinstance(buffer_, (buffer, basestring)):
+        return message_from_string(buffer_)
+    return False
 
 
 __all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
@@ -265,19 +267,19 @@ class ElectronicMail(ModelSQL, ModelView):
     bcc = fields.Char('BCC')
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
-    body_html = fields.Function(fields.Text('Body HTML'), 'get_email')
-    body_plain = fields.Function(fields.Text('Body Plain'), 'get_email')
+    body_html = fields.Function(fields.Text('Body HTML'), 'get_mail')
+    body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
     deliveredto = fields.Char('Deliveret-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
     num_attach = fields.Function(fields.Integer('Number of attachments'),
-        'get_email')
+        'get_mail')
     message_id = fields.Char('Message-ID', help='Unique Message Identifier')
     in_reply_to = fields.Char('In-Reply-To')
     digest = fields.Char('MD5 Digest', size=32)
     collision = fields.Integer('Collision')
-    email_file = fields.Function(fields.Binary('Email File'), 'get_email',
-        setter='set_email')
+    mail_file = fields.Function(fields.Binary('Mail File'), 'get_mail',
+        setter='set_mail')
     flag_send = fields.Boolean('Sent', readonly=True)
     flag_received = fields.Boolean('Received', readonly=True)
     flag_seen = fields.Boolean('Seen')
@@ -308,30 +310,33 @@ class ElectronicMail(ModelSQL, ModelView):
 
     @property
     def all_to(self):
-        email = msg_from_string(self.email_file)
-        all_to = getaddresses(email.get_all('to', []))
+        mail = msg_from_string(self.mail_file)
         parse_all_to = []
-        for to in all_to:
-            parse_all_to.append((_decode_header(to[0]), _decode_header(to[1])))
+        if mail:
+            all_to = getaddresses(mail.get_all('to', []))
+            for to in all_to:
+                parse_all_to.append((_decode_header(to[0]), _decode_header(to[1])))
         return parse_all_to
 
     @property
     def all_cc(self):
-        email = msg_from_string(self.email_file)
-        all_cc = getaddresses(email.get_all('cc', []))
+        mail = msg_from_string(self.mail_file)
         parse_all_cc = []
-        for cc in all_cc:
-            parse_all_cc.append((_decode_header(cc[0]), _decode_header(cc[1])))
+        if mail:
+            all_cc = getaddresses(mail.get_all('cc', []))
+            for cc in all_cc:
+                parse_all_cc.append((_decode_header(cc[0]), _decode_header(cc[1])))
         return parse_all_cc
 
     @property
     def all_bcc(self):
-        email = msg_from_string(self.email_file)
-        all_bcc = getaddresses(email.get_all('bcc', []))
+        mail = msg_from_string(self.mail_file)
         parse_all_bcc = []
-        for bcc in all_bcc:
-            parse_all_bcc.append(
-                (_decode_header(bcc[0]), _decode_header(bcc[1])))
+        if mail:
+            all_bcc = getaddresses(mail.get_all('bcc', []))
+            for bcc in all_bcc:
+                parse_all_bcc.append(
+                    (_decode_header(bcc[0]), _decode_header(bcc[1])))
         return parse_all_bcc
 
     @staticmethod
@@ -466,9 +471,9 @@ class ElectronicMail(ModelSQL, ModelView):
         return [('mailbox.' + name[8:],) + clause[1:]]
 
     @staticmethod
-    def _get_email(electronic_mail):
+    def _get_mail(electronic_mail):
         """
-        Returns the email object from reading the FS
+        Returns the mail object from reading the FS
         :param electronic_mail: Browse Record of the mail
         """
         db_name = Transaction().cursor.dbname
@@ -487,14 +492,14 @@ class ElectronicMail(ModelSQL, ModelView):
         return value
 
     @classmethod
-    def get_email(cls, mails, names):
+    def get_mail(cls, mails, names):
         result = {}
-        for fname in ['body_plain', 'body_html', 'num_attach', 'email_file']:
+        for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
             result[fname] = {}
         for mail in mails:
-            email_file = cls._get_email(mail) or False
-            result['email_file'][mail.id] = email_file
-            email = msg_from_string(email_file)
+            mail_file = cls._get_mail(mail) or False
+            result['mail_file'][mail.id] = mail_file
+            email = msg_from_string(mail_file)
             body = cls.get_body(mail, email)
             result['body_plain'][mail.id] = body.get('body_plain')
             result['body_html'][mail.id] = body.get('body_html')
@@ -502,10 +507,10 @@ class ElectronicMail(ModelSQL, ModelView):
         return result
 
     @classmethod
-    def set_email(cls, records, name, data):
-        """Saves an email to the data path
+    def set_mail(cls, records, name, data):
+        """Saves an mail to the data path
 
-        :param data: Email as string
+        :param data: Mail as string
         """
         if data is False or data is None:
             return
@@ -600,7 +605,7 @@ class ElectronicMail(ModelSQL, ModelView):
             'deliveredto': _decode_header(mail.get('delivered-to')),
             'reference': _decode_header(mail.get('references')),
             'reply_to': _decode_header(mail.get('reply-to')),
-            'email_file': mail.__str__(),
+            'mail_file': mail.__str__(),
             'size': getsizeof(mail.__str__()),
             }
 

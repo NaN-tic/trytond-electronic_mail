@@ -17,7 +17,7 @@ Version 2.4.0 - 2012-09-06
 * Add es_ES locale
 * Review ca_ES locale
 * Add ca_ES locale
-* get_email: Remove base64 when reading data
+* get_mail: Remove base64 when reading data
 * Add doc
 * README and legal notice
 * Initial release

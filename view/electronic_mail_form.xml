@@ -38,12 +38,12 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <label name="flag_recent"/>
         <field name="flag_recent"/>
     </group>
-    <separator id="body_plain" name="body_plain" colspan="2"/>
-    <separator id="body_html" name="body_html" colspan="2"/>
+    <separator id="body_plain" string="Body Plain" colspan="2"/>
+    <separator id="body_html" string="Body Html" colspan="2"/>
     <field name="body_plain" colspan="2"/>
     <field name="body_html" colspan="2"/>
-    <separator id="mail_file" name="mail_file" colspan="2"/>
-    <separator id="attach" name="num_attach" colspan="2"/>
+    <separator id="mail_file" string="Fail" colspan="2"/>
+    <separator id="attach" string="Attach Number" colspan="2"/>
     <field name="mail_file" colspan="2"/>
     <field name="num_attach" colspan="2"/>
 </form>

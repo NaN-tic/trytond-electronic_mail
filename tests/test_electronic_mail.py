@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #This file is part electronic_mail module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
 "Electronic Mail test suite"
 
@@ -217,7 +217,7 @@ class ElectronicMailTestCase(unittest.TestCase):
                     'read_users': [('add', [USER])],
                     'write_users': [('add', [USER])],
                     }])[0]
-            mail = self.Mail.create_from_email(message, mailbox)
+            mail = self.Mail.create_from_mail(message, mailbox)
 
             self.assertEqual(mail.subject, message['Subject'])
             self.assertEqual(mail.from_, message['From'])

@@ -43,7 +43,7 @@ def _decode_header(data):
         if charset:
             headers.append(unicode(decoded_str, charset))
         else:
-            headers.append(unicode(decoded_str))
+            headers.append(unicode(decoded_str, 'utf8'))
     return " ".join(headers)
 
 def _decode_body(part):

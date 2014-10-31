@@ -1,3 +1,14 @@
+* Fix encoding error when calculate headers
+* Fix order of register class and xml files to install on clean database
+* Fix wrong attributes of view
+* Add the possibilty to have a user signature in html format
+
+Version 3.2.0 - 2014-05-22
+
+Version 3.0.0 - 2013-10-25
+
+Version 2.8.0 - 2013-04-26
+
 Version 2.6.0 - 2012-10-08
 * Simplify module information with python configuration
 * Active Record

@@ -1,3 +1,4 @@
+Version 3.4.0 - 2014-11-03
 Version 3.2.1 - 2014-10-31
 * Fix encoding error when calculate headers
 * Fix order of register class and xml files to install on clean database

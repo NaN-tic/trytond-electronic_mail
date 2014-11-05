@@ -5,11 +5,6 @@
 #the full copyright notices and license terms.
 "Electronic Mail test suite"
 
-import sys, os
-DIR = os.path.abspath(os.path.normpath(os.path.join(__file__,
-    '..', '..', '..', '..', '..', 'trytond')))
-if os.path.isdir(DIR):
-    sys.path.insert(0, os.path.dirname(DIR))
 import unittest
 
 from email.mime.multipart import MIMEMultipart
@@ -20,10 +15,10 @@ import trytond.tests.test_tryton
 from trytond.tests.test_tryton import POOL, DB_NAME, USER, CONTEXT, \
     test_view, test_depends
 from trytond.transaction import Transaction
-from trytond.config import CONFIG
+from trytond.config import config
 
 # Set a data path since the module stores email attachment content in data dir
-CONFIG['data_path'] = '/tmp/'
+config.set('database', 'path', '/tmp/')
 
 USER_TYPES = ('owner_user_%s', 'read_user_%s', 'write_user_%s')
 

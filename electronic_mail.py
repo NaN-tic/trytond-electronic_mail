@@ -5,7 +5,7 @@ from __future__ import with_statement
 from datetime import datetime
 from sys import getsizeof
 from time import mktime
-from trytond.config import CONFIG
+from trytond.config import config
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
@@ -43,7 +43,7 @@ def _decode_header(data):
         if charset:
             headers.append(unicode(decoded_str, charset))
         else:
-            headers.append(unicode(decoded_str))
+            headers.append(unicode(decoded_str, 'utf8'))
     return " ".join(headers)
 
 def _decode_body(part):
@@ -482,8 +482,8 @@ class ElectronicMail(ModelSQL, ModelView):
             filename = electronic_mail.digest
             if electronic_mail.collision:
                 filename = filename + '-' + str(electronic_mail.collision)
-            filename = os.path.join(CONFIG['data_path'], db_name,
-                'email', filename[0:2], filename)
+            filename = os.path.join(config.get('database', 'path'),
+                db_name, 'email', filename[0:2], filename)
             try:
                 with open(filename, 'rb') as file_p:
                     value = buffer(file_p.read())
@@ -516,7 +516,7 @@ class ElectronicMail(ModelSQL, ModelView):
             return
         db_name = Transaction().cursor.dbname
         # Prepare Directory <DATA PATH>/<DB NAME>/email
-        directory = os.path.join(CONFIG['data_path'], db_name)
+        directory = os.path.join(config.get('database', 'path'), db_name)
         if not os.path.isdir(directory):
             os.makedirs(directory, 0770)
         digest = cls.make_digest(data)

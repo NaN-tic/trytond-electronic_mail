@@ -10,8 +10,8 @@ Podemos llevar así un registro más eficiente de nuestras actividades, evitando
 pérdidas de información que se pueden producir cuando la mensajería electrónica
 no está integrada en nuestro ERP.
 
-|mailbox|
-=========
+Buzón de correo
+===============
 
 Los buzones de correo nos permiten agrupar distintos correos para poder
 encontrarlos más fácilmente. Son directorios virtuales donde se clasificarán los
@@ -24,8 +24,8 @@ vayamos creando. Para crear un buzón, simplemente tenemos que clicar en el bot�
 y ya tendremos creado un nuevo buzón. Posteriormente configuraremos qué correos se
 guardarán en qué buzones.
 
-|electronic_mail|
-=================
+Correo electrónico
+==================
 
 Mediante la ruta |mail_menu| accederemos a un listado de todos los correos
 electrónicos. Podremos cambiar la vista y acceder a cada uno de los correos que nos
@@ -34,8 +34,8 @@ el menú para poder acceder solo a los correos del buzón en cuestión.
 
 .. inheritref:: electronic_mail/electronic_mail:section:configuracion
 
-|configuration|
-===============
+Configuración
+=============
 
 Antes de la instalación del módulo, debemos asegurarnos que el administrador
 del servidor ha especificado la opción ``data_path`` en el fichero de configuración.
@@ -65,9 +65,6 @@ claramente en qué estado está cada uno de los correos.
 
 Para configurar el protocolo smtp puede ver :ref:`config-smtp`
 
-.. |mailbox| model:: electronic.mail.mailbox
-.. |electronic_mail| model:: electronic.mail
-.. |configuration| model:: electronic.mail.configuration
 .. |menu_configuracion| tryref::  electronic_mail.menu_electronic_mail_configuration/complete_name
 .. |box_menu| tryref:: electronic_mail.menu_mailbox/complete_name
 .. |mail_menu| tryref:: electronic_mail.menu_mail/complete_name

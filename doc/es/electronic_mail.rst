@@ -5,14 +5,16 @@ Correo electrónico
 .. inheritref:: electronic_mail/electronic_mail:paragraph:introdución
 
 **Tryton** nos permite gestionar el envío y recepción de correos electrónicos a través
-del sistema para una gestión más eficaz de nuestra correspondencia electrónica.  
+del sistema para una gestión más eficaz de nuestra correspondencia electrónica.
 Podemos llevar así un registro más eficiente de nuestras actividades, evitando posibles
 pérdidas de información que se pueden producir cuando la mensajería electrónica
 no está integrada en nuestro ERP.
 
 .. inheritref:: electronic_mail/electronic_mail:section:mailbox
 
-|mailbox|
+Buzón de correo
+===============
+
 
 Los buzones de correo nos permiten agrupar distintos correos para poder
 encontrarlos más fácilmente. Son directorios virtuales donde se clasificarán los

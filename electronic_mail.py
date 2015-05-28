@@ -605,7 +605,7 @@ class ElectronicMail(ModelSQL, ModelView):
             'deliveredto': _decode_header(mail.get('delivered-to')),
             'reference': _decode_header(mail.get('references')),
             'reply_to': _decode_header(mail.get('reply-to')),
-            'mail_file': mail.__str__(),
+            'mail_file': mail.as_string(),
             'size': getsizeof(mail.__str__()),
             }
 

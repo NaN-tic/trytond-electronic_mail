@@ -2,7 +2,7 @@
 Correo electrónico
 ==================
 
-.. inheritref:: electronic_mail/electronic_mail:paragraph:introdución
+.. inheritref:: electronic_mail/electronic_mail:paragraph:introduccion
 
 **Tryton** nos permite gestionar el envío y recepción de correos electrónicos a través
 del sistema para una gestión más eficaz de nuestra correspondencia electrónica.
@@ -62,11 +62,10 @@ carpetas básicas.
 * **Error**: Se guardarán en este buzón todos aquellos correos en los que se
   ha producido algún error durante el envío del mismo.
 
-Aunque es posible utilizar un único buzón para todas las carpetas
+.. Note:: Aunque es posible utilizar un único buzón para todas las carpetas
 se recomienda crear un buzón para cada una de ellas para poder diferenciar
 claramente en qué estado está cada uno de los correos.
 
-Para configurar el protocolo smtp puede ver :ref:`config-smtp`
 
 .. |menu_configuracion| tryref::  electronic_mail.menu_electronic_mail_configuration/complete_name
 .. |box_menu| tryref:: electronic_mail.menu_mailbox/complete_name

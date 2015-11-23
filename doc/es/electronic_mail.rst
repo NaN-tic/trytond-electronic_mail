@@ -63,8 +63,8 @@ carpetas básicas.
   ha producido algún error durante el envío del mismo.
 
 .. Note:: Aunque es posible utilizar un único buzón para todas las carpetas
-se recomienda crear un buzón para cada una de ellas para poder diferenciar
-claramente en qué estado está cada uno de los correos.
+   se recomienda crear un buzón para cada una de ellas para poder diferenciar
+   claramente en qué estado está cada uno de los correos.
 
 
 .. |menu_configuracion| tryref::  electronic_mail.menu_electronic_mail_configuration/complete_name

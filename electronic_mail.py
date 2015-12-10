@@ -34,6 +34,7 @@ except ImportError:
 def _make_header(data, charset='utf-8'):
     return str(make_header([(data, charset)]))
 
+
 def _decode_header(data):
     if data is None:
         return
@@ -46,12 +47,14 @@ def _decode_header(data):
             headers.append(unicode(decoded_str, 'utf8'))
     return " ".join(headers)
 
+
 def _decode_body(part):
     charset = str(part.get_content_charset())
     payload = part.get_payload(decode=True)
     if not charset or charset == 'None':
         charset = chardet.detect(payload).get('encoding')
     return payload.decode(charset).strip()
+
 
 def msg_from_string(buffer_):
     " Convert mail file (buffer) to Email class"
@@ -315,7 +318,8 @@ class ElectronicMail(ModelSQL, ModelView):
         if mail:
             all_to = getaddresses(mail.get_all('to', []))
             for to in all_to:
-                parse_all_to.append((_decode_header(to[0]), _decode_header(to[1])))
+                parse_all_to.append((_decode_header(to[0]),
+                        _decode_header(to[1])))
         return parse_all_to
 
     @property
@@ -325,7 +329,8 @@ class ElectronicMail(ModelSQL, ModelView):
         if mail:
             all_cc = getaddresses(mail.get_all('cc', []))
             for cc in all_cc:
-                parse_all_cc.append((_decode_header(cc[0]), _decode_header(cc[1])))
+                parse_all_cc.append((_decode_header(cc[0]),
+                        _decode_header(cc[1])))
         return parse_all_cc
 
     @property

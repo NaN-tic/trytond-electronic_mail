@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 #This file is part electronic_mail module for Tryton.
 #The COPYRIGHT file at the top level of this repository contains
@@ -12,8 +11,8 @@ from email.mime.text import MIMEText
 from email.utils import formatdate
 
 import trytond.tests.test_tryton
-from trytond.tests.test_tryton import POOL, DB_NAME, USER, CONTEXT, \
-    test_view, test_depends
+from trytond.tests.test_tryton import ModuleTestCase
+from trytond.tests.test_tryton import POOL, DB_NAME, USER, CONTEXT
 from trytond.transaction import Transaction
 from trytond.config import config
 
@@ -23,13 +22,14 @@ config.set('database', 'path', '/tmp/')
 USER_TYPES = ('owner_user_%s', 'read_user_%s', 'write_user_%s')
 
 
-class ElectronicMailTestCase(unittest.TestCase):
+class ElectronicMailTestCase(ModuleTestCase):
     """
     Test Electronic Mail Module
     """
+    module = 'electronic_mail'
 
     def setUp(self):
-        trytond.tests.test_tryton.install_module('electronic_mail')
+        super(ElectronicMailTestCase, self).setUp()
 
         self.Mailbox = POOL.get('electronic.mail.mailbox')
         self.Mail = POOL.get('electronic.mail')
@@ -40,9 +40,9 @@ class ElectronicMailTestCase(unittest.TestCase):
         """
         Creates a new user and returns the ID
         """
-        group_email_admin_id =  self.ModelData.get_id(
+        group_email_admin_id = self.ModelData.get_id(
             'electronic_mail', 'group_email_admin')
-        group_email_user_id =  self.ModelData.get_id(
+        group_email_user_id = self.ModelData.get_id(
             'electronic_mail', 'group_email_user')
 
         return self.User.create([
@@ -61,24 +61,15 @@ class ElectronicMailTestCase(unittest.TestCase):
             1 Write User
         :return: List of tuple of the ID of three users
         """
-        created_users = [ ]
+        created_users = []
         for iteration in xrange(1, no_of_sets + 1):
             created_users.append(
                 tuple([
-                    self.create_user(user_type % iteration) \
+                    self.create_user(user_type % iteration)
                         for user_type in USER_TYPES
                 ])
             )
         return created_users
-
-    def test0005views(self):
-        '''
-        Test views.
-        '''
-        test_view('electronic_mail')
-
-    def test0010depends(self):
-        test_depends()
 
     def test0010mailbox_read_rights(self):
         '''
@@ -227,6 +218,3 @@ def suite():
         )
     )
     return suite
-
-if __name__ == '__main__':
-    unittest.TextTestRunner(verbosity=2).run(suite())

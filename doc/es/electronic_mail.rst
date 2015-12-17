@@ -52,13 +52,10 @@ carpetas básicas.
 
 * **Borrador**: Se guardarán en este buzón aquellos correos de los que no se
   haya finalizado la edición.
-
 * **Salida**: Se guardarán en este buzón los correos que todavía estén
   pendientes de enviar.
-
 * **Enviado**: Se guardarán en este buzón aquellos correos que se hayan
   enviado correctamente.
-
 * **Error**: Se guardarán en este buzón todos aquellos correos en los que se
   ha producido algún error durante el envío del mismo.
 

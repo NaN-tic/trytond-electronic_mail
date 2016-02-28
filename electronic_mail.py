@@ -613,14 +613,24 @@ class ElectronicMail(ModelSQL, ModelView):
         return mail
 
     @staticmethod
-    def validate_emails(emails):
+    def validate_emails(email):
         '''Validate if emails ara corect formated.
         :param emails: list strings
         Return only the correct mails.
         '''
+        if isinstance(email, list):
+            emails = email
+        else:
+            emails = [email]
         correct_mails = []
         if CHECK_EMAIL:
             for email in emails:
                 if check_email(email):
                     correct_mails.append(email)
-        return correct_mails
+        else:
+           return email
+
+        if isinstance(email, list):
+            return correct_mails
+        else:
+            return len(correct_mails) == 1 and correct_mails[0] or ""

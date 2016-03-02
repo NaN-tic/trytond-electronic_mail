@@ -632,9 +632,9 @@ class ElectronicMail(ModelSQL, ModelView):
             emails = [email]
         correct_mails = []
         if CHECK_EMAIL:
-            for email in emails:
-                if check_email(email):
-                    correct_mails.append(email)
+            for em in emails:
+                if check_email(em):
+                    correct_mails.append(em)
         else:
            return email
 

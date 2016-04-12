@@ -111,7 +111,7 @@ class ElectronicMailTestCase(ModuleTestCase):
                     mailboxes = self.Mailbox.search([], count=True)
                     self.assertEqual(mailboxes, mailbox_count)
 
-            transaction.cursor.rollback()
+            transaction.rollback()
 
     def test0020mail_create_access_rights(self):
         """
@@ -161,7 +161,7 @@ class ElectronicMailTestCase(ModuleTestCase):
                         }])
                 )
 
-            transaction.cursor.rollback()
+            transaction.rollback()
 
     def test0030_email_message_extraction(self):
         """

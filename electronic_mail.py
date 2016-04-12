@@ -481,7 +481,7 @@ class ElectronicMail(ModelSQL, ModelView):
         Returns the mail object from reading the FS
         :param electronic_mail: Browse Record of the mail
         """
-        db_name = Transaction().cursor.dbname
+        db_name = Transaction().database.name
         value = u''
         if electronic_mail.digest:
             filename = electronic_mail.digest
@@ -522,7 +522,7 @@ class ElectronicMail(ModelSQL, ModelView):
         """
         if data is False or data is None:
             return
-        db_name = Transaction().cursor.dbname
+        db_name = Transaction().database.name
         # Prepare Directory <DATA PATH>/<DB NAME>/email
         directory = os.path.join(config.get('database', 'path'), db_name)
         if not os.path.isdir(directory):
@@ -550,7 +550,7 @@ class ElectronicMail(ModelSQL, ModelView):
             with open(filename, 'r') as file_p:
                 data2 = file_p.read()
             if data != data2:
-                cursor = Transaction().cursor
+                cursor = Transaction().connection.cursor()
                 cursor.execute(
                     'SELECT DISTINCT(collision) FROM electronic_mail '
                     'WHERE digest = %s AND collision !=0 '

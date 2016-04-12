@@ -1,7 +1,7 @@
 # This file is part of the electronic_mail_configuration module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-from trytond.model import ModelView, ModelSingleton, ModelSQL, fields
+from trytond.model import ModelView, ModelSingleton, ModelSQL, fields, Unique
 from trytond.pool import Pool
 from trytond.transaction import Transaction
 
@@ -109,7 +109,8 @@ class ElectronicMailConfigurationCompany(ModelSQL, ModelView):
     @classmethod
     def __setup__(cls):
         super(ElectronicMailConfigurationCompany, cls).__setup__()
-        cls._sql_constraints += [
-            ('company_uniq', 'UNIQUE(company)',
+        t = cls.__table__()
+        cls._sql_constraints = [
+            ('company_uniq', Unique(t, t.company),
                 'There is already one configuration for this company.'),
             ]

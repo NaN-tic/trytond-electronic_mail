@@ -31,8 +31,9 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
     def __setup__(cls):
         super(ElectronicMailConfiguration, cls).__setup__()
         cls._error_messages.update({
-                'not_company': ('You have not got the default company configured.'
-                    ' And you need it to configure the default folders.' ),
+                'not_company': (
+                    'You have not got the default company configured.'
+                    ' And you need it to configure the default folders.'),
                 })
 
     @classmethod
@@ -50,7 +51,7 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
                 for conf in confs:
                     for field_name in names:
                         value = getattr(conf, field_name)
-                        if value and (not isinstance(value, unicode)
+                        if (value and not isinstance(value, unicode)
                                 and not isinstance(value, int)):
                             value = value.id
                         res[field_name] = {conf_id: value}

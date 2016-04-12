@@ -2,26 +2,21 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from __future__ import with_statement
-from datetime import datetime
-from sys import getsizeof
-from time import mktime
-from trytond.config import config
-from trytond.model import ModelView, ModelSQL, fields
-from trytond.pool import Pool
-from trytond.pyson import Bool, Eval
-from trytond.transaction import Transaction
-from email import message_from_string
-from email.utils import parsedate, getaddresses
-from email.header import decode_header, make_header
-import logging
-import os
 import chardet
+import logging
 import mimetypes
+import os
 try:
     import hashlib
 except ImportError:
     hashlib = None
     import md5
+from datetime import datetime
+from email import message_from_string
+from email.utils import parsedate, getaddresses
+from email.header import decode_header, make_header
+from sys import getsizeof
+from time import mktime
 try:
     from emailvalid import check_email
     CHECK_EMAIL = True
@@ -29,6 +24,14 @@ except ImportError:
     CHECK_EMAIL = False
     msg = "Unable to import emailvalid. Email validation disabled."
     logging.getLogger('Electronic Mail').warning(msg)
+
+from trytond.config import config
+from trytond.model import ModelView, ModelSQL, fields
+from trytond.pool import Pool
+from trytond.pyson import Bool, Eval
+from trytond.transaction import Transaction
+
+__all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
 
 
 def _make_header(data, charset='utf-8'):
@@ -63,9 +66,6 @@ def msg_from_string(buffer_):
     return False
 
 
-__all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
-
-
 class Mailbox(ModelSQL, ModelView):
     "Mailbox"
     __name__ = "electronic.mail.mailbox"
@@ -73,18 +73,18 @@ class Mailbox(ModelSQL, ModelView):
     name = fields.Char('Name', required=True)
     user = fields.Many2One('res.user', 'Owner')
     read_users = fields.Many2Many('electronic.mail.mailbox.read.res.user',
-            'mailbox', 'user', 'Read Users')
+        'mailbox', 'user', 'Read Users')
     write_users = fields.Many2Many('electronic.mail.mailbox.write.res.user',
-            'mailbox', 'user', 'Write Users')
+        'mailbox', 'user', 'Write Users')
 
     @classmethod
     def __setup__(cls):
         super(Mailbox, cls).__setup__()
         cls._error_messages.update({
-                'foreign_model_exist': 'You can not delete this mailbox '
-                    'because it has electronic mails.',
-                'menu_exist': 'This mailbox has already a menu.\nPlease, '
-                    'refresh the menu to see it.',
+                'foreign_model_exist': ('You can not delete this mailbox '
+                    'because it has electronic mails.'),
+                'menu_exist': ('This mailbox has already a menu.\n'
+                    'Please, refresh the menu to see it.'),
                 })
         cls._buttons.update({
                 'create_menu': {
@@ -261,8 +261,8 @@ class ElectronicMail(ModelSQL, ModelView):
     __name__ = 'electronic.mail'
     _order_name = 'date'
 
-    mailbox = fields.Many2One(
-        'electronic.mail.mailbox', 'Mailbox', required=True)
+    mailbox = fields.Many2One('electronic.mail.mailbox', 'Mailbox',
+        required=True)
     from_ = fields.Char('From')
     sender = fields.Char('Sender')
     to = fields.Char('To')
@@ -270,8 +270,10 @@ class ElectronicMail(ModelSQL, ModelView):
     bcc = fields.Char('BCC')
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
-    body_html = fields.Function(fields.Text('Body HTML'), 'get_mail')
-    body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
+    body_html = fields.Function(fields.Text('Body HTML'),
+        'get_mail')
+    body_plain = fields.Function(fields.Text('Body Plain'),
+        'get_mail')
     deliveredto = fields.Char('Deliveret-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
@@ -281,8 +283,8 @@ class ElectronicMail(ModelSQL, ModelView):
     in_reply_to = fields.Char('In-Reply-To')
     digest = fields.Char('MD5 Digest', size=32)
     collision = fields.Integer('Collision')
-    mail_file = fields.Function(fields.Binary('Mail File'), 'get_mail',
-        setter='set_mail')
+    mail_file = fields.Function(fields.Binary('Mail File'),
+        'get_mail', setter='set_mail')
     flag_send = fields.Boolean('Sent', readonly=True)
     flag_received = fields.Boolean('Received', readonly=True)
     flag_seen = fields.Boolean('Seen')
@@ -291,8 +293,7 @@ class ElectronicMail(ModelSQL, ModelView):
     flag_draft = fields.Boolean('Draft')
     flag_recent = fields.Boolean('Recent')
     size = fields.Integer('Size')
-    mailbox_owner = fields.Function(
-        fields.Many2One('res.user', 'Owner'),
+    mailbox_owner = fields.Function(fields.Many2One('res.user', 'Owner'),
         'get_mailbox_owner', searcher='search_mailbox_owner')
     mailbox_read_users = fields.Function(
         fields.One2Many('res.user', None, 'Read Users'),
@@ -306,9 +307,8 @@ class ElectronicMail(ModelSQL, ModelView):
         super(ElectronicMail, cls).__setup__()
         cls._order.insert(0, ('date', 'DESC'))
         cls._error_messages.update({
-                'email_invalid':
-                    'eMail %s invalid. '
-                    'Please, check the email before save it.',
+                'email_invalid': ('eMail %s invalid. '
+                    'Please, check the email before save it.'),
                 })
 
     @property
@@ -397,16 +397,19 @@ class ElectronicMail(ModelSQL, ModelView):
                             maintype_text['body_html'] = decode_body
                         else:
                             maintype_text['body_plain'] = decode_body
-                    if maintype_text['body_plain'] and maintype_text['body_html']:
+                    if (maintype_text['body_plain']
+                            and maintype_text['body_html']):
                         break
                     if maintype == 'multipart':
                         for p in part.get_payload():
                             if p.get_content_maintype() == 'text':
                                 decode_body = _decode_body(p)
                                 if p.get_content_subtype() == 'html':
-                                    maintype_multipart['body_html'] = decode_body
+                                    maintype_multipart['body_html'] = (
+                                        decode_body)
                                 else:
-                                    maintype_multipart['body_plain'] = decode_body
+                                    maintype_multipart['body_plain'] = (
+                                        decode_body)
                     elif maintype != 'multipart' and not part.get_filename():
                         decode_body = _decode_body(part)
                         if not maintype_multipart['body_plain']:
@@ -414,9 +417,11 @@ class ElectronicMail(ModelSQL, ModelView):
                         if not maintype_multipart['body_html']:
                             maintype_multipart['body_html'] = decode_body
                 if not maintype_text['body_plain']:
-                    maintype_text['body_plain'] = maintype_multipart['body_plain']
+                    maintype_text['body_plain'] = (
+                        maintype_multipart['body_plain'])
                 if not maintype_text['body_html']:
-                    maintype_text['body_html'] = maintype_multipart['body_html']
+                    maintype_text['body_html'] = (
+                        maintype_multipart['body_html'])
         return maintype_text
 
     @staticmethod
@@ -432,7 +437,8 @@ class ElectronicMail(ModelSQL, ModelView):
                 if part.get_filename():
                     filename = part.get_filename()
                     if not filename:
-                        ext = mimetypes.guess_extension(part.get_content_type())
+                        ext = mimetypes.guess_extension(
+                            part.get_content_type())
                         if not ext:
                             # Use a generic bag-of-bits extension
                             ext = '.bin'
@@ -636,7 +642,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 if check_email(em):
                     correct_mails.append(em)
         else:
-           return email
+            return email
 
         if isinstance(email, list):
             return correct_mails

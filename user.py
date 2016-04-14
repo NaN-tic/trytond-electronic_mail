@@ -13,6 +13,7 @@ class User:
 
     @classmethod
     def __setup__(cls):
+        super(User, cls).__setup__()
         if not cls._preferences_fields:
             cls._preferences_fields = []
         cls._preferences_fields.append('signature_html')

@@ -1,10 +1,16 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:electronic.mail.configuration.company:"
 msgid "There is already one configuration for this company."
 msgstr "Ja existeix una configuració per aquesta empresa."
+
+msgctxt "error:electronic.mail.configuration:"
+msgid ""
+"You have not got the default company configured. And you need it to "
+"configure the default folders."
+msgstr ""
 
 msgctxt "error:electronic.mail.mailbox:"
 msgid ""
@@ -19,12 +25,20 @@ msgid "You can not delete this mailbox because it has electronic mails."
 msgstr "No podeu eliminar aquesta bústia perquè te correus electrònics."
 
 msgctxt "error:electronic.mail:"
-msgid "Invalid email. Please, check the email before save it."
-msgstr "Email invàlid. Siusplau, reviseu-lo abans de guardar-lo."
+msgid "eMail %s invalid. Please, check the email before save it."
+msgstr ""
 
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
+
+msgctxt "field:electronic.mail,body_html:"
+msgid "Body HTML"
+msgstr ""
+
+msgctxt "field:electronic.mail,body_plain:"
+msgid "Body Plain"
+msgstr ""
 
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
@@ -46,13 +60,13 @@ msgctxt "field:electronic.mail,date:"
 msgid "Date"
 msgstr "Data"
 
+msgctxt "field:electronic.mail,deliveredto:"
+msgid "Deliveret-To"
+msgstr ""
+
 msgctxt "field:electronic.mail,digest:"
 msgid "MD5 Digest"
 msgstr "MD%"
-
-msgctxt "field:electronic.mail,email:"
-msgid "Email"
-msgstr "Correu electrònic"
 
 msgctxt "field:electronic.mail,flag_answered:"
 msgid "Answered"
@@ -65,6 +79,10 @@ msgstr "Esborrany"
 msgctxt "field:electronic.mail,flag_flagged:"
 msgid "Flagged"
 msgstr "Marcat"
+
+msgctxt "field:electronic.mail,flag_received:"
+msgid "Received"
+msgstr "Rebut"
 
 msgctxt "field:electronic.mail,flag_recent:"
 msgid "Recent"
@@ -90,6 +108,10 @@ msgctxt "field:electronic.mail,in_reply_to:"
 msgid "In-Reply-To"
 msgstr "En resposta a"
 
+msgctxt "field:electronic.mail,mail_file:"
+msgid "Mail File"
+msgstr ""
+
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
 msgstr "Bústia de correu"
@@ -110,9 +132,21 @@ msgctxt "field:electronic.mail,message_id:"
 msgid "Message-ID"
 msgstr "Missatge-ID"
 
+msgctxt "field:electronic.mail,num_attach:"
+msgid "Number of attachments"
+msgstr ""
+
 msgctxt "field:electronic.mail,rec_name:"
 msgid "Name"
 msgstr "Nom"
+
+msgctxt "field:electronic.mail,reference:"
+msgid "References"
+msgstr ""
+
+msgctxt "field:electronic.mail,reply_to:"
+msgid "Reply-To"
+msgstr ""
 
 msgctxt "field:electronic.mail,sender:"
 msgid "Sender"
@@ -326,6 +360,10 @@ msgctxt "field:electronic.mail.mailbox.write.res.user,write_uid:"
 msgid "Write User"
 msgstr "Usuari modificació"
 
+msgctxt "field:res.user,signature_html:"
+msgid "Signature"
+msgstr "Signatura"
+
 msgctxt "help:electronic.mail,message_id:"
 msgid "Unique Message Identifier"
 msgstr "Identificador únic del missatge"
@@ -415,9 +453,37 @@ msgid "Permissions"
 msgstr "Permissos"
 
 msgctxt "view:electronic.mail:"
+msgid "Attach Number"
+msgstr ""
+
+msgctxt "view:electronic.mail:"
+msgid "Body Html"
+msgstr ""
+
+msgctxt "view:electronic.mail:"
+msgid "Body Plain"
+msgstr ""
+
+msgctxt "view:electronic.mail:"
 msgid "Email"
 msgstr "Correu electrònic"
 
 msgctxt "view:electronic.mail:"
 msgid "Emails"
 msgstr "Correus electrònics"
+
+msgctxt "view:electronic.mail:"
+msgid "Fail"
+msgstr "Fallat"
+
+msgctxt "view:electronic.mail:"
+msgid "Hour"
+msgstr "Hora"
+
+msgctxt "view:res.user:"
+msgid "Signature"
+msgstr "Signatura"
+
+msgctxt "view:res.user:"
+msgid "Signature (HTML)"
+msgstr "Signatura (HTML)"

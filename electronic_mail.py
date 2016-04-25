@@ -272,7 +272,7 @@ class ElectronicMail(ModelSQL, ModelView):
     subject = fields.Char('Subject')
     body_html = fields.Function(fields.Text('Body HTML'), 'get_mail')
     body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
-    deliveredto = fields.Char('Deliveret-To')
+    deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
     num_attach = fields.Function(fields.Integer('Number of attachments'),

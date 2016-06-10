@@ -1,4 +1,4 @@
-#
+# 
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -65,7 +65,7 @@ msgid "Date"
 msgstr "Data"
 
 msgctxt "field:electronic.mail,deliveredto:"
-msgid "Deliveret-To"
+msgid "Delivered-To"
 msgstr "Entregat-a"
 
 msgctxt "field:electronic.mail,digest:"

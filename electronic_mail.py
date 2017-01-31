@@ -35,7 +35,7 @@ __all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
 
 
 def _make_header(data, charset='utf-8'):
-    return str(make_header([(data, charset)]))
+    return str(make_header([(data or "", charset)]))
 
 
 def _decode_header(data):

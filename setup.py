@@ -1,45 +1,62 @@
 #!/usr/bin/env python
-#This file is part electronic_mail module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains
-#the full copyright notices and license terms.
+# encoding: utf-8
 
 from setuptools import setup
 import re
 import os
-import ConfigParser
+import io
+try:
+    from configparser import ConfigParser
+except ImportError:
+    from ConfigParser import ConfigParser
 
 MODULE = 'electronic_mail'
 PREFIX = 'trytonzz'
 MODULE2PREFIX = {}
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-config = ConfigParser.ConfigParser()
+def read(fname):
+    return io.open(
+        os.path.join(os.path.dirname(__file__), fname),
+        'r', encoding='utf-8').read()
+
+
+def get_require_version(name):
+    if minor_version % 2:
+        require = '%s >= %s.%s.dev0, < %s.%s'
+    else:
+        require = '%s >= %s.%s, < %s.%s'
+    require %= (name, major_version, minor_version,
+        major_version, minor_version + 1)
+    return require
+
+config = ConfigParser()
 config.readfp(open('tryton.cfg'))
 info = dict(config.items('tryton'))
 for key in ('depends', 'extras_depend', 'xml'):
     if key in info:
         info[key] = info[key].strip().splitlines()
-major_version, minor_version, _ = info.get('version', '0.0.1').split('.', 2)
+
+version = info.get('version', '0.0.1')
+major_version, minor_version, _ = version.split('.', 2)
 major_version = int(major_version)
 minor_version = int(minor_version)
 
-requires = []
+requires = ['chardet']
 for dep in info.get('depends', []):
-    if not re.match(r'(ir|res|webdav)(\W|$)', dep):
+    if not re.match(r'(ir|res)(\W|$)', dep):
         prefix = MODULE2PREFIX.get(dep, 'trytond')
-        requires.append('%s_%s >= %s.%s, < %s.%s' %
-                (prefix, dep, major_version, minor_version,
-                major_version, minor_version + 1))
-requires.append('trytond >= %s.%s, < %s.%s' %
-        (major_version, minor_version, major_version, minor_version + 1))
+        requires.append(get_require_version('%s_%s' % (prefix, dep)))
+requires.append(get_require_version('trytond'))
 
-tests_require = ['proteus >= %s.%s, < %s.%s' %
-    (major_version, minor_version, major_version, minor_version + 1)]
+tests_require = []
+dependency_links = []
+if minor_version % 2:
+    # Add development index for testing with proteus
+    dependency_links.append('https://trydevpi.tryton.org/')
 
 setup(name='%s_%s' % (PREFIX, MODULE),
-    version=info.get('version', '0.0.1'),
+    version=version,
     description='Electronic mail storage',
     author='Openlabs Technologies & Consulting (P) LTD',
     author_email='info@openlabs.co.in',
@@ -66,12 +83,17 @@ setup(name='%s_%s' % (PREFIX, MODULE),
         'Natural Language :: Catalan',
         'Natural Language :: Spanish',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Office/Business',
         ],
     license='GPL-3',
     install_requires=requires,
+    dependency_links=dependency_links,
     zip_safe=False,
     entry_points="""
     [trytond.modules]
@@ -79,4 +101,6 @@ setup(name='%s_%s' % (PREFIX, MODULE),
     """ % (MODULE, MODULE),
     test_suite='tests',
     test_loader='trytond.test_loader:Loader',
-)
+    tests_require=tests_require,
+    use_2to3=True,
+    )

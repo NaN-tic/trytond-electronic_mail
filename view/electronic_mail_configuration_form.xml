@@ -2,7 +2,7 @@
 <!-- This file is part of the electronic_mail_configuration module for Tryton.
 The COPYRIGHT file at the top level of this repository contains the full
 copyright notices and license terms. -->
-<form string="Electronic Mail Configuration">
+<form>
     <label name="draft"/>
     <field name="draft" colspan="3"/>
     <label name="outbox"/>

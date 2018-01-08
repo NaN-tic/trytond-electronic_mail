@@ -35,7 +35,6 @@ def create_user(name):
     return User.create([{
                 'login': name,
                 'name': name,
-                'password': name,
                 'groups': [
                     ('add', [group_email_admin_id, group_email_user_id]),
                     ],

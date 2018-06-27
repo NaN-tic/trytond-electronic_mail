@@ -135,6 +135,19 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_delete" eval="True"/>
     </record>
 
+
+    <record model="ir.model.button" id="create_menu_button">
+        <field name="name">create_menu</field>
+        <field name="string">Create Menu</field>
+        <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+    </record>
+    <record model="ir.model.button-res.group"
+        id="create_menu_button_group_account">
+        <field name="button" ref="create_menu_button"/>
+        <field name="group" ref="access_mail_admin"/>
+    </record>
+
+
     <!-- Rule to read mailboxes -->
     <record model="ir.rule.group" id="rule_group_read_mailbox">
       <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>

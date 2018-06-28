@@ -144,7 +144,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <record model="ir.model.button-res.group"
         id="create_menu_button_group_account">
         <field name="button" ref="create_menu_button"/>
-        <field name="group" ref="access_mail_admin"/>
+        <field name="group" ref="group_email_admin"/>
     </record>
 
 

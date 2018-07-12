@@ -112,7 +112,7 @@ class Mailbox(ModelSQL, ModelView):
         for mailbox in mailboxes:
             act_windows.extend(ActWindow.search([
                     ('res_model', '=', 'electronic.mail'),
-                    ('domain', '=', str([('mailbox', '=', mailbox.id)])),
+                    ('domain', '=', '[["mailbox", "=", %d]]' % mailbox.id),
                     ]))
             actions.extend([a_w.action for a_w in act_windows])
             keywords.extend(ActionKeyword.search([('action', 'in', actions)]))
@@ -147,8 +147,8 @@ class Mailbox(ModelSQL, ModelView):
                 for mailbox in mailboxes:
                     act_windows = ActWindow.search([
                             ('res_model', '=', 'electronic.mail'),
-                            ('domain', '=', str([
-                                        ('mailbox', '=', mailbox.id)])),
+                            ('domain', '=',
+                                '[["mailbox", "=", %d]]' % mailbox.id),
                             ])
                     actions.extend([a_w.action for a_w in act_windows])
                     keywords = ActionKeyword.search([
@@ -176,7 +176,7 @@ class Mailbox(ModelSQL, ModelView):
         for mailbox in mailboxes:
             act_windows = ActWindow.search([
                     ('res_model', '=', 'electronic.mail'),
-                    ('domain', '=', str([('mailbox', '=', mailbox.id)])),
+                    ('domain', '=', '[["mailbox", "=", %d]]' % mailbox.id),
                     ])
             actions = [a_w.action for a_w in act_windows]
             keywords = ActionKeyword.search([('action', 'in', actions)])
@@ -197,7 +197,7 @@ class Mailbox(ModelSQL, ModelView):
                     } for mb in mailboxes])
         act_windows = ActWindow.create([{
                     'res_model': 'electronic.mail',
-                    'domain': str([('mailbox', '=', mb.id)]),
+                    'domain': '[["mailbox", "=", %d]]' % mailbox.id,
                     'action': a.id,
                     }
                 for mb in mailboxes for a in actions if a.name == mb.name])

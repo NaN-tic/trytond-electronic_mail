@@ -1,7 +1,7 @@
 # This file is part of electronic_mail module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
-from __future__ import with_statement
+
 import chardet
 import logging
 import mimetypes
@@ -44,11 +44,11 @@ def _decode_header(data):
     decoded_headers = decode_header(data)
     headers = []
     for decoded_str, charset in decoded_headers:
-        if not isinstance(decoded_str, unicode):
+        if not isinstance(decoded_str, str):
             if charset:
-                headers.append(unicode(decoded_str, charset))
+                headers.append(str(decoded_str, charset))
             else:
-                headers.append(unicode(decoded_str, 'utf8'))
+                headers.append(str(decoded_str, 'utf8'))
         else:
             headers.append(decoded_str)
     return " ".join(headers)
@@ -64,7 +64,7 @@ def _decode_body(part):
 
 def msg_from_string(buffer_):
     " Convert mail file (buffer) to Email class"
-    if isinstance(buffer_, (buffer, basestring)):
+    if isinstance(buffer_, (buffer, str)):
         return message_from_string(buffer_)
     return False
 
@@ -490,7 +490,7 @@ class ElectronicMail(ModelSQL, ModelView):
         :param electronic_mail: Browse Record of the mail
         """
         db_name = Transaction().database.name
-        value = u''
+        value = ''
         if electronic_mail.digest:
             filename = electronic_mail.digest
             if electronic_mail.collision:
@@ -534,11 +534,11 @@ class ElectronicMail(ModelSQL, ModelView):
         # Prepare Directory <DATA PATH>/<DB NAME>/email
         directory = os.path.join(config.get('database', 'path'), db_name)
         if not os.path.isdir(directory):
-            os.makedirs(directory, 0770)
+            os.makedirs(directory, 0o770)
         digest = cls.make_digest(data)
         directory = os.path.join(directory, 'email', digest[0:2])
         if not os.path.isdir(directory):
-            os.makedirs(directory, 0770)
+            os.makedirs(directory, 0o770)
         # Filename <DIRECTORY>/<DIGEST>
         filename = os.path.join(directory, digest)
         collision = 0

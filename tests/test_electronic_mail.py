@@ -50,7 +50,7 @@ def create_users(no_of_sets=1):
     :return: List of tuple of three users
     """
     created_users = []
-    for iteration in xrange(1, no_of_sets + 1):
+    for iteration in range(1, no_of_sets + 1):
         created_users.append(
             tuple(create_user(user_type % iteration)
                 for user_type in USER_TYPES))
@@ -145,14 +145,14 @@ class ElectronicMailTestCase(ModuleTestCase):
 
         # Creating mail with the write user
         with Transaction().set_user(user_w):
-            self.assert_(Mail.create, [{
+            self.assertTrue(Mail.create, [{
                         'from_': 'Test',
                         'mailbox': mailbox.id,
                         }])
 
         # Create an email as mailbox owner
         with Transaction().set_user(user_o):
-            self.assert_(Mail.create, [{
+            self.assertTrue(Mail.create, [{
                         'from_': 'Test',
                         'mailbox': mailbox.id,
                         }])

@@ -6,9 +6,8 @@ from trytond.model import fields
 __all__ = ['User']
 
 
-class User:
+class User(metaclass=PoolMeta):
     __name__ = "res.user"
-    __metaclass__ = PoolMeta
     signature_html = fields.Text('Signature')
 
     @classmethod

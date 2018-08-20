@@ -51,7 +51,7 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
                 for conf in confs:
                     for field_name in names:
                         value = getattr(conf, field_name)
-                        if (value and not isinstance(value, unicode)
+                        if (value and not isinstance(value, str)
                                 and not isinstance(value, int)):
                             value = value.id
                         res[field_name] = {conf_id: value}

@@ -9,7 +9,7 @@ copyright notices and license terms. -->
             id="menu_parent_electronic_mail_configuration"
             parent="electronic_mail.menu_email_management"
             sequence="0"
-            icon="tryton-preferences"/>
+            icon="tryton-settings"/>
         <record model="ir.ui.menu-res.group" id="menu_configuration_group_electronic_mail_admin">
             <field name="menu" ref="menu_parent_electronic_mail_configuration"/>
             <field name="group" ref="electronic_mail.group_email_admin"/>

@@ -11,6 +11,8 @@ msgid ""
 "You have not got the default company configured. And you need it to "
 "configure the default folders."
 msgstr ""
+"No tens la companyia per defecte configurada, i necesites tenir-laper poder "
+"configurar les carpetes per defecte."
 
 msgctxt "error:electronic.mail.mailbox:"
 msgid ""
@@ -26,7 +28,7 @@ msgstr "No podeu eliminar aquesta bústia perquè te correus electrònics."
 
 msgctxt "error:electronic.mail:"
 msgid "eMail %s invalid. Please, check the email before save it."
-msgstr ""
+msgstr "Email %s invalit. Sisplau, comprova el email abans de guardar-lo."
 
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
@@ -34,11 +36,11 @@ msgstr "BCC"
 
 msgctxt "field:electronic.mail,body_html:"
 msgid "Body HTML"
-msgstr ""
+msgstr "Body HTML"
 
 msgctxt "field:electronic.mail,body_plain:"
 msgid "Body Plain"
-msgstr ""
+msgstr "Body Text Plà"
 
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
@@ -61,12 +63,12 @@ msgid "Date"
 msgstr "Data"
 
 msgctxt "field:electronic.mail,deliveredto:"
-msgid "Deliveret-To"
-msgstr ""
+msgid "Delivered-To"
+msgstr "Entregat a"
 
 msgctxt "field:electronic.mail,digest:"
 msgid "MD5 Digest"
-msgstr "MD%"
+msgstr "Digest MD5"
 
 msgctxt "field:electronic.mail,flag_answered:"
 msgid "Answered"
@@ -102,7 +104,7 @@ msgstr "De"
 
 msgctxt "field:electronic.mail,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail,in_reply_to:"
 msgid "In-Reply-To"
@@ -110,7 +112,7 @@ msgstr "En resposta a"
 
 msgctxt "field:electronic.mail,mail_file:"
 msgid "Mail File"
-msgstr ""
+msgstr "Arxiu de correu"
 
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
@@ -134,19 +136,19 @@ msgstr "Missatge-ID"
 
 msgctxt "field:electronic.mail,num_attach:"
 msgid "Number of attachments"
-msgstr ""
+msgstr "Número d'adjunts"
 
 msgctxt "field:electronic.mail,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nom"
 
 msgctxt "field:electronic.mail,reference:"
 msgid "References"
-msgstr ""
+msgstr "Referències"
 
 msgctxt "field:electronic.mail,reply_to:"
 msgid "Reply-To"
-msgstr ""
+msgstr "Resposta a"
 
 msgctxt "field:electronic.mail,sender:"
 msgid "Sender"
@@ -190,14 +192,14 @@ msgstr "Error"
 
 msgctxt "field:electronic.mail.configuration,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.configuration,outbox:"
 msgid "Outbox"
 msgstr "Sortida"
 
 msgctxt "field:electronic.mail.configuration,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nom"
 
 msgctxt "field:electronic.mail.configuration,sent:"
@@ -234,14 +236,14 @@ msgstr "Error"
 
 msgctxt "field:electronic.mail.configuration.company,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.configuration.company,outbox:"
 msgid "Outbox"
 msgstr "Sortida"
 
 msgctxt "field:electronic.mail.configuration.company,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nom"
 
 msgctxt "field:electronic.mail.configuration.company,sent:"
@@ -266,7 +268,7 @@ msgstr "Usuari creació"
 
 msgctxt "field:electronic.mail.mailbox,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.mailbox,name:"
 msgid "Name"
@@ -277,7 +279,7 @@ msgid "Read Users"
 msgstr "Usuaris lectura"
 
 msgctxt "field:electronic.mail.mailbox,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nom"
 
 msgctxt "field:electronic.mail.mailbox,user:"
@@ -306,14 +308,14 @@ msgstr "Usuari creació"
 
 msgctxt "field:electronic.mail.mailbox.read.res.user,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.mailbox.read.res.user,mailbox:"
 msgid "Mailbox"
 msgstr "Bústia de correu"
 
 msgctxt "field:electronic.mail.mailbox.read.res.user,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nom"
 
 msgctxt "field:electronic.mail.mailbox.read.res.user,user:"
@@ -338,14 +340,14 @@ msgstr "Usuari creació"
 
 msgctxt "field:electronic.mail.mailbox.write.res.user,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.mailbox.write.res.user,mailbox:"
 msgid "mailbox"
 msgstr "Bústia de correu"
 
 msgctxt "field:electronic.mail.mailbox.write.res.user,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nom"
 
 msgctxt "field:electronic.mail.mailbox.write.res.user,user:"
@@ -404,6 +406,10 @@ msgctxt "model:ir.action,name:act_mailbox_form"
 msgid "Mailboxes"
 msgstr "Bústies de correu"
 
+msgctxt "model:ir.model.button,string:create_menu_button"
+msgid "Create Menu"
+msgstr "Crear menú"
+
 msgctxt "model:ir.ui.menu,name:menu_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"
 msgstr "Configuracio correu electrònic"
@@ -454,15 +460,15 @@ msgstr "Permissos"
 
 msgctxt "view:electronic.mail:"
 msgid "Attach Number"
-msgstr ""
+msgstr "Número d'adjunts"
 
 msgctxt "view:electronic.mail:"
 msgid "Body Html"
-msgstr ""
+msgstr "Body HTML"
 
 msgctxt "view:electronic.mail:"
 msgid "Body Plain"
-msgstr ""
+msgstr "Body Text Plà"
 
 msgctxt "view:electronic.mail:"
 msgid "Email"

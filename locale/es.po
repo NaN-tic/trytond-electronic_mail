@@ -11,6 +11,8 @@ msgid ""
 "You have not got the default company configured. And you need it to "
 "configure the default folders."
 msgstr ""
+"No tienes la compañia por defecto configurada, i necesitas tener-la"
+"para configurar las carpetas por defecto."
 
 msgctxt "error:electronic.mail.mailbox:"
 msgid ""
@@ -26,7 +28,7 @@ msgstr "No puede eliminar este buzon porqué tiene correos electrónicos."
 
 msgctxt "error:electronic.mail:"
 msgid "eMail %s invalid. Please, check the email before save it."
-msgstr ""
+msgstr "Email %s invalido. Por favor, comprueba el email antes de guardar-lo"
 
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
@@ -34,11 +36,11 @@ msgstr "BCC"
 
 msgctxt "field:electronic.mail,body_html:"
 msgid "Body HTML"
-msgstr ""
+msgstr "Body HTML"
 
 msgctxt "field:electronic.mail,body_plain:"
 msgid "Body Plain"
-msgstr ""
+msgstr "Body Texto Plano"
 
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
@@ -61,8 +63,8 @@ msgid "Date"
 msgstr "Fecha"
 
 msgctxt "field:electronic.mail,deliveredto:"
-msgid "Deliveret-To"
-msgstr ""
+msgid "Delivered-To"
+msgstr "Entregado a"
 
 msgctxt "field:electronic.mail,digest:"
 msgid "MD5 Digest"
@@ -110,7 +112,7 @@ msgstr "En respuesta"
 
 msgctxt "field:electronic.mail,mail_file:"
 msgid "Mail File"
-msgstr ""
+msgstr "Archivo de correo"
 
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
@@ -134,19 +136,19 @@ msgstr "Modelo"
 
 msgctxt "field:electronic.mail,num_attach:"
 msgid "Number of attachments"
-msgstr ""
+msgstr "Número de adjuntos"
 
 msgctxt "field:electronic.mail,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail,reference:"
 msgid "References"
-msgstr ""
+msgstr "Referencias"
 
 msgctxt "field:electronic.mail,reply_to:"
 msgid "Reply-To"
-msgstr ""
+msgstr "Respuesta a"
 
 msgctxt "field:electronic.mail,sender:"
 msgid "Sender"
@@ -197,7 +199,7 @@ msgid "Outbox"
 msgstr "Salida"
 
 msgctxt "field:electronic.mail.configuration,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.configuration,sent:"
@@ -241,7 +243,7 @@ msgid "Outbox"
 msgstr "Salida"
 
 msgctxt "field:electronic.mail.configuration.company,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.configuration.company,sent:"
@@ -277,7 +279,7 @@ msgid "Read Users"
 msgstr "Usuarios lectura"
 
 msgctxt "field:electronic.mail.mailbox,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.mailbox,user:"
@@ -313,7 +315,7 @@ msgid "Mailbox"
 msgstr "Buzón de correo"
 
 msgctxt "field:electronic.mail.mailbox.read.res.user,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.mailbox.read.res.user,user:"
@@ -345,7 +347,7 @@ msgid "mailbox"
 msgstr "Buzón de correo"
 
 msgctxt "field:electronic.mail.mailbox.write.res.user,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.mailbox.write.res.user,user:"
@@ -404,6 +406,10 @@ msgctxt "model:ir.action,name:act_mailbox_form"
 msgid "Mailboxes"
 msgstr "Buzones correo"
 
+msgctxt "model:ir.model.button,string:create_menu_button"
+msgid "Create Menu"
+msgstr "Crear menú"
+
 msgctxt "model:ir.ui.menu,name:menu_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"
 msgstr "Configuración del correo electrónico"
@@ -454,15 +460,15 @@ msgstr "Permisos"
 
 msgctxt "view:electronic.mail:"
 msgid "Attach Number"
-msgstr ""
+msgstr "Número de adjuntos"
 
 msgctxt "view:electronic.mail:"
 msgid "Body Html"
-msgstr ""
+msgstr "Body HTML"
 
 msgctxt "view:electronic.mail:"
 msgid "Body Plain"
-msgstr ""
+msgstr "Body Texto Plano"
 
 msgctxt "view:electronic.mail:"
 msgid "Email"

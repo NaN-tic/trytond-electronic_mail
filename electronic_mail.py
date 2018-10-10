@@ -276,7 +276,7 @@ class ElectronicMail(ModelSQL, ModelView):
         'get_mail')
     body_plain = fields.Function(fields.Text('Body Plain'),
         'get_mail')
-    deliveredto = fields.Char('Deliveret-To')
+    deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
     num_attach = fields.Function(fields.Integer('Number of attachments'),
@@ -590,10 +590,12 @@ class ElectronicMail(ModelSQL, ModelView):
         :param data: Data String
         :return: Digest
         """
+        if isinstance(data, unicode):
+            data = data.encode('utf-8')
         if hashlib:
-            digest = hashlib.md5(data.encode('utf-8')).hexdigest()
+            digest = hashlib.md5(data).hexdigest()
         else:
-            digest = md5.new(data.encode('utf-8')).hexdigest()
+            digest = md5.new(data).hexdigest()
         return digest
 
     @classmethod

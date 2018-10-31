@@ -1,10 +1,17 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:electronic.mail.configuration.company:"
 msgid "There is already one configuration for this company."
 msgstr "Ya hay una configuración para esta compañia."
+
+msgctxt "error:electronic.mail.configuration:"
+msgid ""
+"You have not got the default company configured. And you need it to "
+"configure the default folders."
+msgstr "No tienes la configurada una compañia por defecto y necestitas tenerla"
+"para configurar las carpetas por defecto"
 
 msgctxt "error:electronic.mail.mailbox:"
 msgid ""
@@ -20,12 +27,20 @@ msgstr ""
 "No puede borrar esta bandeja de entrada porque tiene correos electrónicos."
 
 msgctxt "error:electronic.mail:"
-msgid "Invalid email. Please, check the email before save it."
-msgstr "Correo inválido. Por favor, verifique el correo antes de guaradarlo."
+msgid "eMail %s invalid. Please, check the email before save it."
+msgstr "Correo %s inválido. Por favor, verifique el correo antes de guaradarlo."
 
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
+
+msgctxt "field:electronic.mail,body_html:"
+msgid "Body HTML"
+msgstr "Body HTML"
+
+msgctxt "field:electronic.mail,body_plain:"
+msgid "Body Plain"
+msgstr "Body Texto Plano"
 
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
@@ -47,13 +62,13 @@ msgctxt "field:electronic.mail,date:"
 msgid "Date"
 msgstr "Fecha"
 
+msgctxt "field:electronic.mail,deliveredto:"
+msgid "Delivered-To"
+msgstr "Entregado a"
+
 msgctxt "field:electronic.mail,digest:"
 msgid "MD5 Digest"
-msgstr "MD5"
-
-msgctxt "field:electronic.mail,email:"
-msgid "Email"
-msgstr "Correo electrónico"
+msgstr "Digesto MD5"
 
 msgctxt "field:electronic.mail,flag_answered:"
 msgid "Answered"
@@ -66,6 +81,10 @@ msgstr "Borrador"
 msgctxt "field:electronic.mail,flag_flagged:"
 msgid "Flagged"
 msgstr "Marcado"
+
+msgctxt "field:electronic.mail,flag_received:"
+msgid "Received"
+msgstr "Recibido"
 
 msgctxt "field:electronic.mail,flag_recent:"
 msgid "Recent"
@@ -91,29 +110,33 @@ msgctxt "field:electronic.mail,in_reply_to:"
 msgid "In-Reply-To"
 msgstr "En respuesta"
 
+msgctxt "field:electronic.mail,mail_file:"
+msgid "Mail File"
+msgstr "Archivo de correo"
+
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
 msgstr "Buzón de correo"
-
-msgctxt "field:electronic.mail,mailbox_owner:"
-msgid "Owner"
-msgstr "Propietario"
-
-msgctxt "field:electronic.mail,mailbox_read_users:"
-msgid "Read Users"
-msgstr "Usuarios lectura"
-
-msgctxt "field:electronic.mail,mailbox_write_users:"
-msgid "Write Users"
-msgstr "Modificado por Usuario"
 
 msgctxt "field:electronic.mail,message_id:"
 msgid "Message-ID"
 msgstr "Modelo"
 
+msgctxt "field:electronic.mail,num_attach:"
+msgid "Number of attachments"
+msgstr "Número de adjuntos"
+
 msgctxt "field:electronic.mail,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
+
+msgctxt "field:electronic.mail,reference:"
+msgid "References"
+msgstr "Referencias"
+
+msgctxt "field:electronic.mail,reply_to:"
+msgid "Reply-To"
+msgstr "En respuesta"
 
 msgctxt "field:electronic.mail,sender:"
 msgid "Sender"
@@ -164,7 +187,7 @@ msgid "Outbox"
 msgstr "Bandeja de Salida"
 
 msgctxt "field:electronic.mail.configuration,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.configuration,sent:"
@@ -208,7 +231,7 @@ msgid "Outbox"
 msgstr "Bandeja de Salida"
 
 msgctxt "field:electronic.mail.configuration.company,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
 
 msgctxt "field:electronic.mail.configuration.company,sent:"
@@ -239,91 +262,15 @@ msgctxt "field:electronic.mail.mailbox,name:"
 msgid "Name"
 msgstr "Nombre"
 
-msgctxt "field:electronic.mail.mailbox,read_users:"
-msgid "Read Users"
-msgstr "Usuarios lectura"
-
 msgctxt "field:electronic.mail.mailbox,rec_name:"
-msgid "Name"
+msgid "Record Name"
 msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox,user:"
-msgid "Owner"
-msgstr "Propietario"
 
 msgctxt "field:electronic.mail.mailbox,write_date:"
 msgid "Write Date"
 msgstr "Fecha de Modificación"
 
 msgctxt "field:electronic.mail.mailbox,write_uid:"
-msgid "Write User"
-msgstr "Modificado por Usuario"
-
-msgctxt "field:electronic.mail.mailbox,write_users:"
-msgid "Write Users"
-msgstr "Modificado por Usuario"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,create_date:"
-msgid "Create Date"
-msgstr "Fecha de Creación"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,create_uid:"
-msgid "Create User"
-msgstr "Creado por Usuario"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,id:"
-msgid "ID"
-msgstr "ID"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,mailbox:"
-msgid "Mailbox"
-msgstr "Buzón de correo"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,rec_name:"
-msgid "Name"
-msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,user:"
-msgid "User"
-msgstr "Usuario"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,write_date:"
-msgid "Write Date"
-msgstr "Fecha de Modificación"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,write_uid:"
-msgid "Write User"
-msgstr "Modificado por Usuario"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,create_date:"
-msgid "Create Date"
-msgstr "Fecha de Creación"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,create_uid:"
-msgid "Create User"
-msgstr "Creado por Usuario"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,id:"
-msgid "ID"
-msgstr "ID"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,mailbox:"
-msgid "mailbox"
-msgstr "Buzón de correo"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,rec_name:"
-msgid "Name"
-msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,user:"
-msgid "User"
-msgstr "Usuario"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,write_date:"
-msgid "Write Date"
-msgstr "Fecha de Modificación"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,write_uid:"
 msgid "Write User"
 msgstr "Modificado por Usuario"
 
@@ -347,14 +294,6 @@ msgctxt "model:electronic.mail.mailbox,name:"
 msgid "Mailbox"
 msgstr "Buzón de correo"
 
-msgctxt "model:electronic.mail.mailbox.read.res.user,name:"
-msgid "Electronic Mail - read - User"
-msgstr "Correo electrónico - lectura - Usuario"
-
-msgctxt "model:electronic.mail.mailbox.write.res.user,name:"
-msgid "Mailbox - write - User"
-msgstr "Buzón de correo - escritura - Usuario"
-
 msgctxt "model:ir.action,name:act_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"
 msgstr "Configuración de Correo Electrónico"
@@ -367,6 +306,10 @@ msgctxt "model:ir.action,name:act_mailbox_form"
 msgid "Mailboxes"
 msgstr "Buzones correo"
 
+msgctxt "model:ir.model.button,string:create_menu_button"
+msgid "Create Menu"
+msgstr "Crear Menú"
+
 msgctxt "model:ir.ui.menu,name:menu_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"
 msgstr "Configuración de Correo Electrónico"
@@ -377,7 +320,7 @@ msgstr "Correo electrónico"
 
 msgctxt "model:ir.ui.menu,name:menu_mail"
 msgid "Emails"
-msgstr "Correos electrónicos"
+msgstr "Correo electrónico"
 
 msgctxt "model:ir.ui.menu,name:menu_mailbox"
 msgid "Mailboxes"
@@ -385,7 +328,7 @@ msgstr "Buzones correo"
 
 msgctxt "model:ir.ui.menu,name:menu_parent_electronic_mail_configuration"
 msgid "Configuration"
-msgstr "Configuration"
+msgstr "Configuración"
 
 msgctxt "model:res.group,name:group_email_admin"
 msgid "Electronic Mail Administrator"
@@ -394,31 +337,3 @@ msgstr "Administrador correo electrónico"
 msgctxt "model:res.group,name:group_email_user"
 msgid "Electronic Mail User"
 msgstr "Usuario correo electrónico"
-
-msgctxt "view:electronic.mail.configuration:"
-msgid "Electronic Mail Configuration"
-msgstr "Configuración de Correo Electrónico"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Create Menu"
-msgstr "Crear Menú"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Mailbox"
-msgstr "Buzón de correo"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Mailboxes"
-msgstr "Buzones correo"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Permissions"
-msgstr "Permisos"
-
-msgctxt "view:electronic.mail:"
-msgid "Email"
-msgstr "Correo electrónico"
-
-msgctxt "view:electronic.mail:"
-msgid "Emails"
-msgstr "Correos electrónicos"

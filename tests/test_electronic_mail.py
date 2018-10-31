@@ -106,7 +106,7 @@ class ElectronicMailTestCase(ModuleTestCase):
             user_set_1[2].id: 2,
             user_set_2[2].id: 2,  # 1,
             }
-        for user_id, mailbox_count in expected_results.items():
+        for user_id, mailbox_count in list(expected_results.items()):
             with Transaction().set_user(user_id):
                 mailboxes = Mailbox.search([], count=True)
                 self.assertEqual(mailboxes, mailbox_count)

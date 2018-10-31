@@ -14,7 +14,5 @@ def register():
         configuration.ElectronicMailConfiguration,
         configuration.ElectronicMailConfigurationCompany,
         electronic_mail.ElectronicMail,
-        electronic_mail.ReadUser,
         user.User,
-        electronic_mail.WriteUser,
         module='electronic_mail', type_='model')

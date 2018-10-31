@@ -11,8 +11,8 @@ msgid ""
 "You have not got the default company configured. And you need it to "
 "configure the default folders."
 msgstr ""
-"No tienes la compañia por defecto configurada, i necesitas tener-la"
-"para configurar las carpetas por defecto."
+"No tienes la compañia por defecto configurada, i necesitas tener-lapara "
+"configurar las carpetas por defecto."
 
 msgctxt "error:electronic.mail.mailbox:"
 msgid ""
@@ -117,18 +117,6 @@ msgstr "Archivo de correo"
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
 msgstr "Buzón de correo"
-
-msgctxt "field:electronic.mail,mailbox_owner:"
-msgid "Owner"
-msgstr "Propietario"
-
-msgctxt "field:electronic.mail,mailbox_read_users:"
-msgid "Read Users"
-msgstr "Usuarios lectura"
-
-msgctxt "field:electronic.mail,mailbox_write_users:"
-msgid "Write Users"
-msgstr "Usuarios modificación"
 
 msgctxt "field:electronic.mail,message_id:"
 msgid "Message-ID"
@@ -274,17 +262,9 @@ msgctxt "field:electronic.mail.mailbox,name:"
 msgid "Name"
 msgstr "Nombre"
 
-msgctxt "field:electronic.mail.mailbox,read_users:"
-msgid "Read Users"
-msgstr "Usuarios lectura"
-
 msgctxt "field:electronic.mail.mailbox,rec_name:"
 msgid "Record Name"
 msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox,user:"
-msgid "Owner"
-msgstr "Propietario"
 
 msgctxt "field:electronic.mail.mailbox,write_date:"
 msgid "Write Date"
@@ -293,78 +273,6 @@ msgstr "Fecha modificación"
 msgctxt "field:electronic.mail.mailbox,write_uid:"
 msgid "Write User"
 msgstr "Usuario modificación"
-
-msgctxt "field:electronic.mail.mailbox,write_users:"
-msgid "Write Users"
-msgstr "Usuarios modificación"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,create_date:"
-msgid "Create Date"
-msgstr "Fecha creación"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,create_uid:"
-msgid "Create User"
-msgstr "Usuario creación"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,id:"
-msgid "ID"
-msgstr "Identificador"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,mailbox:"
-msgid "Mailbox"
-msgstr "Buzón de correo"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,rec_name:"
-msgid "Record Name"
-msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,user:"
-msgid "User"
-msgstr "Usuario"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,write_date:"
-msgid "Write Date"
-msgstr "Fecha modificación"
-
-msgctxt "field:electronic.mail.mailbox.read.res.user,write_uid:"
-msgid "Write User"
-msgstr "Usuario modificación"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,create_date:"
-msgid "Create Date"
-msgstr "Fecha creación"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,create_uid:"
-msgid "Create User"
-msgstr "Usuario creación"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,id:"
-msgid "ID"
-msgstr "Identificador"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,mailbox:"
-msgid "mailbox"
-msgstr "Buzón de correo"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,rec_name:"
-msgid "Record Name"
-msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,user:"
-msgid "User"
-msgstr "Usuario"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,write_date:"
-msgid "Write Date"
-msgstr "Fecha modificación"
-
-msgctxt "field:electronic.mail.mailbox.write.res.user,write_uid:"
-msgid "Write User"
-msgstr "Usuario modificación"
-
-msgctxt "field:res.user,signature_html:"
-msgid "Signature"
-msgstr "Firma"
 
 msgctxt "help:electronic.mail,message_id:"
 msgid "Unique Message Identifier"
@@ -385,14 +293,6 @@ msgstr "Configuración del correo electrónico por empresa"
 msgctxt "model:electronic.mail.mailbox,name:"
 msgid "Mailbox"
 msgstr "Buzón de correo"
-
-msgctxt "model:electronic.mail.mailbox.read.res.user,name:"
-msgid "Electronic Mail - read - User"
-msgstr "Correo electrónico - lectura - Usuario"
-
-msgctxt "model:electronic.mail.mailbox.write.res.user,name:"
-msgid "Mailbox - write - User"
-msgstr "Buzón de correo - escritura - Usuario"
 
 msgctxt "model:ir.action,name:act_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"

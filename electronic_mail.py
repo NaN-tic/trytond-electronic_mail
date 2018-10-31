@@ -31,7 +31,7 @@ from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
 from trytond.transaction import Transaction
 
-__all__ = ['Mailbox', 'ReadUser', 'WriteUser', 'ElectronicMail']
+__all__ = ['Mailbox', 'ElectronicMail']
 
 
 def _make_header(data, charset='utf-8'):
@@ -44,10 +44,13 @@ def _decode_header(data):
     decoded_headers = decode_header(data)
     headers = []
     for decoded_str, charset in decoded_headers:
-        if charset:
-            headers.append(unicode(decoded_str, charset))
+        if not isinstance(decoded_str, unicode):
+            if charset:
+                headers.append(unicode(decoded_str, charset))
+            else:
+                headers.append(unicode(decoded_str, 'utf8'))
         else:
-            headers.append(unicode(decoded_str, 'utf8'))
+            headers.append(decoded_str)
     return " ".join(headers)
 
 
@@ -71,11 +74,6 @@ class Mailbox(ModelSQL, ModelView):
     __name__ = "electronic.mail.mailbox"
 
     name = fields.Char('Name', required=True)
-    user = fields.Many2One('res.user', 'Owner')
-    read_users = fields.Many2Many('electronic.mail.mailbox.read.res.user',
-        'mailbox', 'user', 'Read Users')
-    write_users = fields.Many2Many('electronic.mail.mailbox.write.res.user',
-        'mailbox', 'user', 'Write Users')
 
     @classmethod
     def __setup__(cls):
@@ -214,10 +212,9 @@ class Mailbox(ModelSQL, ModelView):
                     'keyword': 'tree_open',
                     }
                 for mb in mailboxes
-                    for a_w in act_windows
-                        for m in menus
-                            if mb.id == eval(a_w.domain)[0][2]
-                                and m.name == mb.name
+                for a_w in act_windows
+                for m in menus
+                if mb.id == eval(a_w.domain)[0][2] and m.name == mb.name
                 ])
         data_views = ModelData.search([
                 ('module', '=', 'electronic_mail'),
@@ -234,26 +231,6 @@ class Mailbox(ModelSQL, ModelView):
                     'sequence': 10 if v.type == 'tree' else 20,
                     } for a_w in act_windows for v in views])
         return 'reload menu'
-
-
-class ReadUser(ModelSQL):
-    'Electronic Mail - read - User'
-    __name__ = 'electronic.mail.mailbox.read.res.user'
-
-    mailbox = fields.Many2One('electronic.mail.mailbox', 'Mailbox',
-            ondelete='CASCADE', required=True, select=1)
-    user = fields.Many2One('res.user', 'User', ondelete='CASCADE',
-            required=True, select=1)
-
-
-class WriteUser(ModelSQL):
-    'Mailbox - write - User'
-    __name__ = 'electronic.mail.mailbox.write.res.user'
-
-    mailbox = fields.Many2One('electronic.mail.mailbox', 'mailbox',
-            ondelete='CASCADE', required=True, select=1)
-    user = fields.Many2One('res.user', 'User', ondelete='CASCADE',
-            required=True, select=1)
 
 
 class ElectronicMail(ModelSQL, ModelView):
@@ -293,14 +270,6 @@ class ElectronicMail(ModelSQL, ModelView):
     flag_draft = fields.Boolean('Draft')
     flag_recent = fields.Boolean('Recent')
     size = fields.Integer('Size')
-    mailbox_owner = fields.Function(fields.Many2One('res.user', 'Owner'),
-        'get_mailbox_owner', searcher='search_mailbox_owner')
-    mailbox_read_users = fields.Function(
-        fields.One2Many('res.user', None, 'Read Users'),
-        'get_mailbox_users', searcher='search_mailbox_users')
-    mailbox_write_users = fields.Function(
-        fields.One2Many('res.user', None, 'Write Users'),
-        'get_mailbox_users', searcher='search_mailbox_users')
 
     @classmethod
     def __setup__(cls):
@@ -455,31 +424,6 @@ class ElectronicMail(ModelSQL, ModelView):
                             'content_type': content_type,
                             })
         return attachments
-
-    @classmethod
-    def get_mailbox_owner(cls, records, name):
-        "Returns owner of mailbox"
-        mails = records
-        return dict([(mail.id, mail.mailbox.user.id) for mail in mails])
-
-    @classmethod
-    def get_mailbox_users(cls, records, name):
-        assert name in ('mailbox_read_users', 'mailbox_write_users')
-        res = {}
-        for mail in records:
-            if name == 'mailbox_read_users':
-                res[mail.id] = [x.id for x in mail.mailbox['read_users']]
-            else:
-                res[mail.id] = [x.id for x in mail.mailbox['write_users']]
-        return res
-
-    @classmethod
-    def search_mailbox_owner(cls, name, clause):
-        return [('mailbox.user',) + clause[1:]]
-
-    @classmethod
-    def search_mailbox_users(cls, name, clause):
-        return [('mailbox.' + name[8:],) + clause[1:]]
 
     @staticmethod
     def _get_mail(electronic_mail):

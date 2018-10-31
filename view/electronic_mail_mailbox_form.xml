@@ -5,17 +5,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <group colspan="4" id="wrapper">
         <label name="name"/>
         <field name="name"/>
-        <label name="user"/>
-        <field name="user"/>
     </group>
-    <notebook colspan="4">
-        <page string="Permissions" id="permissions">
-            <separator name="read_users" colspan="4"/>
-            <field name="read_users"/>
-            <separator name="write_users" colspan="4"/>
-            <field name="write_users"/>
-        </page>
-    </notebook>
     <button name="create_menu" string="Create Menu" icon="tryton-ok"
         colspan="4"/>
 </form>

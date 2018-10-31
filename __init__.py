@@ -3,18 +3,16 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 from trytond.pool import Pool
-from .electronic_mail import *
-from .configuration import *
-from .user import *
+from . import electronic_mail
+from . import configuration
+from . import user
 
 
 def register():
     Pool.register(
-        Mailbox,
-        ElectronicMailConfiguration,
-        ElectronicMailConfigurationCompany,
-        ElectronicMail,
-        ReadUser,
-        User,
-        WriteUser,
+        electronic_mail.Mailbox,
+        configuration.ElectronicMailConfiguration,
+        configuration.ElectronicMailConfigurationCompany,
+        electronic_mail.ElectronicMail,
+        user.User,
         module='electronic_mail', type_='model')

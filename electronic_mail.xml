@@ -18,8 +18,12 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="group" ref="group_email_user"/>
     </record>
 
+    <record model="ir.ui.icon" id="mail_icon">
+        <field name="name">tryton-mail</field>
+        <field name="path">icons/tryton-mail.svg</field>
+    </record>
     <menuitem name="Emails" sequence="10"
-      id="menu_email_management"/>
+      id="menu_email_management" icon="tryton-mail"/>
     <record model="ir.ui.menu-res.group" id="menu_email_management_group_email_user">
         <field name="menu" ref="menu_email_management"/>
         <field name="group" ref="group_email_user"/>

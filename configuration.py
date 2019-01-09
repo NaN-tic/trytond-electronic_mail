@@ -28,15 +28,6 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
         'get_fields', setter='set_fields')
 
     @classmethod
-    def __setup__(cls):
-        super(ElectronicMailConfiguration, cls).__setup__()
-        cls._error_messages.update({
-                'not_company': (
-                    'You have not got the default company configured.'
-                    ' And you need it to configure the default folders.'),
-                })
-
-    @classmethod
     def get_fields(cls, configurations, names):
         res = {}
         ConfigurationCompany = Pool().get(

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data group="1">
+        <record model="ir.message" id="foreign_model_exist">
+            <field name="text">You can not delete this mailbox because it has electronic mails.</field>
+        </record>
+        <record model="ir.message" id="menu_exist">
+            <field name="text">This mailbox has already a menu.\n Please, refresh the menu to see it.</field>
+        </record>
+        <record model="ir.message" id="email_invalid">
+            <field name="text">Please, check the email before save it</field>
+        </record>
+        <record model="ir.message" id="not_company">
+            <field name="text">You have not got the default company configured. And you need it to configure the default folders.</field>
+        </record>
+    </data>
+</tryton>

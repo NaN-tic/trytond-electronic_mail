@@ -4,6 +4,9 @@
 from trytond.model import ModelView, ModelSingleton, ModelSQL, fields, Unique
 from trytond.pool import Pool
 from trytond.transaction import Transaction
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
+
 
 __all__ = [
     'ElectronicMailConfiguration',

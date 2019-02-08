@@ -17,8 +17,6 @@ from email.utils import parsedate, getaddresses
 from email.header import decode_header, make_header
 from sys import getsizeof
 from time import mktime
-from trytond.i18n import gettext
-from trytond.exceptions import UserError
 
 try:
     from emailvalid import check_email
@@ -81,6 +79,12 @@ class Mailbox(ModelSQL, ModelView):
     @classmethod
     def __setup__(cls):
         super(Mailbox, cls).__setup__()
+        cls._error_messages.update({
+                'foreign_model_exist': ('You can not delete this mailbox '
+                    'because it has electronic mails.'),
+                'menu_exist': ('This mailbox has already a menu.\n'
+                    'Please, refresh the menu to see it.'),
+                })
         cls._buttons.update({
                 'create_menu': {
                     'invisible': Bool(Eval('menu')),
@@ -177,7 +181,7 @@ class Mailbox(ModelSQL, ModelView):
             keywords = ActionKeyword.search([('action', 'in', actions)])
             menus = [k.model for k in keywords]
         if menus:
-            raise UserError(gettext('email_template.menu_exist'))
+            cls.raise_user_error('menu_exist')
         data_menu_mailbox, = ModelData.search([
                 ('module', '=', 'electronic_mail'),
                 ('model', '=', 'ir.ui.menu'),
@@ -272,6 +276,10 @@ class ElectronicMail(ModelSQL, ModelView):
     def __setup__(cls):
         super(ElectronicMail, cls).__setup__()
         cls._order.insert(0, ('date', 'DESC'))
+        cls._error_messages.update({
+                'email_invalid': ('eMail %s invalid. '
+                    'Please, check the email before save it.'),
+                })
 
     @property
     def all_to(self):

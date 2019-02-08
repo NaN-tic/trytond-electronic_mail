@@ -4,9 +4,6 @@
 from trytond.model import ModelView, ModelSingleton, ModelSQL, fields, Unique
 from trytond.pool import Pool
 from trytond.transaction import Transaction
-from trytond.i18n import gettext
-from trytond.exceptions import UserError
-
 
 __all__ = [
     'ElectronicMailConfiguration',
@@ -29,6 +26,15 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
     outbox = fields.Function(fields.Many2One('electronic.mail.mailbox',
             'Outbox', required=True),
         'get_fields', setter='set_fields')
+
+    @classmethod
+    def __setup__(cls):
+        super(ElectronicMailConfiguration, cls).__setup__()
+        cls._error_messages.update({
+                'not_company': (
+                    'You have not got the default company configured.'
+                    ' And you need it to configure the default folders.'),
+                })
 
     @classmethod
     def get_fields(cls, configurations, names):

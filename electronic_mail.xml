@@ -154,6 +154,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 
     <!-- Rule to read mailboxes -->
     <record model="ir.rule.group" id="rule_group_read_mailbox">
+      <field name="name">Read MailBox Rule Group </field>
       <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
       <field name="global_p" eval="True"/>
       <field name="default_p" eval="False"/>
@@ -195,6 +196,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 
     <!-- Rule to read emails -->
     <record model="ir.rule.group" id="rule_group_read_mail">
+      <field name="name">Read Mail</field>
       <field name="model" search="[('model', '=', 'electronic.mail')]"/>
       <field name="global_p" eval="True"/>
       <field name="default_p" eval="False"/>
@@ -229,6 +231,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 
     <!-- Rule to write emails -->
     <record model="ir.rule.group" id="rule_group_write_mail">
+      <field name="name">Write Mail</field>
       <field name="model" search="[('model', '=', 'electronic.mail')]"/>
       <field name="global_p" eval="True"/>
       <field name="default_p" eval="False"/>

@@ -2,34 +2,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:electronic.mail.configuration.company:"
-msgid "There is already one configuration for this company."
-msgstr "Ya existe una configuración para esta empresa."
-
-msgctxt "error:electronic.mail.configuration:"
-msgid ""
-"You have not got the default company configured. And you need it to "
-"configure the default folders."
-msgstr ""
-"No tienes la compañia por defecto configurada, i necesitas tener-lapara "
-"configurar las carpetas por defecto."
-
-msgctxt "error:electronic.mail.mailbox:"
-msgid ""
-"This mailbox has already a menu.\n"
-"Please, refresh the menu to see it."
-msgstr ""
-"Este buzon de correo ya tiene un menu.\n"
-"Por favor, recargue el menú para verlo."
-
-msgctxt "error:electronic.mail.mailbox:"
-msgid "You can not delete this mailbox because it has electronic mails."
-msgstr "No puede eliminar este buzon porqué tiene correos electrónicos."
-
-msgctxt "error:electronic.mail:"
-msgid "eMail %s invalid. Please, check the email before save it."
-msgstr "Email %s invalido. Por favor, comprueba el email antes de guardar-lo"
-
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
@@ -104,7 +76,7 @@ msgstr "De"
 
 msgctxt "field:electronic.mail,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail,in_reply_to:"
 msgid "In-Reply-To"
@@ -180,7 +152,7 @@ msgstr "Error"
 
 msgctxt "field:electronic.mail.configuration,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.configuration,outbox:"
 msgid "Outbox"
@@ -224,7 +196,7 @@ msgstr "Error"
 
 msgctxt "field:electronic.mail.configuration.company,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.configuration.company,outbox:"
 msgid "Outbox"
@@ -256,7 +228,7 @@ msgstr "Usuario creación"
 
 msgctxt "field:electronic.mail.mailbox,id:"
 msgid "ID"
-msgstr "Identificador"
+msgstr "ID"
 
 msgctxt "field:electronic.mail.mailbox,name:"
 msgid "Name"
@@ -273,6 +245,10 @@ msgstr "Fecha modificación"
 msgctxt "field:electronic.mail.mailbox,write_uid:"
 msgid "Write User"
 msgstr "Usuario modificación"
+
+msgctxt "field:res.user,signature_html:"
+msgid "Signature"
+msgstr "Firma"
 
 msgctxt "help:electronic.mail,message_id:"
 msgid "Unique Message Identifier"
@@ -306,9 +282,42 @@ msgctxt "model:ir.action,name:act_mailbox_form"
 msgid "Mailboxes"
 msgstr "Buzones correo"
 
+msgctxt "model:ir.message,text:email_invalid"
+msgid "Please, check the email before save it"
+msgstr "Por favor, consulte el correo electrónico antes de guardarlo"
+
+msgctxt "model:ir.message,text:foreign_model_exist"
+msgid "You can not delete this mailbox because it has electronic mails."
+msgstr "No puede borrar este buzón porque tiene correos electrónicos."
+
+msgctxt "model:ir.message,text:menu_exist"
+msgid "This mailbox has already a menu.\\n Please, refresh the menu to see it."
+msgstr ""
+"Este buzón ya tiene un menú.\\n Por favor, actualice el menú para verlo."
+
+msgctxt "model:ir.message,text:not_company"
+msgid ""
+"You have not got the default company configured. And you need it to "
+"configure the default folders."
+msgstr ""
+"No tienes configurada la empresa por defecto. Y lo necesitas para configurar"
+" las carpetas predeterminadas."
+
 msgctxt "model:ir.model.button,string:create_menu_button"
 msgid "Create Menu"
 msgstr "Crear menú"
+
+msgctxt "model:ir.rule.group,name:rule_group_read_mail"
+msgid "Read Mail"
+msgstr "Leer el correo"
+
+msgctxt "model:ir.rule.group,name:rule_group_read_mailbox"
+msgid "Read MailBox Rule Group "
+msgstr "Leer el grupo de reglas de MailBox"
+
+msgctxt "model:ir.rule.group,name:rule_group_write_mail"
+msgid "Write Mail"
+msgstr "Escribir correo"
 
 msgctxt "model:ir.ui.menu,name:menu_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"

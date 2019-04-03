@@ -2,34 +2,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:electronic.mail.configuration.company:"
-msgid "There is already one configuration for this company."
-msgstr "Ja existeix una configuració per aquesta empresa."
-
-msgctxt "error:electronic.mail.configuration:"
-msgid ""
-"You have not got the default company configured. And you need it to "
-"configure the default folders."
-msgstr ""
-"No tens la companyia per defecte configurada, i necesites tenir-laper poder "
-"configurar les carpetes per defecte."
-
-msgctxt "error:electronic.mail.mailbox:"
-msgid ""
-"This mailbox has already a menu.\n"
-"Please, refresh the menu to see it."
-msgstr ""
-"Aquesta bústia ja te un menú. \n"
-"Sisuplau, refresqueu el menú per a veure'l. "
-
-msgctxt "error:electronic.mail.mailbox:"
-msgid "You can not delete this mailbox because it has electronic mails."
-msgstr "No podeu eliminar aquesta bústia perquè te correus electrònics."
-
-msgctxt "error:electronic.mail:"
-msgid "eMail %s invalid. Please, check the email before save it."
-msgstr "Email %s invalit. Sisplau, comprova el email abans de guardar-lo."
-
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
@@ -274,6 +246,10 @@ msgctxt "field:electronic.mail.mailbox,write_uid:"
 msgid "Write User"
 msgstr "Usuari modificació"
 
+msgctxt "field:res.user,signature_html:"
+msgid "Signature"
+msgstr "Signatura"
+
 msgctxt "help:electronic.mail,message_id:"
 msgid "Unique Message Identifier"
 msgstr "Identificador únic del missatge"
@@ -306,9 +282,44 @@ msgctxt "model:ir.action,name:act_mailbox_form"
 msgid "Mailboxes"
 msgstr "Bústies de correu"
 
+msgctxt "model:ir.message,text:email_invalid"
+msgid "Please, check the email before save it"
+msgstr "Si us plau, consulteu el correu electrònic abans de desar-lo"
+
+msgctxt "model:ir.message,text:foreign_model_exist"
+msgid "You can not delete this mailbox because it has electronic mails."
+msgstr ""
+"No podeu suprimir aquesta bústia perquè té missatges de correu electrònic."
+
+msgctxt "model:ir.message,text:menu_exist"
+msgid "This mailbox has already a menu.\\n Please, refresh the menu to see it."
+msgstr ""
+"Aquesta bústia ja disposa d’un menú.\\n Si us plau, actualitzeu el menú per "
+"veure-ho."
+
+msgctxt "model:ir.message,text:not_company"
+msgid ""
+"You have not got the default company configured. And you need it to "
+"configure the default folders."
+msgstr ""
+"No heu configurat l'empresa per defecte. I ho necessiteu per configurar les "
+"carpetes per defecte."
+
 msgctxt "model:ir.model.button,string:create_menu_button"
 msgid "Create Menu"
 msgstr "Crear menú"
+
+msgctxt "model:ir.rule.group,name:rule_group_read_mail"
+msgid "Read Mail"
+msgstr "Llegiu el correu"
+
+msgctxt "model:ir.rule.group,name:rule_group_read_mailbox"
+msgid "Read MailBox Rule Group "
+msgstr "Llegir el grup de regles de MailBox"
+
+msgctxt "model:ir.rule.group,name:rule_group_write_mail"
+msgid "Write Mail"
+msgstr "Escriure correu"
 
 msgctxt "model:ir.ui.menu,name:menu_electronic_mail_configuration"
 msgid "Electronic Mail Configuration"

@@ -24,11 +24,11 @@ msgstr "Colisión"
 
 msgctxt "field:electronic.mail,create_date:"
 msgid "Create Date"
-msgstr "Fecha creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:electronic.mail,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Usuario de creación"
 
 msgctxt "field:electronic.mail,date:"
 msgid "Date"
@@ -128,19 +128,19 @@ msgstr "A"
 
 msgctxt "field:electronic.mail,write_date:"
 msgid "Write Date"
-msgstr "Fecha modificación"
+msgstr "Fecha de modificación"
 
 msgctxt "field:electronic.mail,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Usuario de modificación"
 
 msgctxt "field:electronic.mail.configuration,create_date:"
 msgid "Create Date"
-msgstr "Fecha creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:electronic.mail.configuration,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Usuario de creación"
 
 msgctxt "field:electronic.mail.configuration,draft:"
 msgid "Draft"
@@ -168,11 +168,11 @@ msgstr "Enviado"
 
 msgctxt "field:electronic.mail.configuration,write_date:"
 msgid "Write Date"
-msgstr "Fecha modificación"
+msgstr "Fecha de modificación"
 
 msgctxt "field:electronic.mail.configuration,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Usuario de modificación"
 
 msgctxt "field:electronic.mail.configuration.company,company:"
 msgid "Company"
@@ -180,11 +180,11 @@ msgstr "Empresa"
 
 msgctxt "field:electronic.mail.configuration.company,create_date:"
 msgid "Create Date"
-msgstr "Fecha creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:electronic.mail.configuration.company,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Usuario de creación"
 
 msgctxt "field:electronic.mail.configuration.company,draft:"
 msgid "Draft"
@@ -212,19 +212,19 @@ msgstr "Enviado"
 
 msgctxt "field:electronic.mail.configuration.company,write_date:"
 msgid "Write Date"
-msgstr "Fecha modificación"
+msgstr "Fecha de modificación"
 
 msgctxt "field:electronic.mail.configuration.company,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Usuario de modificación"
 
 msgctxt "field:electronic.mail.mailbox,create_date:"
 msgid "Create Date"
-msgstr "Fecha creación"
+msgstr "Fecha de creación"
 
 msgctxt "field:electronic.mail.mailbox,create_uid:"
 msgid "Create User"
-msgstr "Usuario creación"
+msgstr "Usuario de creación"
 
 msgctxt "field:electronic.mail.mailbox,id:"
 msgid "ID"
@@ -240,11 +240,11 @@ msgstr "Nombre"
 
 msgctxt "field:electronic.mail.mailbox,write_date:"
 msgid "Write Date"
-msgstr "Fecha modificación"
+msgstr "Fecha de modificación"
 
 msgctxt "field:electronic.mail.mailbox,write_uid:"
 msgid "Write User"
-msgstr "Usuario modificación"
+msgstr "Usuario de modificación"
 
 msgctxt "field:res.user,signature_html:"
 msgid "Signature"

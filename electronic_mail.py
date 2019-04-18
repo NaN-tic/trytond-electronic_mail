@@ -541,9 +541,12 @@ class ElectronicMail(ModelSQL, ModelView):
         :param mailbox: ID of the mailbox
         :param context: dict
         """
-        mail_date = (_decode_header(mail.get('date', "")) and
-            datetime.fromtimestamp(
-                mktime(parsedate(mail.get('date')))))
+
+        mail_date = None
+        if mail.get('date'):
+            mail_date = (_decode_header(mail.get('date', "")) and
+                datetime.fromtimestamp(mktime(parsedate(mail.get('date')))))
+
         values = {
             'mailbox': mailbox,
             'from_': _decode_header(mail.get('from')),

@@ -67,7 +67,7 @@ def _decode_body(part):
 
 def msg_from_string(buffer_):
     " Convert mail file (buffer) to Email class"
-    if isinstance(buffer_, (buffer, str)):
+    if isinstance(buffer_, str):
         return message_from_string(buffer_)
     return False
 
@@ -434,7 +434,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 db_name, 'email', filename[0:2], filename)
             try:
                 with open(filename, 'rb') as file_p:
-                    value = buffer(file_p.read())
+                    value = file_p.read()
             except IOError:
                 pass
         return value

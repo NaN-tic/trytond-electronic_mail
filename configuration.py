@@ -53,7 +53,7 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
                 for field_name in names:
                     res[field_name] = {conf_id: None}
         else:
-            cls.raise_user_error('not_company')
+            raise UserError(gettext('electronic_mail.not_company'))
         return res
 
     @classmethod

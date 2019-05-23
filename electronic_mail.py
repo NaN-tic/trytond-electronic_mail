@@ -12,7 +12,7 @@ except ImportError:
     hashlib = None
     import md5
 from datetime import datetime
-from email import message_from_string
+from email import message_from_bytes
 from email.utils import parsedate, getaddresses
 from email.header import decode_header, make_header
 from sys import getsizeof
@@ -63,13 +63,6 @@ def _decode_body(part):
     if not charset or charset == 'None':
         charset = chardet.detect(payload).get('encoding')
     return payload.decode(charset).strip()
-
-
-def msg_from_string(buffer_):
-    " Convert mail file (buffer) to Email class"
-    if isinstance(buffer_, str):
-        return message_from_string(buffer_)
-    return False
 
 
 class Mailbox(ModelSQL, ModelView):
@@ -275,7 +268,7 @@ class ElectronicMail(ModelSQL, ModelView):
 
     @property
     def all_to(self):
-        mail = msg_from_string(self.mail_file)
+        mail = message_from_bytes(self.mail_file)
         parse_all_to = []
         if mail:
             all_to = getaddresses(mail.get_all('to', []))
@@ -286,7 +279,7 @@ class ElectronicMail(ModelSQL, ModelView):
 
     @property
     def all_cc(self):
-        mail = msg_from_string(self.mail_file)
+        mail = message_from_bytes(self.mail_file)
         parse_all_cc = []
         if mail:
             all_cc = getaddresses(mail.get_all('cc', []))
@@ -297,7 +290,7 @@ class ElectronicMail(ModelSQL, ModelView):
 
     @property
     def all_bcc(self):
-        mail = msg_from_string(self.mail_file)
+        mail = message_from_bytes(self.mail_file)
         parse_all_bcc = []
         if mail:
             all_bcc = getaddresses(mail.get_all('bcc', []))
@@ -447,8 +440,8 @@ class ElectronicMail(ModelSQL, ModelView):
         for mail in mails:
             mail_file = cls._get_mail(mail) or False
             result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
-            email = msg_from_string(mail_file)
-            body = cls.get_body(mail, email)
+            email = message_from_bytes(mail_file)
+            body = mail.get_body(email)
             result['body_plain'][mail.id] = body.get('body_plain')
             result['body_html'][mail.id] = body.get('body_html')
             result['num_attach'][mail.id] = len(cls.get_attachments(email))

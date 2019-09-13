@@ -8,7 +8,7 @@ import io
 from configparser import ConfigParser
 
 MODULE = 'electronic_mail'
-PREFIX = 'trytonzz'
+PREFIX = 'nantic'
 MODULE2PREFIX = {}
 
 

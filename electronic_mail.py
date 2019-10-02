@@ -77,6 +77,7 @@ class Mailbox(ModelSQL, ModelView):
         cls._buttons.update({
                 'create_menu': {
                     'invisible': Bool(Eval('menu')),
+                    'icon': 'tryton-ok',
                     },
                 })
 

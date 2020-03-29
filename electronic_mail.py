@@ -439,13 +439,19 @@ class ElectronicMail(ModelSQL, ModelView):
         for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
             result[fname] = {}
         for mail in mails:
-            mail_file = cls._get_mail(mail) or False
-            result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
-            email = message_from_bytes(mail_file)
-            body = mail.get_body(email)
-            result['body_plain'][mail.id] = body.get('body_plain')
-            result['body_html'][mail.id] = body.get('body_html')
-            result['num_attach'][mail.id] = len(cls.get_attachments(email))
+            mail_file = cls._get_mail(mail)
+            if mail_file:
+                result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
+                email = message_from_bytes(mail_file)
+                body = mail.get_body(email)
+                result['body_plain'][mail.id] = body.get('body_plain')
+                result['body_html'][mail.id] = body.get('body_html')
+                result['num_attach'][mail.id] = len(cls.get_attachments(email))
+            else:
+                result['mail_file'][mail.id] = None
+                result['body_plain'][mail.id] = None
+                result['body_html'][mail.id] = None
+                result['num_attach'][mail.id] = None
         for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
             if fname not in names:
                 del result[fname]

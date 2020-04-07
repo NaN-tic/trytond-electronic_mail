@@ -12,7 +12,7 @@ msgstr "Body HTML"
 
 msgctxt "field:electronic.mail,body_plain:"
 msgid "Body Plain"
-msgstr "Body Text Plà"
+msgstr "Body Text Pla"
 
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"

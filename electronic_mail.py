@@ -462,6 +462,7 @@ class ElectronicMail(ModelSQL, ModelView):
             else:
                 result['mail_file'][mail.id] = None
                 result['mail_file_name'][mail.id] = None
+                result['body'][mail.id] = None
                 result['body_plain'][mail.id] = None
                 result['body_html'][mail.id] = None
                 result['num_attach'][mail.id] = None

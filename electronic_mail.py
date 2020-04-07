@@ -238,21 +238,22 @@ class ElectronicMail(ModelSQL, ModelView):
     bcc = fields.Char('BCC')
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
-    body_html = fields.Function(fields.Text('Body HTML'),
-        'get_mail')
-    body_plain = fields.Function(fields.Text('Body Plain'),
-        'get_mail')
+    body = fields.Function(fields.Text('Body'), 'get_mail')
+    body_html = fields.Function(fields.Text('Body HTML'), 'get_mail')
+    body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
     deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
     num_attach = fields.Function(fields.Integer('Number of attachments'),
         'get_mail')
+    attachments = fields.Function(fields.Text('Attachments'), 'get_mail')
     message_id = fields.Char('Message-ID', help='Unique Message Identifier')
     in_reply_to = fields.Char('In-Reply-To')
     digest = fields.Char('MD5 Digest', size=32)
     collision = fields.Integer('Collision')
-    mail_file = fields.Function(fields.Binary('Mail File'),
-        'get_mail', setter='set_mail')
+    mail_file = fields.Function(fields.Binary('Mail File',
+            filename='mail_file_name'), 'get_mail', setter='set_mail')
+    mail_file_name = fields.Function(fields.Char('Mail File Name'), 'get_mail')
     flag_send = fields.Boolean('Sent', readonly=True)
     flag_received = fields.Boolean('Received', readonly=True)
     flag_seen = fields.Boolean('Seen')
@@ -436,22 +437,35 @@ class ElectronicMail(ModelSQL, ModelView):
     @classmethod
     def get_mail(cls, mails, names):
         result = {}
-        for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
+        for fname in ['body', 'body_plain', 'body_html', 'num_attach',
+                'mail_file', 'mail_file_name', 'attachments']:
             result[fname] = {}
         for mail in mails:
             mail_file = cls._get_mail(mail)
             if mail_file:
                 result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
+                result['mail_file_name'][mail.id] = '%d.txt' % mail.id
                 email = message_from_bytes(mail_file)
                 body = mail.get_body(email)
+                html = body.get('body_html').strip()
+                # TODO: Find a better way to know if there's a real HTML body
+                if html.startswith('<html') or html.startswith('<meta'):
+                    result['body'][mail.id] = body.get('body_html')
+                else:
+                    result['body'][mail.id] = ('<pre>%s</pre>' %
+                        body.get('body_plain'))
                 result['body_plain'][mail.id] = body.get('body_plain')
                 result['body_html'][mail.id] = body.get('body_html')
                 result['num_attach'][mail.id] = len(cls.get_attachments(email))
+                result['attachments'][mail.id] = '\n'.join([x['filename'] for x
+                        in cls.get_attachments(email)])
             else:
                 result['mail_file'][mail.id] = None
+                result['mail_file_name'][mail.id] = None
                 result['body_plain'][mail.id] = None
                 result['body_html'][mail.id] = None
                 result['num_attach'][mail.id] = None
+                result['attachments'][mail.id] = None
         for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
             if fname not in names:
                 del result[fname]

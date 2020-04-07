@@ -20,13 +20,13 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <label name="mailbox"/>
         <field name="mailbox"/>
     </group>
-    <group colspan="4" col="10" id="send_area">
+    <group colspan="1" col="10" id="send_area">
         <label name="flag_send"/>
         <field name="flag_send"/>
         <label name="flag_received"/>
         <field name="flag_received"/>
     </group>
-    <group colspan="4" col="10" id="flags_area">
+    <group colspan="3" col="10" id="flags_area">
         <label name="flag_seen"/>
         <field name="flag_seen"/>
         <label name="flag_flagged"/>
@@ -38,12 +38,24 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <label name="flag_recent"/>
         <field name="flag_recent"/>
     </group>
-    <separator id="body_plain" string="Body Plain" colspan="2"/>
-    <separator id="body_html" string="Body Html" colspan="2"/>
-    <field name="body_plain" colspan="2"/>
-    <field name="body_html" colspan="2"/>
-    <separator id="mail_file" string="Fail" colspan="2"/>
-    <separator id="attach" string="Attach Number" colspan="2"/>
-    <field name="mail_file" colspan="2"/>
-    <field name="num_attach" colspan="2"/>
+    <group id="content" col="6" colspan="4">
+        <notebook id="body" colspan="4">
+            <page name="body">
+                <field name="body" widget="richtext" toolbar="0" colspan="4" height="400"/>
+            </page>
+            <page name="body_plain">
+                <field name="body_plain" colspan="4" height="400"/>
+            </page>
+            <page name="body_html">
+                <field name="body_html" widget="richtext" toolbar="0" height="400" colspan="4"/>
+            </page>
+        </notebook>
+        <group id="attachments" col="2" colspan="2">
+            <separator name="attachments"/>
+            <field name="num_attach" xfill="1" xexpand="0"/>
+            <field name="attachments" colspan="2" height="400"/>
+        </group>
+    </group>
+    <label name="mail_file"/>
+    <field name="mail_file"/>
 </form>

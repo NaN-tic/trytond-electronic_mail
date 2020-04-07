@@ -440,24 +440,32 @@ class ElectronicMail(ModelSQL, ModelView):
                 'mail_file', 'mail_file_name', 'attachments']:
             result[fname] = {}
         for mail in mails:
-            mail_file = cls._get_mail(mail) or False
-            result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
-            result['mail_file_name'][mail.id] = '%d.txt' % mail.id
-            email = message_from_bytes(mail_file)
-            body = mail.get_body(email)
-            html = body.get('body_html').strip()
-            # TODO: Find a better way to know if there's a real HTML body
-            if html.startswith('<html') or html.startswith('<meta'):
-                result['body'][mail.id] = body.get('body_html')
+            mail_file = cls._get_mail(mail)
+            if mail_file:
+                result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
+                result['mail_file_name'][mail.id] = '%d.txt' % mail.id
+                email = message_from_bytes(mail_file)
+                body = mail.get_body(email)
+                html = body.get('body_html').strip()
+                # TODO: Find a better way to know if there's a real HTML body
+                if html.startswith('<html') or html.startswith('<meta'):
+                    result['body'][mail.id] = body.get('body_html')
+                else:
+                    result['body'][mail.id] = ('<pre>%s</pre>' %
+                        body.get('body_plain'))
+                result['body_plain'][mail.id] = body.get('body_plain')
+                result['body_html'][mail.id] = body.get('body_html')
+                result['num_attach'][mail.id] = len(cls.get_attachments(email))
+                result['attachments'][mail.id] = '\n'.join([x['filename'] for x
+                        in cls.get_attachments(email)])
             else:
-                result['body'][mail.id] = ('<pre>%s</pre>' %
-                    body.get('body_plain'))
-            result['body_plain'][mail.id] = body.get('body_plain')
-            result['body_html'][mail.id] = body.get('body_html')
-            result['body_plain'][mail.id] = body.get('body_plain')
-            result['num_attach'][mail.id] = len(cls.get_attachments(email))
-            result['attachments'][mail.id] = '\n'.join([x['filename'] for x in
-                    cls.get_attachments(email)])
+                result['mail_file'][mail.id] = None
+                result['mail_file_name'][mail.id] = None
+                result['body'][mail.id] = None
+                result['body_plain'][mail.id] = None
+                result['body_html'][mail.id] = None
+                result['num_attach'][mail.id] = None
+                result['attachments'][mail.id] = None
         for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
             if fname not in names:
                 del result[fname]

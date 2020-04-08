@@ -8,11 +8,11 @@ msgstr "BCC"
 
 msgctxt "field:electronic.mail,body_html:"
 msgid "Body HTML"
-msgstr "Body HTML"
+msgstr "Cos HTML"
 
 msgctxt "field:electronic.mail,body_plain:"
 msgid "Body Plain"
-msgstr "Body Text Pla"
+msgstr "Cos Text Pla"
 
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
@@ -375,11 +375,11 @@ msgstr "Número d'adjunts"
 
 msgctxt "view:electronic.mail:"
 msgid "Body Html"
-msgstr "Body HTML"
+msgstr "Cos HTML"
 
 msgctxt "view:electronic.mail:"
 msgid "Body Plain"
-msgstr "Body Text Plà"
+msgstr "Cos Text Pla"
 
 msgctxt "view:electronic.mail:"
 msgid "Email"

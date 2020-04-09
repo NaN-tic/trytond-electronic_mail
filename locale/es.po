@@ -2,9 +2,17 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "field:electronic.mail,attachments:"
+msgid "Attachments"
+msgstr "Adjuntos"
+
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
+
+msgctxt "field:electronic.mail,body:"
+msgid "Body"
+msgstr "Cuerpo"
 
 msgctxt "field:electronic.mail,body_html:"
 msgid "Body HTML"
@@ -85,6 +93,10 @@ msgstr "En respuesta"
 msgctxt "field:electronic.mail,mail_file:"
 msgid "Mail File"
 msgstr "Archivo de correo"
+
+msgctxt "field:electronic.mail,mail_file_name:"
+msgid "Mail File Name"
+msgstr "Nombre de fichero del correo"
 
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
@@ -354,42 +366,6 @@ msgstr "Configuración del correo electrónico"
 msgctxt "view:electronic.mail.mailbox:"
 msgid "Create Menu"
 msgstr "Crear menú"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Mailbox"
-msgstr "Buzón de correo"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Mailboxes"
-msgstr "Buzones correo"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Permissions"
-msgstr "Permisos"
-
-msgctxt "view:electronic.mail:"
-msgid "Attach Number"
-msgstr "Número de adjuntos"
-
-msgctxt "view:electronic.mail:"
-msgid "Body Html"
-msgstr "Cuerpo HTML"
-
-msgctxt "view:electronic.mail:"
-msgid "Body Plain"
-msgstr "Cuerpo Texto Plano"
-
-msgctxt "view:electronic.mail:"
-msgid "Email"
-msgstr "Correo electrónico"
-
-msgctxt "view:electronic.mail:"
-msgid "Emails"
-msgstr "Correos electrónicos"
-
-msgctxt "view:electronic.mail:"
-msgid "Fail"
-msgstr "Fallado"
 
 msgctxt "view:electronic.mail:"
 msgid "Hour"

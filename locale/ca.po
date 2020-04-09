@@ -2,9 +2,17 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "field:electronic.mail,attachments:"
+msgid "Attachments"
+msgstr "Adjunts"
+
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
+
+msgctxt "field:electronic.mail,body:"
+msgid "Body"
+msgstr "Cos"
 
 msgctxt "field:electronic.mail,body_html:"
 msgid "Body HTML"
@@ -85,6 +93,10 @@ msgstr "En resposta a"
 msgctxt "field:electronic.mail,mail_file:"
 msgid "Mail File"
 msgstr "Arxiu de correu"
+
+msgctxt "field:electronic.mail,mail_file_name:"
+msgid "Mail File Name"
+msgstr "Nom del fitxer del correu"
 
 msgctxt "field:electronic.mail,mailbox:"
 msgid "Mailbox"
@@ -356,42 +368,6 @@ msgstr "Configuracio correu electrònic"
 msgctxt "view:electronic.mail.mailbox:"
 msgid "Create Menu"
 msgstr "Crea menú"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Mailbox"
-msgstr "Bústia de correu"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Mailboxes"
-msgstr "Bústies de correu"
-
-msgctxt "view:electronic.mail.mailbox:"
-msgid "Permissions"
-msgstr "Permissos"
-
-msgctxt "view:electronic.mail:"
-msgid "Attach Number"
-msgstr "Número d'adjunts"
-
-msgctxt "view:electronic.mail:"
-msgid "Body Html"
-msgstr "Cos HTML"
-
-msgctxt "view:electronic.mail:"
-msgid "Body Plain"
-msgstr "Cos Text Pla"
-
-msgctxt "view:electronic.mail:"
-msgid "Email"
-msgstr "Correu electrònic"
-
-msgctxt "view:electronic.mail:"
-msgid "Emails"
-msgstr "Correus electrònics"
-
-msgctxt "view:electronic.mail:"
-msgid "Fail"
-msgstr "Fallat"
 
 msgctxt "view:electronic.mail:"
 msgid "Hour"

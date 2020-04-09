@@ -39,7 +39,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="flag_recent"/>
     </group>
     <group id="content" col="6" colspan="4">
-        <notebook id="body" colspan="4">
+        <notebook colspan="4">
             <page name="body">
                 <field name="body" widget="richtext" toolbar="0" colspan="4" height="400"/>
             </page>

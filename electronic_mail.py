@@ -60,6 +60,8 @@ def _decode_header(data):
 def _decode_body(part):
     charset = str(part.get_content_charset())
     payload = part.get_payload(decode=True)
+    if not payload:
+        return ''
     if not charset or charset == 'None':
         charset = chardet.detect(payload).get('encoding')
     return payload.decode(charset).strip()

@@ -64,7 +64,10 @@ def _decode_body(part):
         return ''
     if not charset or charset == 'None':
         charset = chardet.detect(payload).get('encoding')
-    return payload.decode(charset).strip()
+    try:
+        return payload.decode(charset or 'utf-8').strip()
+    except UnicodeDecodeError:
+        return ''
 
 
 class Mailbox(ModelSQL, ModelView):

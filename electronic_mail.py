@@ -332,7 +332,10 @@ class ElectronicMail(ModelSQL, ModelView):
             return {}
         res = {}
         for mail in records:
-            res[mail.id] = '%s (ID: %s)' % (mail.subject, mail.id)
+            # remove \r and \n characters on the subject because SAO
+            # detect that "reference" field is modified
+            res[mail.id] = '%s (ID: %s)' % (
+                mail.subject.replace('\r', '').replace('\n', ''), mail.id)
         return res
 
     def get_body(self, msg):

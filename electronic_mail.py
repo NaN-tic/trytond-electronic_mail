@@ -6,6 +6,7 @@ import chardet
 import logging
 import mimetypes
 import os
+import base64
 try:
     import hashlib
 except ImportError:
@@ -409,6 +410,23 @@ class ElectronicMail(ModelSQL, ModelView):
                             # Use a generic bag-of-bits extension
                             ext = '.bin'
                         filename = 'part-%03d%s' % (counter, ext)
+                    if filename.startswith('=?utf-8'):
+                        # Filename will be in the following format:
+                        # =?utf-8?B?BASE 64 ENCODED NAME?=\n=?utf-8?Q?BASE 64 EXTENSION?=
+                        fparts = []
+                        for fpart in filename.split('=?utf-8'):
+                            if fpart == '':
+                                continue
+                            #The B represents base64 encoding (RFC 2045)
+                            if fpart.startswith('?B?'):
+                                fparts.append(str(base64.b64decode(
+                                        fpart[len('?B?'):-len('?=')]),
+                                        'utf-8','ignore'))
+                            #The Q represents an encoding similar to the
+                            #“quoted-printable” (RFC 2045)
+                            elif fpart.startswith('?Q?'):
+                                fparts.append(fpart[len('?Q?'):-len('?=')])
+                        filename = ''.join(fparts)
                     counter += 1
 
                     data = part.get_payload(decode=True)

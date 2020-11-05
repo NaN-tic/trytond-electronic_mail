@@ -409,22 +409,28 @@ class ElectronicMail(ModelSQL, ModelView):
                             # Use a generic bag-of-bits extension
                             ext = '.bin'
                         filename = 'part-%03d%s' % (counter, ext)
-                    if filename.startswith('=?utf-8'):
+                    if filename.startswith('=?'):
                         # Filename will be in the following format:
                         # =?utf-8?B?BASE 64 ENCODED NAME?=\n=?utf-8?Q?BASE 64 EXTENSION?=
+                        # =?Windows-1252?Q?NAME WITH EXTENSION?=
+                        # =?iso-8859-1?Q?NAME WITH EXTENSION?=
                         fparts = []
-                        for fpart in filename.split('=?utf-8'):
+                        for fpart in filename.split('=?'):
                             if fpart == '':
                                 continue
+                            try:
+                                encoding, bq, value, _ = fpart.split('?')
+                            except ValueError:
+                                continue
                             #The B represents base64 encoding (RFC 2045)
-                            if fpart.startswith('?B?'):
-                                fparts.append(str(base64.b64decode(
-                                        fpart[len('?B?'):-len('?=')]),
-                                        'utf-8','ignore'))
+                            if bq == 'B':
+                                bvalue = base64.b64decode(value)
                             #The Q represents an encoding similar to the
                             #“quoted-printable” (RFC 2045)
-                            elif fpart.startswith('?Q?'):
-                                fparts.append(fpart[len('?Q?'):-len('?=')])
+                            elif bq == 'Q':
+                                bvalue = value.encode('ascii', errors='ignore')
+                            value = bvalue.decode(encoding, errors='ignore')
+                            fparts.append(value)
                         filename = ''.join(fparts)
                     counter += 1
 

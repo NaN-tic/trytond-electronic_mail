@@ -527,7 +527,15 @@ class ElectronicMail(ModelSQL, ModelView):
 
         if not os.path.isfile(filename):
             # File doesnt exist already
-            with open(filename, 'w') as file_p:
+
+            # When writing output to the stream, if newline is None, any '\n'
+            # characters written are translated to the system default line separator,
+            # os.linesep. If newline is '' or '\n', no translation takes place.
+            # If newline is any of the other legal values, any '\n' characters
+            # written are translated to the given string.
+            # https://docs.python.org/3/library/functions.html?highlight=open#open
+
+            with open(filename, 'w', newline='\r\n') as file_p:
                 file_p.write(data)
         else:
             # File already exists, may be its the same email data

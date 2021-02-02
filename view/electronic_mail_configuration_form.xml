@@ -11,4 +11,6 @@ copyright notices and license terms. -->
     <field name="sent" colspan="3"/>
     <label name="error"/>
     <field name="error" colspan="3"/>
+    <label name="send_email_after"/>
+    <field name="send_email_after"/>
 </form>

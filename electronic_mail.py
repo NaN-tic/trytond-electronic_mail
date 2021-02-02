@@ -268,11 +268,22 @@ class ElectronicMail(ModelSQL, ModelView):
     flag_draft = fields.Boolean('Draft')
     flag_recent = fields.Boolean('Recent')
     size = fields.Integer('Size')
+    resource = fields.Reference('Resource', selection='get_resource_models',
+        select=True)
 
     @classmethod
     def __setup__(cls):
         super(ElectronicMail, cls).__setup__()
         cls._order.insert(0, ('date', 'DESC'))
+
+    @staticmethod
+    def get_resource_models():
+        pool = Pool()
+        Model = pool.get('ir.model')
+        ModelAccess = pool.get('ir.model.access')
+        models = Model.search([])
+        access = ModelAccess.get_access([m.model for m in models])
+        return [(m.model, m.name) for m in models if access[m.model]['read']]
 
     @property
     def all_to(self):
@@ -590,7 +601,7 @@ class ElectronicMail(ModelSQL, ModelView):
         return digest
 
     @classmethod
-    def create_from_mail(cls, mail, mailbox):
+    def create_from_mail(cls, mail, mailbox, record=None):
         """
         Creates a mail record from a given mail
         :param mail: email object
@@ -619,6 +630,8 @@ class ElectronicMail(ModelSQL, ModelView):
             'reply_to': _decode_header(mail.get('reply-to')),
             'mail_file': mail.as_string(),
             'size': getsizeof(mail.__str__()),
+            'resource': ('%s,%s' % (record.__name__, record.id)
+                if record else None),
             }
 
         mail = cls.create([values])[0]

@@ -29,6 +29,10 @@ class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
     outbox = fields.Function(fields.Many2One('electronic.mail.mailbox',
             'Outbox', required=True),
         'get_fields', setter='set_fields')
+    send_email_after = fields.TimeDelta("Send Email after",
+        help="The grace period during which user send email "
+        "and finally it is sent.\n"
+        "Applied if a worker queue is activated.")
 
     @classmethod
     def get_fields(cls, configurations, names):

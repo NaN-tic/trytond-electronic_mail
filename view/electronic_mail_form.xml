@@ -58,4 +58,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     </group>
     <label name="mail_file"/>
     <field name="mail_file"/>
+    <label name="resource"/>
+    <field name="resource"/>
 </form>

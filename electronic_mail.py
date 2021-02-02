@@ -283,7 +283,13 @@ class ElectronicMail(ModelSQL, ModelView):
         ModelAccess = pool.get('ir.model.access')
         models = Model.search([])
         access = ModelAccess.get_access([m.model for m in models])
-        return [(m.model, m.name) for m in models if access[m.model]['read']]
+
+        res = [(None, '')]
+        for m in models:
+            if not access[m.model]['read']:
+                continue
+            res.append((m.model, m.name))
+        return res
 
     @property
     def all_to(self):

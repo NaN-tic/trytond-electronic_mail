@@ -30,14 +30,6 @@ msgctxt "field:electronic.mail,collision:"
 msgid "Collision"
 msgstr "Colisión"
 
-msgctxt "field:electronic.mail,create_date:"
-msgid "Create Date"
-msgstr "Fecha de creación"
-
-msgctxt "field:electronic.mail,create_uid:"
-msgid "Create User"
-msgstr "Usuario de creación"
-
 msgctxt "field:electronic.mail,date:"
 msgid "Date"
 msgstr "Fecha"
@@ -82,10 +74,6 @@ msgctxt "field:electronic.mail,from_:"
 msgid "From"
 msgstr "De"
 
-msgctxt "field:electronic.mail,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail,in_reply_to:"
 msgid "In-Reply-To"
 msgstr "En respuesta"
@@ -110,10 +98,6 @@ msgctxt "field:electronic.mail,num_attach:"
 msgid "Number of attachments"
 msgstr "Número de adjuntos"
 
-msgctxt "field:electronic.mail,rec_name:"
-msgid "Record Name"
-msgstr "Nombre"
-
 msgctxt "field:electronic.mail,reference:"
 msgid "References"
 msgstr "Referencias"
@@ -121,6 +105,10 @@ msgstr "Referencias"
 msgctxt "field:electronic.mail,reply_to:"
 msgid "Reply-To"
 msgstr "Respuesta a"
+
+msgctxt "field:electronic.mail,resource:"
+msgid "Resource"
+msgstr "Recurso"
 
 msgctxt "field:electronic.mail,sender:"
 msgid "Sender"
@@ -136,23 +124,7 @@ msgstr "Asunto"
 
 msgctxt "field:electronic.mail,to:"
 msgid "To"
-msgstr "A"
-
-msgctxt "field:electronic.mail,write_date:"
-msgid "Write Date"
-msgstr "Fecha de modificación"
-
-msgctxt "field:electronic.mail,write_uid:"
-msgid "Write User"
-msgstr "Usuario de modificación"
-
-msgctxt "field:electronic.mail.configuration,create_date:"
-msgid "Create Date"
-msgstr "Fecha de creación"
-
-msgctxt "field:electronic.mail.configuration,create_uid:"
-msgid "Create User"
-msgstr "Usuario de creación"
+msgstr "Para"
 
 msgctxt "field:electronic.mail.configuration,draft:"
 msgid "Draft"
@@ -162,41 +134,21 @@ msgctxt "field:electronic.mail.configuration,error:"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "field:electronic.mail.configuration,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail.configuration,outbox:"
 msgid "Outbox"
 msgstr "Salida"
 
-msgctxt "field:electronic.mail.configuration,rec_name:"
-msgid "Record Name"
-msgstr "Nombre"
+msgctxt "field:electronic.mail.configuration,send_email_after:"
+msgid "Send Email after"
+msgstr "Enviar correos después de"
 
 msgctxt "field:electronic.mail.configuration,sent:"
 msgid "Sent"
 msgstr "Enviado"
 
-msgctxt "field:electronic.mail.configuration,write_date:"
-msgid "Write Date"
-msgstr "Fecha de modificación"
-
-msgctxt "field:electronic.mail.configuration,write_uid:"
-msgid "Write User"
-msgstr "Usuario de modificación"
-
 msgctxt "field:electronic.mail.configuration.company,company:"
 msgid "Company"
 msgstr "Empresa"
-
-msgctxt "field:electronic.mail.configuration.company,create_date:"
-msgid "Create Date"
-msgstr "Fecha de creación"
-
-msgctxt "field:electronic.mail.configuration.company,create_uid:"
-msgid "Create User"
-msgstr "Usuario de creación"
 
 msgctxt "field:electronic.mail.configuration.company,draft:"
 msgid "Draft"
@@ -206,57 +158,17 @@ msgctxt "field:electronic.mail.configuration.company,error:"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "field:electronic.mail.configuration.company,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail.configuration.company,outbox:"
 msgid "Outbox"
 msgstr "Salida"
-
-msgctxt "field:electronic.mail.configuration.company,rec_name:"
-msgid "Record Name"
-msgstr "Nombre"
 
 msgctxt "field:electronic.mail.configuration.company,sent:"
 msgid "Sent"
 msgstr "Enviado"
 
-msgctxt "field:electronic.mail.configuration.company,write_date:"
-msgid "Write Date"
-msgstr "Fecha de modificación"
-
-msgctxt "field:electronic.mail.configuration.company,write_uid:"
-msgid "Write User"
-msgstr "Usuario de modificación"
-
-msgctxt "field:electronic.mail.mailbox,create_date:"
-msgid "Create Date"
-msgstr "Fecha de creación"
-
-msgctxt "field:electronic.mail.mailbox,create_uid:"
-msgid "Create User"
-msgstr "Usuario de creación"
-
-msgctxt "field:electronic.mail.mailbox,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail.mailbox,name:"
 msgid "Name"
 msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox,rec_name:"
-msgid "Record Name"
-msgstr "Nombre"
-
-msgctxt "field:electronic.mail.mailbox,write_date:"
-msgid "Write Date"
-msgstr "Fecha de modificación"
-
-msgctxt "field:electronic.mail.mailbox,write_uid:"
-msgid "Write User"
-msgstr "Usuario de modificación"
 
 msgctxt "field:res.user,signature_html:"
 msgid "Signature"
@@ -265,6 +177,14 @@ msgstr "Firma"
 msgctxt "help:electronic.mail,message_id:"
 msgid "Unique Message Identifier"
 msgstr "Identificador único mensaje"
+
+msgctxt "help:electronic.mail.configuration,send_email_after:"
+msgid ""
+"The grace period during which user send email and finally it is sent.\n"
+"Applied if a worker queue is activated."
+msgstr ""
+"El periodo durante el cual se enviará el correo.\n"
+"Solo aplica si la cola de trabajos está activada."
 
 msgctxt "model:electronic.mail,name:"
 msgid "E-mail"
@@ -337,7 +257,7 @@ msgstr "Configuración del correo electrónico"
 
 msgctxt "model:ir.ui.menu,name:menu_email_management"
 msgid "Emails"
-msgstr "Correo electrónico"
+msgstr "Correo electrónicos"
 
 msgctxt "model:ir.ui.menu,name:menu_mail"
 msgid "Emails"

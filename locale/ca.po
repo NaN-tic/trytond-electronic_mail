@@ -30,14 +30,6 @@ msgctxt "field:electronic.mail,collision:"
 msgid "Collision"
 msgstr "Col·lisió"
 
-msgctxt "field:electronic.mail,create_date:"
-msgid "Create Date"
-msgstr "Data de creació"
-
-msgctxt "field:electronic.mail,create_uid:"
-msgid "Create User"
-msgstr "Usuari de creació"
-
 msgctxt "field:electronic.mail,date:"
 msgid "Date"
 msgstr "Data"
@@ -82,10 +74,6 @@ msgctxt "field:electronic.mail,from_:"
 msgid "From"
 msgstr "De"
 
-msgctxt "field:electronic.mail,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail,in_reply_to:"
 msgid "In-Reply-To"
 msgstr "En resposta a"
@@ -110,10 +98,6 @@ msgctxt "field:electronic.mail,num_attach:"
 msgid "Number of attachments"
 msgstr "Número d'adjunts"
 
-msgctxt "field:electronic.mail,rec_name:"
-msgid "Record Name"
-msgstr "Nom"
-
 msgctxt "field:electronic.mail,reference:"
 msgid "References"
 msgstr "Referències"
@@ -121,6 +105,10 @@ msgstr "Referències"
 msgctxt "field:electronic.mail,reply_to:"
 msgid "Reply-To"
 msgstr "Resposta a"
+
+msgctxt "field:electronic.mail,resource:"
+msgid "Resource"
+msgstr "Recurs"
 
 msgctxt "field:electronic.mail,sender:"
 msgid "Sender"
@@ -138,22 +126,6 @@ msgctxt "field:electronic.mail,to:"
 msgid "To"
 msgstr "A"
 
-msgctxt "field:electronic.mail,write_date:"
-msgid "Write Date"
-msgstr "Data de modificació"
-
-msgctxt "field:electronic.mail,write_uid:"
-msgid "Write User"
-msgstr "Usuari de modificació"
-
-msgctxt "field:electronic.mail.configuration,create_date:"
-msgid "Create Date"
-msgstr "Data de creació"
-
-msgctxt "field:electronic.mail.configuration,create_uid:"
-msgid "Create User"
-msgstr "Usuari de creació"
-
 msgctxt "field:electronic.mail.configuration,draft:"
 msgid "Draft"
 msgstr "Esborrany"
@@ -162,41 +134,21 @@ msgctxt "field:electronic.mail.configuration,error:"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "field:electronic.mail.configuration,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail.configuration,outbox:"
 msgid "Outbox"
 msgstr "Sortida"
 
-msgctxt "field:electronic.mail.configuration,rec_name:"
-msgid "Record Name"
-msgstr "Nom"
+msgctxt "field:electronic.mail.configuration,send_email_after:"
+msgid "Send Email after"
+msgstr "Envia mail  desprès de"
 
 msgctxt "field:electronic.mail.configuration,sent:"
 msgid "Sent"
 msgstr "Enviat"
 
-msgctxt "field:electronic.mail.configuration,write_date:"
-msgid "Write Date"
-msgstr "Data de modificació"
-
-msgctxt "field:electronic.mail.configuration,write_uid:"
-msgid "Write User"
-msgstr "Usuari de modificació"
-
 msgctxt "field:electronic.mail.configuration.company,company:"
 msgid "Company"
 msgstr "Empresa"
-
-msgctxt "field:electronic.mail.configuration.company,create_date:"
-msgid "Create Date"
-msgstr "Data de creació"
-
-msgctxt "field:electronic.mail.configuration.company,create_uid:"
-msgid "Create User"
-msgstr "Usuari de creació"
 
 msgctxt "field:electronic.mail.configuration.company,draft:"
 msgid "Draft"
@@ -206,57 +158,17 @@ msgctxt "field:electronic.mail.configuration.company,error:"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "field:electronic.mail.configuration.company,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail.configuration.company,outbox:"
 msgid "Outbox"
 msgstr "Sortida"
-
-msgctxt "field:electronic.mail.configuration.company,rec_name:"
-msgid "Record Name"
-msgstr "Nom"
 
 msgctxt "field:electronic.mail.configuration.company,sent:"
 msgid "Sent"
 msgstr "Enviat"
 
-msgctxt "field:electronic.mail.configuration.company,write_date:"
-msgid "Write Date"
-msgstr "Data de modificació"
-
-msgctxt "field:electronic.mail.configuration.company,write_uid:"
-msgid "Write User"
-msgstr "Usuari de modificació"
-
-msgctxt "field:electronic.mail.mailbox,create_date:"
-msgid "Create Date"
-msgstr "Data de creació"
-
-msgctxt "field:electronic.mail.mailbox,create_uid:"
-msgid "Create User"
-msgstr "Usuari de creació"
-
-msgctxt "field:electronic.mail.mailbox,id:"
-msgid "ID"
-msgstr "ID"
-
 msgctxt "field:electronic.mail.mailbox,name:"
 msgid "Name"
 msgstr "Nom"
-
-msgctxt "field:electronic.mail.mailbox,rec_name:"
-msgid "Record Name"
-msgstr "Nom"
-
-msgctxt "field:electronic.mail.mailbox,write_date:"
-msgid "Write Date"
-msgstr "Data de modificació"
-
-msgctxt "field:electronic.mail.mailbox,write_uid:"
-msgid "Write User"
-msgstr "Usuari de modificació"
 
 msgctxt "field:res.user,signature_html:"
 msgid "Signature"
@@ -265,6 +177,14 @@ msgstr "Signatura"
 msgctxt "help:electronic.mail,message_id:"
 msgid "Unique Message Identifier"
 msgstr "Identificador únic del missatge"
+
+msgctxt "help:electronic.mail.configuration,send_email_after:"
+msgid ""
+"The grace period during which user send email and finally it is sent.\n"
+"Applied if a worker queue is activated."
+msgstr ""
+"El període durant el qual l’usuari envia correus electrònics i finalment s’envia.\n"
+"S’aplica si s’ha activat una cua."
 
 msgctxt "model:electronic.mail,name:"
 msgid "E-mail"
@@ -304,7 +224,9 @@ msgstr ""
 "No podeu suprimir aquesta bústia perquè té missatges de correu electrònic."
 
 msgctxt "model:ir.message,text:menu_exist"
-msgid "This mailbox has already a menu.\\n Please, refresh the menu to see it."
+msgid ""
+"This mailbox has already a menu.\n"
+"Please, refresh the menu to see it."
 msgstr ""
 "Aquesta bústia ja disposa d’un menú.\\n Si us plau, actualitzeu el menú per "
 "veure-ho."
@@ -316,6 +238,14 @@ msgid ""
 msgstr ""
 "No heu configurat l'empresa per defecte. I ho necessiteu per configurar les "
 "carpetes per defecte."
+
+msgctxt "model:ir.message,text:not_validate_emails"
+msgid ""
+"Email is not list, set or string. Please, check the e-mail \"%(email)s\" "
+"before to send."
+msgstr ""
+"L'email no és una llista, set o una cadena de text. Revisi el correu "
+"electrònic \"%(email)s\" abans d'enviar-ho."
 
 msgctxt "model:ir.model.button,string:create_menu_button"
 msgid "Create Menu"

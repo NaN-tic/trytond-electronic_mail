@@ -651,8 +651,13 @@ class ElectronicMail(ModelSQL, ModelView):
         '''
         if isinstance(email, list):
             emails = email
-        else:
+        elif isinstance(email, set):
+            emails = list(email)
+        elif isinstance(email, str):
             emails = [email]
+        else:
+            raise UserError(
+                gettext('electronic_mail.not_validate_emails', email=email))
         correct_mails = []
         if CHECK_EMAIL:
             for em in emails:

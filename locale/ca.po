@@ -124,7 +124,7 @@ msgstr "Assumpte"
 
 msgctxt "field:electronic.mail,to:"
 msgid "To"
-msgstr "A"
+msgstr "Per a"
 
 msgctxt "field:electronic.mail.configuration,draft:"
 msgid "Draft"
@@ -140,7 +140,7 @@ msgstr "Sortida"
 
 msgctxt "field:electronic.mail.configuration,send_email_after:"
 msgid "Send Email after"
-msgstr "Envia mail  desprès de"
+msgstr "Envia correu després de"
 
 msgctxt "field:electronic.mail.configuration,sent:"
 msgid "Sent"
@@ -183,8 +183,8 @@ msgid ""
 "The grace period during which user send email and finally it is sent.\n"
 "Applied if a worker queue is activated."
 msgstr ""
-"El període durant el qual l’usuari envia correus electrònics i finalment s’envia.\n"
-"S’aplica si s’ha activat una cua."
+"El període durant el qual s'enviarà el correu.\n"
+"Aplica només si la cua de treballs està activada."
 
 msgctxt "model:electronic.mail,name:"
 msgid "E-mail"
@@ -269,7 +269,7 @@ msgstr "Configuracio correu electrònic"
 
 msgctxt "model:ir.ui.menu,name:menu_email_management"
 msgid "Emails"
-msgstr "Correu electrònic"
+msgstr "Correu electrònics"
 
 msgctxt "model:ir.ui.menu,name:menu_mail"
 msgid "Emails"

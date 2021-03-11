@@ -124,7 +124,7 @@ msgstr "Asunto"
 
 msgctxt "field:electronic.mail,to:"
 msgid "To"
-msgstr "A"
+msgstr "Para"
 
 msgctxt "field:electronic.mail.configuration,draft:"
 msgid "Draft"
@@ -140,7 +140,7 @@ msgstr "Salida"
 
 msgctxt "field:electronic.mail.configuration,send_email_after:"
 msgid "Send Email after"
-msgstr "Enviar email despúes de"
+msgstr "Enviar correos después de"
 
 msgctxt "field:electronic.mail.configuration,sent:"
 msgid "Sent"
@@ -183,8 +183,8 @@ msgid ""
 "The grace period during which user send email and finally it is sent.\n"
 "Applied if a worker queue is activated."
 msgstr ""
-"El período durante el usuario envia correo electrónicos y finalmente se enviará.\n"
-"Se aplica si se ha activado la cola."
+"El periodo durante el cual se enviará el correo.\n"
+"Solo aplica si la cola de trabajos está activada."
 
 msgctxt "model:electronic.mail,name:"
 msgid "E-mail"
@@ -267,7 +267,7 @@ msgstr "Configuración del correo electrónico"
 
 msgctxt "model:ir.ui.menu,name:menu_email_management"
 msgid "Emails"
-msgstr "Correo electrónico"
+msgstr "Correo electrónicos"
 
 msgctxt "model:ir.ui.menu,name:menu_mail"
 msgid "Emails"

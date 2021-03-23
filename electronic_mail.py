@@ -270,6 +270,22 @@ class ElectronicMail(ModelSQL, ModelView):
     size = fields.Integer('Size')
     resource = fields.Reference('Resource', selection='get_resource_models',
         select=True)
+    parent = fields.Function(fields.Many2One('electronic.mail', 'Parent'),
+            'get_parent')
+
+    def get_parent(self, name=None):
+        ElectronicMail = Pool().get('electronic.mail')
+        referenced_mails = None
+        if self.in_reply_to:
+            referenced_mails = ElectronicMail.search([
+                ('message_id', '=', self.in_reply_to)
+                ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
+        if not referenced_mails and self.reference:
+            referenced_mails = ElectronicMail.search([
+                ('message_id', 'in', self.reference)
+                ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
+        if referenced_mails:
+            return referenced_mails[0]
 
     @classmethod
     def __setup__(cls):

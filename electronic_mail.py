@@ -448,24 +448,8 @@ class ElectronicMail(ModelSQL, ModelView):
                         # =?utf-8?B?BASE 64 ENCODED NAME?=\n=?utf-8?Q?BASE 64 EXTENSION?=
                         # =?Windows-1252?Q?NAME WITH EXTENSION?=
                         # =?iso-8859-1?Q?NAME WITH EXTENSION?=
-                        fparts = []
-                        for fpart in filename.split('=?'):
-                            if fpart == '':
-                                continue
-                            try:
-                                encoding, bq, value, _ = fpart.split('?')
-                            except ValueError:
-                                continue
-                            #The B represents base64 encoding (RFC 2045)
-                            if bq == 'B':
-                                bvalue = base64.b64decode(value)
-                            #The Q represents an encoding similar to the
-                            #“quoted-printable” (RFC 2045)
-                            elif bq == 'Q':
-                                bvalue = value.encode('ascii', errors='ignore')
-                            value = bvalue.decode(encoding, errors='ignore')
-                            fparts.append(value)
-                        filename = ''.join(fparts)
+                        filename_decoded = decode_header(filename)
+                        filename = filename_decoded[0][0].decode(filename_decoded[0][1])
                     counter += 1
 
                     data = part.get_payload(decode=True)
@@ -667,8 +651,13 @@ class ElectronicMail(ModelSQL, ModelView):
         '''
         if isinstance(email, list):
             emails = email
-        else:
+        elif isinstance(email, set):
+            emails = list(email)
+        elif isinstance(email, str):
             emails = [email]
+        else:
+            raise UserError(
+                gettext('electronic_mail.not_validate_emails', email=email))
         correct_mails = []
         if CHECK_EMAIL:
             for em in emails:

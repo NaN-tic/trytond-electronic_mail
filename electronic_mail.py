@@ -1,12 +1,10 @@
 # This file is part of electronic_mail module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
-
 import chardet
 import logging
 import mimetypes
 import os
-import base64
 try:
     import hashlib
 except ImportError:
@@ -34,8 +32,6 @@ from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
 from trytond.transaction import Transaction
-
-__all__ = ['Mailbox', 'ElectronicMail']
 
 
 def _make_header(data, charset='utf-8'):

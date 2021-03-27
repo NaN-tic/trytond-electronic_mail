@@ -3,8 +3,6 @@
 from trytond.pool import PoolMeta
 from trytond.model import fields
 
-__all__ = ['User']
-
 
 class User(metaclass=PoolMeta):
     __name__ = "res.user"

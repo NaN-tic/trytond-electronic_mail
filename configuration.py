@@ -8,12 +8,6 @@ from trytond.i18n import gettext
 from trytond.exceptions import UserError
 
 
-__all__ = [
-    'ElectronicMailConfiguration',
-    'ElectronicMailConfigurationCompany',
-    ]
-
-
 class ElectronicMailConfiguration(ModelSingleton, ModelSQL, ModelView):
     'Electronic Mail Configuration'
     __name__ = 'electronic.mail.configuration'

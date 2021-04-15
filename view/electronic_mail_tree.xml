@@ -3,12 +3,13 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tree>
     <field name="mailbox"/>
-    <field name="from_"/>
-    <field name="subject"/>
+    <field name="from_" expand="1"/>
+    <field name="subject" expand="2"/>
     <field name="date" widget="date"/>
     <field name="date" widget="time" string="Hour"/>
     <field name="flag_send"/>
     <field name="flag_seen"/>
     <field name="flag_flagged"/>
     <field name="flag_answered"/>
+    <field name="to" tree_invisible="1"/>
 </tree>

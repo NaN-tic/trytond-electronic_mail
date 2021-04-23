@@ -20,6 +20,7 @@ from sys import getsizeof
 from time import mktime
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
+from trytond.transaction import Transaction
 
 try:
     from emailvalid import check_email
@@ -302,7 +303,8 @@ class ElectronicMail(ModelSQL, ModelView):
 
         res = [(None, '')]
         for m in models:
-            if not access[m.model]['read']:
+            if (Transaction().context.get('_check_access', True) and
+                    not access[m.model]['read']):
                 continue
             res.append((m.model, m.name))
         return res

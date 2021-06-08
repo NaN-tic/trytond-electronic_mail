@@ -50,7 +50,7 @@ def _decode_header(data):
     headers = []
     for decoded_str, charset in decoded_headers:
         if not isinstance(decoded_str, str):
-            if charset:
+            if charset and not charset.startswith('unknown'):
                 headers.append(str(decoded_str, charset))
             else:
                 headers.append(str(decoded_str, 'utf8'))

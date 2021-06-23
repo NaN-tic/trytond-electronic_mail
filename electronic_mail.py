@@ -46,7 +46,7 @@ def _decode_header(data):
     headers = []
     for decoded_str, charset in decoded_headers:
         if not isinstance(decoded_str, str):
-            if charset:
+            if charset and not charset.startswith('unknown'):
                 headers.append(str(decoded_str, charset))
             else:
                 headers.append(str(decoded_str, 'utf8'))
@@ -618,6 +618,14 @@ class ElectronicMail(ModelSQL, ModelView):
             mail_date = (_decode_header(mail.get('date', "")) and
                 datetime.fromtimestamp(mktime(parsedate(mail.get('date')))))
 
+        # email.message.replace_header may raise 'KeyError' if the header
+        # 'content-transfer-encoding' is missing
+        # FIXED at py3.8 https://bugs.python.org/issue27321
+        try:
+            mail_file = mail.as_string()
+        except KeyError:
+            return
+
         values = {
             'mailbox': mailbox,
             'from_': _decode_header(mail.get('from')),
@@ -632,7 +640,7 @@ class ElectronicMail(ModelSQL, ModelView):
             'deliveredto': _decode_header(mail.get('delivered-to')),
             'reference': _decode_header(mail.get('references')),
             'reply_to': _decode_header(mail.get('reply-to')),
-            'mail_file': mail.as_string(),
+            'mail_file': mail_file,
             'size': getsizeof(mail.__str__()),
             'resource': ('%s,%s' % (record.__name__, record.id)
                 if record else None),

@@ -22,7 +22,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="name">tryton-mail</field>
         <field name="path">icons/tryton-mail.svg</field>
     </record>
-    <menuitem name="Emails" sequence="10"
+    <menuitem name="Emails" sequence="100"
       id="menu_email_management" icon="tryton-mail"/>
     <record model="ir.ui.menu-res.group" id="menu_email_management_group_email_user">
         <field name="menu" ref="menu_email_management"/>

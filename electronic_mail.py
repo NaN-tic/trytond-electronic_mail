@@ -32,7 +32,6 @@ from trytond.config import config
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
-from trytond.transaction import Transaction
 
 
 def _make_header(data, charset='utf-8'):

@@ -514,10 +514,10 @@ class ElectronicMail(ModelSQL, ModelView):
                 result['preview'][mail.id] = '''
                     <div style="font-family: sans-serif">
                     <h1>%(subject)s</h1>
-                    <b>Remitent:</b>%(remitent)s<br/>
-                    <b>Destinatari:</b>%(destinatari)s<br/>
-                    <b>CC:</b>%(cc)s<br/>
-                    <b>Data:</b>%(data)s<br/>
+                    <b>Remitent:</b> %(remitent)s<br/>
+                    <b>Destinatari:</b> %(destinatari)s<br/>
+                    <b>CC:</b> %(cc)s<br/>
+                    <b>Data:</b> %(data)s<br/>
                     <hr/>
                     <div>
                     %(body)s

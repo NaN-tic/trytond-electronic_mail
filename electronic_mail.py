@@ -566,16 +566,7 @@ class ElectronicMail(ModelSQL, ModelView):
         collision = 0
 
         if not os.path.isfile(filename):
-            # File doesnt exist already
-
-            # When writing output to the stream, if newline is None, any '\n'
-            # characters written are translated to the system default line separator,
-            # os.linesep. If newline is '' or '\n', no translation takes place.
-            # If newline is any of the other legal values, any '\n' characters
-            # written are translated to the given string.
-            # https://docs.python.org/3/library/functions.html?highlight=open#open
-
-            with open(filename, 'w', newline='\r\n') as file_p:
+            with open(filename, 'wb') as file_p:
                 file_p.write(data)
         else:
             # File already exists, may be its the same email data
@@ -599,7 +590,7 @@ class ElectronicMail(ModelSQL, ModelView):
                     filename = os.path.join(
                         directory, digest + '-' + str(collision2))
                     if os.path.isfile(filename):
-                        with open(filename, 'r') as file_p:
+                        with open(filename, 'rb') as file_p:
                             data2 = file_p.read()
                         if data == data2:
                             collision = collision2
@@ -608,7 +599,7 @@ class ElectronicMail(ModelSQL, ModelView):
                     collision = collision2 + 1
                     filename = os.path.join(
                         directory, digest + '-' + str(collision))
-                    with open(filename, 'w') as file_p:
+                    with open(filename, 'wb') as file_p:
                         file_p.write(data)
         cls.write(records, {'digest': digest, 'collision': collision})
 

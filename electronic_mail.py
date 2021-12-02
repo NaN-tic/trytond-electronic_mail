@@ -14,11 +14,13 @@ from datetime import datetime
 from email import message_from_bytes
 from email.utils import parsedate, getaddresses
 from email.header import decode_header, make_header
+import email.policy
 from sys import getsizeof
 from time import mktime
 from trytond.i18n import gettext
 from trytond.exceptions import UserError
 from trytond.transaction import Transaction
+from . import utils
 
 try:
     from emailvalid import check_email
@@ -33,6 +35,8 @@ from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
 
+
+EMAIL_DEFAULT_POLICY = email.policy.default
 
 def _make_header(data, charset='utf-8'):
     return str(make_header([(data or "", charset)]))
@@ -241,8 +245,9 @@ class ElectronicMail(ModelSQL, ModelView):
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
     body = fields.Function(fields.Text('Body'), 'get_mail')
-    body_html = fields.Function(fields.Text('Body HTML'), 'get_mail')
+    body_html = fields.Function(fields.Binary('Body HTML'), 'get_mail')
     body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
+    preview = fields.Function(fields.Binary('Preview'), 'get_mail')
     deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
@@ -485,14 +490,14 @@ class ElectronicMail(ModelSQL, ModelView):
     def get_mail(cls, mails, names):
         result = {}
         for fname in ['body', 'body_plain', 'body_html', 'num_attach',
-                'mail_file', 'mail_file_name', 'attachments']:
+                'mail_file', 'mail_file_name', 'attachments', 'preview']:
             result[fname] = {}
         for mail in mails:
             mail_file = cls._get_mail(mail)
             if mail_file:
                 result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
                 result['mail_file_name'][mail.id] = '%d.txt' % mail.id
-                email = message_from_bytes(mail_file)
+                email = message_from_bytes(mail_file, policy=EMAIL_DEFAULT_POLICY)
                 body = mail.get_body(email)
                 html = body.get('body_html').strip()
                 # TODO: Find a better way to know if there's a real HTML body
@@ -502,10 +507,30 @@ class ElectronicMail(ModelSQL, ModelView):
                     result['body'][mail.id] = ('<pre>%s</pre>' %
                         body.get('body_plain'))
                 result['body_plain'][mail.id] = body.get('body_plain')
-                result['body_html'][mail.id] = body.get('body_html')
+                result['body_html'][mail.id] = utils.render_email(email)
                 result['num_attach'][mail.id] = len(cls.get_attachments(email))
                 result['attachments'][mail.id] = '\n'.join([x['filename'] for x
                         in cls.get_attachments(email)])
+                result['preview'][mail.id] = '''
+                    <div style="font-family: sans-serif">
+                    <h1>%(subject)s</h1>
+                    <b>Remitent:</b>%(remitent)s<br/>
+                    <b>Destinatari:</b>%(destinatari)s<br/>
+                    <b>CC:</b>%(cc)s<br/>
+                    <b>Data:</b>%(data)s<br/>
+                    <hr/>
+                    <div>
+                    %(body)s
+                    </div>
+                    </div>
+                    ''' % {
+                        'subject': email['Subject'],
+                        'remitent': email['From'],
+                        'destinatari': email['To'],
+                        'cc': email['Cc'],
+                        'data': email['Date'],
+                        'body': result['body_html'][mail.id],
+                    }
             else:
                 result['mail_file'][mail.id] = None
                 result['mail_file_name'][mail.id] = None
@@ -514,7 +539,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 result['body_html'][mail.id] = None
                 result['num_attach'][mail.id] = None
                 result['attachments'][mail.id] = None
-        for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file']:
+        for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file', 'preview']:
             if fname not in names:
                 del result[fname]
         return result

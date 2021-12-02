@@ -550,7 +550,7 @@ class ElectronicMail(ModelSQL, ModelView):
 
         :param data: Mail as string
         """
-        if data is False or data is None:
+        if data is None:
             return
         db_name = Transaction().database.name
         # Prepare Directory <DATA PATH>/<DB NAME>/email
@@ -637,7 +637,7 @@ class ElectronicMail(ModelSQL, ModelView):
         # 'content-transfer-encoding' is missing
         # FIXED at py3.8 https://bugs.python.org/issue27321
         try:
-            mail_file = mail.as_string()
+            mail_file = mail.as_bytes()
         except KeyError:
             return
 

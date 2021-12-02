@@ -47,7 +47,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
                 <field name="body_plain" colspan="4" height="400"/>
             </page>
             <page name="body_html">
-                <field name="body_html" widget="richtext" toolbar="0" height="400" colspan="4"/>
+                <field name="body_html" widget="document" toolbar="0" height="400" colspan="4"/>
             </page>
         </notebook>
         <group id="attachments" col="2" colspan="2">

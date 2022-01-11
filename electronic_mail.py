@@ -628,6 +628,10 @@ class ElectronicMail(ModelSQL, ModelView):
         except KeyError:
             return
 
+        message_id = None
+        if _decode_header(mail.get('message-id')):
+            message_id = _decode_header(mail.get('message-id')).strip('\r\n\t')
+
         values = {
             'mailbox': mailbox,
             'from_': _decode_header(mail.get('from')),
@@ -637,8 +641,7 @@ class ElectronicMail(ModelSQL, ModelView):
             'bcc': _decode_header(mail.get('bcc')),
             'subject': _decode_header(mail.get('subject')),
             'date': mail_date,
-            'message_id': _decode_header(mail.get('message-id')).strip(
-                '\r\n\t'),
+            'message_id': message_id,
             'in_reply_to': _decode_header(mail.get('in-reply-to')),
             'deliveredto': _decode_header(mail.get('delivered-to')),
             'reference': _decode_header(mail.get('references')),

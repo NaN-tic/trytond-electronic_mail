@@ -6,7 +6,6 @@ import chardet
 import logging
 import mimetypes
 import os
-import base64
 try:
     import hashlib
 except ImportError:
@@ -34,7 +33,6 @@ from trytond.config import config
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.pyson import Bool, Eval
-from trytond.transaction import Transaction
 
 __all__ = ['Mailbox', 'ElectronicMail']
 
@@ -639,7 +637,8 @@ class ElectronicMail(ModelSQL, ModelView):
             'bcc': _decode_header(mail.get('bcc')),
             'subject': _decode_header(mail.get('subject')),
             'date': mail_date,
-            'message_id': _decode_header(mail.get('message-id')),
+            'message_id': _decode_header(mail.get('message-id')).strip(
+                '\r\n\t'),
             'in_reply_to': _decode_header(mail.get('in-reply-to')),
             'deliveredto': _decode_header(mail.get('delivered-to')),
             'reference': _decode_header(mail.get('references')),

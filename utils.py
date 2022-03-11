@@ -2,7 +2,9 @@ import email
 import bleach 
 
 def render_email(eml):
-    html = eml.get_body(['html', 'plain']).get_payload(decode=True).decode()
+    charset = eml.get_body(['html', 'plain']).get_content_charset()
+    html = eml.get_body(['html', 'plain']).get_payload(decode=True).decode(
+        charset)
     images = {}
 
     for part in eml.walk():

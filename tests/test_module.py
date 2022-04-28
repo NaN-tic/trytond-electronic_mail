@@ -1,13 +1,11 @@
-# This file is part electronic_mail module for Tryton.
-# The COPYRIGHT file at the top level of this repository contains
-# the full copyright notices and license terms.
-"Electronic Mail test suite"
-import unittest
+
+# This file is part of Tryton.  The COPYRIGHT file at the top level of
+# this repository contains the full copyright notices and license terms.
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
 
-import trytond.tests.test_tryton
 from trytond.config import config
 from trytond.pool import Pool
 from trytond.tests.test_tryton import ModuleTestCase, with_transaction
@@ -17,9 +15,7 @@ config.set('database', 'path', '/tmp/')
 
 
 class ElectronicMailTestCase(ModuleTestCase):
-    """
-    Test Electronic Mail Module
-    """
+    'Test ElectronicMail module'
     module = 'electronic_mail'
 
     @with_transaction()
@@ -69,9 +65,4 @@ class ElectronicMailTestCase(ModuleTestCase):
         self.assertEqual(mail.to, message['To'])
 
 
-def suite():
-    "Electronic mail test suite"
-    suite = trytond.tests.test_tryton.suite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-            ElectronicMailTestCase))
-    return suite
+del ModuleTestCase

@@ -647,18 +647,26 @@ class ElectronicMail(ModelSQL, ModelView):
 
         values = {
             'mailbox': mailbox,
-            'from_': _decode_header(mail.get('from')),
-            'sender': _decode_header(mail.get('sender')),
-            'to': _decode_header(mail.get('to')),
-            'cc': _decode_header(mail.get('cc')),
-            'bcc': _decode_header(mail.get('bcc')),
+            'from_': _decode_header(
+                ",".join(mail.get('from', '').splitlines())),
+            'sender': _decode_header(
+                ",".join(mail.get('sender', '').splitlines())),
+            'to': _decode_header(
+                ",".join(mail.get('to', '').splitlines())),
+            'cc': _decode_header(
+                ",".join(mail.get('cc', '').splitlines())),
+            'bcc': _decode_header(
+                ",".join(mail.get('bcc', '').splitlines())),
             'subject': _decode_header(mail.get('subject')),
             'date': mail_date,
             'message_id': message_id,
             'in_reply_to': _decode_header(mail.get('in-reply-to')),
-            'deliveredto': _decode_header(mail.get('delivered-to')),
-            'reference': _decode_header(mail.get('references')),
-            'reply_to': _decode_header(mail.get('reply-to')),
+            'deliveredto': _decode_header(
+                ",".join(mail.get('delivered-to', '').splitlines())),
+            'reference': _decode_header(
+                ",".join(mail.get('references', '').splitlines())),
+            'reply_to': _decode_header(
+                ",".join(mail.get('reply-to', '').splitlines())),
             'mail_file': mail_file,
             'size': getsizeof(mail.__str__()),
             'resource': ('%s,%s' % (record.__name__, record.id)

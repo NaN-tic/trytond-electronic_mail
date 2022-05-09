@@ -648,25 +648,29 @@ class ElectronicMail(ModelSQL, ModelView):
         values = {
             'mailbox': mailbox,
             'from_': _decode_header(
-                ",".join(mail.get('from', '').splitlines())),
+                ",".join(mail.get('from', '').replace('\t', '').splitlines())),
             'sender': _decode_header(
-                ",".join(mail.get('sender', '').splitlines())),
+                ",".join(mail.get('sender', '').replace(
+                    '\t', '').splitlines())),
             'to': _decode_header(
-                ",".join(mail.get('to', '').splitlines())),
+                ",".join(mail.get('to', '').replace('\t', '').splitlines())),
             'cc': _decode_header(
-                ",".join(mail.get('cc', '').splitlines())),
+                ",".join(mail.get('cc', '').replace('\t', '').splitlines())),
             'bcc': _decode_header(
-                ",".join(mail.get('bcc', '').splitlines())),
+                ",".join(mail.get('bcc', '').replace('\t', '').splitlines())),
             'subject': _decode_header(mail.get('subject')),
             'date': mail_date,
             'message_id': message_id,
             'in_reply_to': _decode_header(mail.get('in-reply-to')),
             'deliveredto': _decode_header(
-                ",".join(mail.get('delivered-to', '').splitlines())),
+                ",".join(mail.get('delivered-to', '').replace(
+                    '\t', '').splitlines())),
             'reference': _decode_header(
-                ",".join(mail.get('references', '').splitlines())),
+                ",".join(mail.get('references', '').replace(
+                    '\t', '').splitlines())),
             'reply_to': _decode_header(
-                ",".join(mail.get('reply-to', '').splitlines())),
+                ",".join(mail.get('reply-to', '').replace(
+                    '\t', '').splitlines())),
             'mail_file': mail_file,
             'size': getsizeof(mail.__str__()),
             'resource': ('%s,%s' % (record.__name__, record.id)

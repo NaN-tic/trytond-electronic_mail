@@ -1,10 +1,13 @@
 import email
-import bleach 
+import bleach
 
 def render_email(eml):
-    charset = eml.get_body(['html', 'plain']).get_content_charset()
-    html = eml.get_body(['html', 'plain']).get_payload(decode=True).decode(
-        charset)
+    body = eml.get_body(['html', 'plain'])
+    if body:
+        charset = body.get_content_charset()
+        html = body.get_payload(decode=True).decode(charset)
+    else:
+        html = ''
     images = {}
 
     for part in eml.walk():
@@ -13,7 +16,8 @@ def render_email(eml):
             cid = part.get('Content-ID')
             if cid:
                 cid = cid[1:-1]
-                images[cid] = 'data:' + content_type + ';base64,' + part.get_payload()
+                images[cid] = ('data:' + content_type + ';base64,' +
+                    part.get_payload())
 
     tags = bleach.sanitizer.ALLOWED_TAGS + ['div', 'img', 'br']
     attributes = bleach.sanitizer.ALLOWED_ATTRIBUTES.copy()
@@ -22,10 +26,11 @@ def render_email(eml):
             'img': ['src', 'alt', 'width', 'height'],
             })
     protocols = bleach.ALLOWED_PROTOCOLS + ['cid']
-    html = bleach.clean(html, tags=tags, attributes=attributes, protocols=protocols, strip=True, strip_comments=True)
+    html = bleach.clean(html, tags=tags, attributes=attributes,
+        protocols=protocols, strip=True, strip_comments=True)
     html = bleach.linkify(html)
 
     for cid, image in images.items():
         html = html.replace('cid:' + cid, image)
     return html
-       
+

@@ -658,7 +658,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 ",".join(mail.get('cc', '').replace('\t', '').splitlines())),
             'bcc': _decode_header(
                 ",".join(mail.get('bcc', '').replace('\t', '').splitlines())),
-            'subject': _decode_header(mail.get('subject').replace(
+            'subject': _decode_header(str(mail.get('subject')).replace(
                 '\n','').replace('\r', '')),
             'date': mail_date,
             'message_id': message_id,

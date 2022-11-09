@@ -269,8 +269,7 @@ class ElectronicMail(ModelSQL, ModelView):
     flag_draft = fields.Boolean('Draft')
     flag_recent = fields.Boolean('Recent')
     size = fields.Integer('Size')
-    resource = fields.Reference('Resource', selection='get_resource_models',
-        select=True)
+    resource = fields.Reference('Resource', selection='get_resource_models')
     parent = fields.Function(fields.Many2One('electronic.mail', 'Parent'),
             'get_parent')
 

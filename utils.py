@@ -1,4 +1,3 @@
-import email
 import bleach
 
 def render_email(eml):
@@ -21,13 +20,26 @@ def render_email(eml):
                 images[cid] = ('data:' + content_type + ';base64,' +
                     part.get_payload())
 
-    tags = bleach.sanitizer.ALLOWED_TAGS + ['div', 'img', 'br']
+    # support bleach 6.0.0
+    allowed_tags = bleach.sanitizer.ALLOWED_TAGS
+    if isinstance(allowed_tags, frozenset):
+        tags = list(allowed_tags) + ['div', 'img', 'br']
+    else:
+        tags = allowed_tags + ['div', 'img', 'br']
+
     attributes = bleach.sanitizer.ALLOWED_ATTRIBUTES.copy()
     attributes.update({
             'div': ['dir'],
             'img': ['src', 'alt', 'width', 'height'],
             })
-    protocols = bleach.ALLOWED_PROTOCOLS + ['cid']
+
+    # support bleach 6.0.0
+    allowed_protocols = bleach.ALLOWED_PROTOCOLS
+    if isinstance(allowed_tags, frozenset):
+        protocols = list(allowed_protocols) + ['cid']
+    else:
+        protocols = allowed_protocols + ['cid']
+
     html = bleach.clean(html, tags=tags, attributes=attributes,
         protocols=protocols, strip=True, strip_comments=True)
     html = bleach.linkify(html)
@@ -35,4 +47,3 @@ def render_email(eml):
     for cid, image in images.items():
         html = html.replace('cid:' + cid, image)
     return html
-

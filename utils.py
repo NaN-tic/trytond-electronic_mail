@@ -21,7 +21,7 @@ def render_email(eml):
                 images[cid] = ('data:' + content_type + ';base64,' +
                     part.get_payload())
 
-    tags = bleach.sanitizer.ALLOWED_TAGS + ['div', 'img', 'br']
+    tags = bleach.sanitizer.ALLOWED_TAGS | {'div', 'img', 'br'}
     attributes = bleach.sanitizer.ALLOWED_ATTRIBUTES.copy()
     attributes.update({
             'div': ['dir'],

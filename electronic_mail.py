@@ -256,10 +256,8 @@ class ElectronicMail(ModelSQL, ModelView):
     attachments = fields.Function(fields.Text('Attachments'), 'get_mail')
     message_id = fields.Char('Message-ID', help='Unique Message Identifier')
     in_reply_to = fields.Char('In-Reply-To')
-    digest = fields.Char('MD5 Digest', size=32)
-    collision = fields.Integer('Collision')
-    mail_file = fields.Function(fields.Binary('Mail File',
-            filename='mail_file_name'), 'get_mail', setter='set_mail')
+    mail_file = fields.Binary('Mail File', file_id='mail_file_id')
+    mail_file_id = fields.Char('Mail File ID')
     mail_file_name = fields.Function(fields.Char('Mail File Name'), 'get_mail')
     flag_send = fields.Boolean('Sent', readonly=True)
     flag_received = fields.Boolean('Received', readonly=True)
@@ -340,10 +338,6 @@ class ElectronicMail(ModelSQL, ModelView):
                 parse_all_bcc.append(
                     (_decode_header(bcc[0]), _decode_header(bcc[1])))
         return parse_all_bcc
-
-    @staticmethod
-    def default_collision():
-        return 0
 
     @staticmethod
     def default_flag_seen():
@@ -464,39 +458,19 @@ class ElectronicMail(ModelSQL, ModelView):
                             })
         return attachments
 
-    @staticmethod
-    def _get_mail(electronic_mail):
-        """
-        Returns the mail object from reading the FS
-        :param electronic_mail: Browse Record of the mail
-        """
-        db_name = Transaction().database.name
-        value = ''
-        if electronic_mail.digest:
-            filename = electronic_mail.digest
-            if electronic_mail.collision:
-                filename = filename + '-' + str(electronic_mail.collision)
-            filename = os.path.join(config.get('database', 'path'),
-                db_name, 'email', filename[0:2], filename)
-            try:
-                with open(filename, 'rb') as file_p:
-                    value = file_p.read()
-            except IOError:
-                pass
-        return value
-
     @classmethod
     def get_mail(cls, mails, names):
         result = {}
         for fname in ['body', 'body_plain', 'body_html', 'num_attach',
-                'mail_file', 'mail_file_name', 'attachments', 'preview']:
+                'mail_file_name', 'attachments', 'preview']:
             result[fname] = {}
+        with Transaction().set_context({'electronic.mail.mail_file': None}):
+            # Ensure that mail_file returns a binary and not its size
+            mails = cls.browse(mails)
         for mail in mails:
-            mail_file = cls._get_mail(mail)
-            if mail_file:
-                result['mail_file'][mail.id] = fields.Binary.cast(mail_file)
+            if mail.mail_file:
                 result['mail_file_name'][mail.id] = '%d.txt' % mail.id
-                email = message_from_bytes(mail_file, policy=EMAIL_DEFAULT_POLICY)
+                email = message_from_bytes(mail.mail_file, policy=EMAIL_DEFAULT_POLICY)
                 body = mail.get_body(email)
                 html = body.get('body_html').strip()
                 # TODO: Find a better way to know if there's a real HTML body
@@ -531,92 +505,16 @@ class ElectronicMail(ModelSQL, ModelView):
                         'body': result['body_html'][mail.id],
                     }
             else:
-                result['mail_file'][mail.id] = None
                 result['mail_file_name'][mail.id] = None
                 result['body'][mail.id] = None
                 result['body_plain'][mail.id] = None
                 result['body_html'][mail.id] = None
                 result['num_attach'][mail.id] = None
                 result['attachments'][mail.id] = None
-        for fname in ['body_plain', 'body_html', 'num_attach', 'mail_file', 'preview']:
+        for fname in ['body_plain', 'body_html', 'num_attach', 'preview']:
             if fname not in names:
                 del result[fname]
         return result
-
-    @classmethod
-    def set_mail(cls, records, name, data):
-        """Saves an mail to the data path
-
-        :param data: Mail as string
-        """
-        if data is None:
-            return
-        db_name = Transaction().database.name
-        # Prepare Directory <DATA PATH>/<DB NAME>/email
-        directory = os.path.join(config.get('database', 'path'), db_name)
-        if not os.path.isdir(directory):
-            os.makedirs(directory, 0o770)
-        digest = cls.make_digest(data)
-        directory = os.path.join(directory, 'email', digest[0:2])
-        if not os.path.isdir(directory):
-            os.makedirs(directory, 0o770)
-        # Filename <DIRECTORY>/<DIGEST>
-        filename = os.path.join(directory, digest)
-        collision = 0
-
-        if not os.path.isfile(filename):
-            with open(filename, 'wb') as file_p:
-                file_p.write(data)
-        else:
-            # File already exists, may be its the same email data
-            # or maybe different.
-
-            # Case 1: If different: we have to write file with updated
-            # Collission index
-
-            # Case 2: Same file: Leave it as such
-            with open(filename, 'r') as file_p:
-                data2 = file_p.read()
-            if data != data2:
-                cursor = Transaction().connection.cursor()
-                cursor.execute(
-                    'SELECT DISTINCT(collision) FROM electronic_mail '
-                    'WHERE digest = %s AND collision !=0 '
-                    'ORDER BY collision', (digest,))
-                collision2 = 0
-                for row in cursor.fetchall():
-                    collision2 = row[0]
-                    filename = os.path.join(
-                        directory, digest + '-' + str(collision2))
-                    if os.path.isfile(filename):
-                        with open(filename, 'rb') as file_p:
-                            data2 = file_p.read()
-                        if data == data2:
-                            collision = collision2
-                            break
-                if collision == 0:
-                    collision = collision2 + 1
-                    filename = os.path.join(
-                        directory, digest + '-' + str(collision))
-                    with open(filename, 'wb') as file_p:
-                        file_p.write(data)
-        cls.write(records, {'digest': digest, 'collision': collision})
-
-    @staticmethod
-    def make_digest(data):
-        """
-        Returns a digest from the mail
-
-        :param data: Data String
-        :return: Digest
-        """
-        if isinstance(data, str):
-            data = data.encode('utf-8')
-        if hashlib:
-            digest = hashlib.md5(data).hexdigest()
-        else:
-            digest = md5.new(data).hexdigest()
-        return digest
 
     @classmethod
     def create_from_mail(cls, mail, mailbox, record=None):

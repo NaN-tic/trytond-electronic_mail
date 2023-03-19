@@ -513,7 +513,7 @@ class ElectronicMail(ModelSQL, ModelView):
         # 'content-transfer-encoding' is missing
         # FIXED at py3.8 https://bugs.python.org/issue27321
         try:
-            mail_file = mail.as_string()
+            mail_file = mail.as_bytes()
         except KeyError:
             return
 

@@ -560,7 +560,8 @@ class ElectronicMail(ModelSQL, ModelView):
                 '\n','').replace('\r', '')),
             'date': mail_date,
             'message_id': message_id,
-            'in_reply_to': _decode_header(mail.get('in-reply-to')),
+            'in_reply_to': _decode_header(mail.get('in-reply-to', '')).strip(
+                '\r\n\t'),
             'deliveredto': _decode_header(
                 ",".join(mail.get('delivered-to', '').replace(
                     '\t', '').splitlines())),

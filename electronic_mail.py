@@ -570,7 +570,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 ",".join(mail.get('reply-to', '').replace(
                     '\t', '').splitlines())),
             'mail_file': mail_file,
-            'size': getsizeof(mail.__str__()),
+            'size': getsizeof(mail.__bytes__()),
             'resource': ('%s,%s' % (record.__name__, record.id)
                 if record else None),
             }

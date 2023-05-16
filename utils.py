@@ -6,7 +6,11 @@ def render_email(eml):
         charset = body.get_content_charset()
         if not charset:
             charset = 'utf-8'
-        html = body.get_payload(decode=True).decode(charset)
+        try:
+            html = body.get_payload(decode=True).decode(charset)
+        except:
+            # If the charset returns an error, try utf-8
+            html = body.get_payload(decode=True).decode('utf-8')
     else:
         html = ''
     images = {}

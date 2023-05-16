@@ -3,9 +3,7 @@ import bleach
 def render_email(eml):
     body = eml.get_body(['html', 'plain'])
     if body:
-        charset = body.get_content_charset()
-        if not charset:
-            charset = 'utf-8'
+        charset = body.get_content_charset('utf-8')
         try:
             html = body.get_payload(decode=True).decode(charset)
         except:

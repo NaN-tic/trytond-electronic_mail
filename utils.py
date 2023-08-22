@@ -27,7 +27,7 @@ def render_email(eml):
             'div': ['dir'],
             'img': ['src', 'alt', 'width', 'height'],
             })
-    protocols = bleach.ALLOWED_PROTOCOLS + ['cid']
+    protocols = list(bleach.ALLOWED_PROTOCOLS) + ['cid']
     html = bleach.clean(html, tags=tags, attributes=attributes,
         protocols=protocols, strip=True, strip_comments=True)
     html = bleach.linkify(html)

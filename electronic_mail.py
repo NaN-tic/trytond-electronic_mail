@@ -4,12 +4,6 @@
 import chardet
 import logging
 import mimetypes
-import os
-try:
-    import hashlib
-except ImportError:
-    hashlib = None
-    import md5
 from datetime import datetime
 from email import message_from_bytes
 from email.utils import parsedate, getaddresses
@@ -30,7 +24,6 @@ except ImportError:
     msg = "Unable to import emailvalid. Email validation disabled."
     logging.getLogger('Electronic Mail').warning(msg)
 
-from trytond.config import config
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.pyson import Bool, Eval

@@ -2,17 +2,24 @@ import bleach
 
 def render_email(eml):
     body = eml.get_body(['html', 'plain'])
+
+    html = ''
     if body:
         charset = body.get_content_charset('utf-8')
         try:
-            html = body.get_payload(decode=True).decode(charset)
+            payload = body.get_payload(decode=True)
         except:
-            # If the charset returns an error, try utf-8
-            html = body.get_payload(decode=True).decode('utf-8')
-    else:
-        html = ''
-    images = {}
+            pass
+        if payload:
+            try:
+                html = payload.decode(charset)
+            except:
+                try:
+                    html = body.get_payload(decode=True).decode('utf-8')
+                except:
+                    pass
 
+    images = {}
     for part in eml.walk():
         content_type = part.get_content_type()
         if content_type.startswith('image/'):

@@ -512,6 +512,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 result['body_html'][mail.id] = None
                 result['num_attach'][mail.id] = None
                 result['attachments'][mail.id] = None
+                result['preview'][mail.id] = None
         for fname in ['body_plain', 'body_html', 'num_attach', 'preview']:
             if fname not in names:
                 del result[fname]

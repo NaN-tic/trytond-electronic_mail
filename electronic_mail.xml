@@ -114,6 +114,23 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_create" eval="False"/>
       <field name="perm_delete" eval="False"/>
     </record>
+    <record model="ir.rule.group" id="rule_group_mailbox_rule">
+        <field name="name">Mailbox Company Rule</field>
+        <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+        <field name="global_p" eval="True"/>
+    </record>
+    <record model="ir.rule" id="rule_mailbox_rule1">
+        <field name="domain"
+            eval="[('company', 'in', Eval('companies', []))]"
+            pyson="1"/>
+        <field name="rule_group" ref="rule_group_mailbox_rule"/>
+    </record>
+    <record model="ir.rule" id="rule_group_mailbox_rule2">
+        <field name="domain"
+            eval="[('company', 'in', [None, -1])]"
+            pyson="1"/>
+        <field name="rule_group" ref="rule_group_mailbox_rule"/>
+    </record>
     <!-- Access Rule Mail -->
     <record model="ir.model.access" id="access_mail_admin">
       <field name="model" search="[('model', '=', 'electronic.mail')]"/>
@@ -137,6 +154,24 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_write" eval="True"/>
       <field name="perm_create" eval="True"/>
       <field name="perm_delete" eval="True"/>
+    </record>
+
+    <record model="ir.rule.group" id="rule_group_electronic_mail_rule">
+        <field name="name">Electronic Mail Company Rule</field>
+        <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+        <field name="global_p" eval="True"/>
+    </record>
+    <record model="ir.rule" id="rule_electronic_mail_rule1">
+        <field name="domain"
+            eval="[('mailbox.company', 'in', Eval('companies', []))]"
+            pyson="1"/>
+        <field name="rule_group" ref="rule_group_electronic_mail_rule"/>
+    </record>
+    <record model="ir.rule" id="rule_group_electronic_mail_rule2">
+        <field name="domain"
+            eval="[('mailbox.company', 'in', [None, -1])]"
+            pyson="1"/>
+        <field name="rule_group" ref="rule_group_electronic_mail_rule"/>
     </record>
 
 

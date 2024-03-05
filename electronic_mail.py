@@ -76,6 +76,7 @@ class Mailbox(ModelSQL, ModelView):
     __name__ = "electronic.mail.mailbox"
 
     name = fields.Char('Name', required=True)
+    company = fields.Many2One('company.company', 'Company')
 
     @classmethod
     def __setup__(cls):

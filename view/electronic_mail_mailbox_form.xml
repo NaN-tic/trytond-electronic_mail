@@ -5,6 +5,8 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <group colspan="4" id="wrapper">
         <label name="name"/>
         <field name="name"/>
+        <label name="company"/>
+        <field name="company"/>
     </group>
     <button name="create_menu" colspan="4"/>
 </form>

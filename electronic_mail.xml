@@ -92,7 +92,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 
     <!-- Access Rule Mailbox -->
     <record model="ir.model.access" id="access_mailbox_admin">
-      <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+      <field name="model">electronic.mail.mailbox</field>
       <field name="group" ref="group_email_admin"/>
       <field name="perm_read" eval="True"/>
       <field name="perm_write" eval="True"/>
@@ -100,7 +100,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_delete" eval="True"/>
     </record>
     <record model="ir.model.access" id="access_mailbox_user">
-      <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+      <field name="model">electronic.mail.mailbox</field>
       <field name="group" ref="group_email_user"/>
       <field name="perm_read" eval="True"/>
       <field name="perm_write" eval="False"/>
@@ -108,7 +108,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_delete" eval="False"/>
     </record>
     <record model="ir.model.access" id="access_mailbox_default">
-      <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+      <field name="model">electronic.mail.mailbox</field>
       <field name="perm_read" eval="False"/>
       <field name="perm_write" eval="False"/>
       <field name="perm_create" eval="False"/>
@@ -116,7 +116,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     </record>
     <record model="ir.rule.group" id="rule_group_mailbox_rule">
         <field name="name">Mailbox Company Rule</field>
-        <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+        <field name="model">electronic.mail.mailbox</field>
         <field name="global_p" eval="True"/>
     </record>
     <record model="ir.rule" id="rule_mailbox_rule1">
@@ -133,7 +133,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     </record>
     <!-- Access Rule Mail -->
     <record model="ir.model.access" id="access_mail_admin">
-      <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+      <field name="model">electronic.mail</field>
       <field name="group" ref="group_email_admin"/>
       <field name="perm_read" eval="True"/>
       <field name="perm_write" eval="True"/>
@@ -141,7 +141,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_delete" eval="True"/>
     </record>
     <record model="ir.model.access" id="access_mail_user">
-      <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+      <field name="model">electronic.mail</field>
       <field name="group" ref="group_email_user"/>
       <field name="perm_read" eval="True"/>
       <field name="perm_write" eval="True"/>
@@ -149,7 +149,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
       <field name="perm_delete" eval="True"/>
     </record>
     <record model="ir.model.access" id="access_mail_default">
-      <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+      <field name="model">electronic.mail</field>
       <field name="perm_read" eval="False"/>
       <field name="perm_write" eval="True"/>
       <field name="perm_create" eval="True"/>
@@ -158,7 +158,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
 
     <record model="ir.rule.group" id="rule_group_electronic_mail_rule">
         <field name="name">Electronic Mail Company Rule</field>
-        <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+        <field name="model">electronic.mail</field>
         <field name="global_p" eval="True"/>
     </record>
     <record model="ir.rule" id="rule_electronic_mail_rule1">
@@ -178,7 +178,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <record model="ir.model.button" id="create_menu_button">
         <field name="name">create_menu</field>
         <field name="string">Create Menu</field>
-        <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+        <field name="model">electronic.mail.mailbox</field>
     </record>
     <record model="ir.model.button-res.group"
         id="create_menu_button_group_account">
@@ -190,7 +190,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <!-- Rule to read mailboxes -->
     <record model="ir.rule.group" id="rule_group_read_mailbox">
       <field name="name">Read MailBox Rule Group </field>
-      <field name="model" search="[('model', '=', 'electronic.mail.mailbox')]"/>
+      <field name="model">electronic.mail.mailbox</field>
       <field name="global_p" eval="True"/>
       <field name="default_p" eval="False"/>
       <field name="perm_read" eval="True"/>
@@ -232,7 +232,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <!-- Rule to read emails -->
     <record model="ir.rule.group" id="rule_group_read_mail">
       <field name="name">Read Mail</field>
-      <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+      <field name="model">electronic.mail</field>
       <field name="global_p" eval="True"/>
       <field name="default_p" eval="False"/>
       <field name="perm_read" eval="True"/>
@@ -267,7 +267,7 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <!-- Rule to write emails -->
     <record model="ir.rule.group" id="rule_group_write_mail">
       <field name="name">Write Mail</field>
-      <field name="model" search="[('model', '=', 'electronic.mail')]"/>
+      <field name="model">electronic.mail</field>
       <field name="global_p" eval="True"/>
       <field name="default_p" eval="False"/>
       <field name="perm_read" eval="True"/>

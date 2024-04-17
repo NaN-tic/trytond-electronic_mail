@@ -37,7 +37,7 @@ copyright notices and license terms. -->
                 action="act_electronic_mail_configuration"/>
 
         <record model="ir.model.access" id="access_electronic_mail_electronic_mail_administration">
-            <field name="model" search="[('model', '=', 'electronic.mail.configuration.company')]"/>
+            <field name="model">electronic.mail.configuration.company</field>
             <field name="group" ref="electronic_mail.group_email_admin"/>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="True"/>
@@ -45,7 +45,7 @@ copyright notices and license terms. -->
             <field name="perm_delete" eval="True"/>
         </record>
         <record model="ir.model.access" id="access_electronic_mail_product">
-            <field name="model" search="[('model', '=', 'electronic.mail.configuration.company')]"/>
+            <field name="model">electronic.mail.configuration.company</field>
             <field name="perm_read" eval="True"/>
             <field name="perm_write" eval="False"/>
             <field name="perm_create" eval="False"/>

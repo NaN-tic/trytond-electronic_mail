@@ -289,7 +289,9 @@ class ElectronicMail(ModelSQL, ModelView):
         pool = Pool()
         Model = pool.get('ir.model')
         ModelAccess = pool.get('ir.model.access')
-        models = Model.search([])
+        models = Model.search([
+            ('name', 'not like', 'babi_execution_%'),
+            ])
         access = ModelAccess.get_access([m.model for m in models])
 
         res = [(None, '')]

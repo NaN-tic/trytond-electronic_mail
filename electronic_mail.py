@@ -559,7 +559,7 @@ class ElectronicMail(ModelSQL, ModelView):
             'bcc': _decode_header(
                 ",".join(mail.get('bcc', '').replace('\t', '').splitlines())),
             'subject': _decode_header(str(mail.get('subject'))).replace(
-                '\n','').replace('\r', ''),
+                '\n','').replace('\r', '').replace('\t', ''),
             'date': mail_date,
             'message_id': message_id,
             'in_reply_to': _decode_header(mail.get('in-reply-to', '')).strip(

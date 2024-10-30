@@ -174,19 +174,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
         <field name="rule_group" ref="rule_group_electronic_mail_rule"/>
     </record>
 
-
-    <record model="ir.model.button" id="create_menu_button">
-        <field name="name">create_menu</field>
-        <field name="string">Create Menu</field>
-        <field name="model">electronic.mail.mailbox</field>
-    </record>
-    <record model="ir.model.button-res.group"
-        id="create_menu_button_group_account">
-        <field name="button" ref="create_menu_button"/>
-        <field name="group" ref="group_email_admin"/>
-    </record>
-
-
     <!-- Rule to read mailboxes -->
     <record model="ir.rule.group" id="rule_group_read_mailbox">
       <field name="name">Read MailBox Rule Group </field>

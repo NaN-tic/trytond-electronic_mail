@@ -26,7 +26,6 @@ except ImportError:
 
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
-from trytond.pyson import Bool, Eval
 
 
 EMAIL_DEFAULT_POLICY = email.policy.default
@@ -137,9 +136,17 @@ class ElectronicMail(ModelSQL, ModelView):
         pool = Pool()
         Model = pool.get('ir.model')
         ModelAccess = pool.get('ir.model.access')
-        models = Model.search([
-            ('name', 'not like', 'babi_execution_%'),
-            ])
+
+        models = []
+        for model in Model.search([
+                ('name', 'not like', 'babi_execution_%'),
+                ]):
+            try:
+                pool.get(model.model)
+                models.append(model)
+            except KeyError:
+                continue
+
         access = ModelAccess.get_access([m.model for m in models])
 
         res = [(None, '')]

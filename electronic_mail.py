@@ -425,7 +425,7 @@ class ElectronicMail(ModelSQL, ModelView):
         return mail
 
     @staticmethod
-    def validate_emails(email):
+    def validate_emails(email, raise_exception=True):
         '''Validate if emails ara corect formated.
         :param emails: list strings
         Return only the correct mails.
@@ -437,8 +437,12 @@ class ElectronicMail(ModelSQL, ModelView):
         elif isinstance(email, str):
             emails = [email]
         else:
-            raise UserError(
-                gettext('electronic_mail.not_validate_emails', email=email))
+            if raise_exception:
+                raise UserError(
+                    gettext('electronic_mail.not_validate_emails', email=email))
+            else:
+                return
+
         correct_mails = []
         if CHECK_EMAIL:
             for em in emails:

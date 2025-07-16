@@ -2,34 +2,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:electronic.mail.configuration.company:"
-msgid "There is already one configuration for this company."
-msgstr "Ya hay una configuración para esta compañia."
-
-msgctxt "error:electronic.mail.configuration:"
-msgid ""
-"You have not got the default company configured. And you need it to "
-"configure the default folders."
-msgstr "No tienes la configurada una compañia por defecto y necestitas tenerla"
-"para configurar las carpetas por defecto"
-
-msgctxt "error:electronic.mail.mailbox:"
-msgid ""
-"This mailbox has already a menu.\n"
-"Please, refresh the menu to see it."
-msgstr ""
-"Esta bandeja de entrada ya tiene un menú.\n"
-"Por favor, actualicé el menú para verlo."
-
-msgctxt "error:electronic.mail.mailbox:"
-msgid "You can not delete this mailbox because it has electronic mails."
-msgstr ""
-"No puede borrar esta bandeja de entrada porque tiene correos electrónicos."
-
-msgctxt "error:electronic.mail:"
-msgid "eMail %s invalid. Please, check the email before save it."
-msgstr "Correo %s inválido. Por favor, verifique el correo antes de guaradarlo."
-
 msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"

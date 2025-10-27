@@ -91,7 +91,7 @@ class ElectronicMail(ModelSQL, ModelView):
     body_html_filename = fields.Function(fields.Char("Body HTML File Name"),
         'get_body_html_filename')
     body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
-    preview = fields.Function(fields.Binary('Preview'), 'get_mail')
+    preview = fields.Function(fields.Text('Preview'), 'get_mail')
     deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
@@ -324,7 +324,18 @@ class ElectronicMail(ModelSQL, ModelView):
                     result['body'][mail.id] = ('<pre>%s</pre>' %
                         body.get('body_plain'))
                 result['body_plain'][mail.id] = body.get('body_plain')
-                result['body_html'][mail.id] = utils.render_email(email)
+                body_html = utils.render_email(email)
+                result['body_html'][mail.id] = ('''
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                    <meta charset="utf-8">
+                    </head>
+                    <body>
+                    %s
+                    </body>
+                    </html>
+                    ''' % body_html).encode('utf-8')
                 result['num_attach'][mail.id] = len(cls.get_attachments(email))
                 result['attachments'][mail.id] = '\n'.join([x['filename'] for x
                         in cls.get_attachments(email)])
@@ -354,7 +365,7 @@ class ElectronicMail(ModelSQL, ModelView):
                         'destinatari': email['To'],
                         'cc': email['Cc'],
                         'data': email['Date'],
-                        'body': result['body_html'][mail.id],
+                        'body': body_html,
                     }
             else:
                 result['mail_file_name'][mail.id] = None

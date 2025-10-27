@@ -323,6 +323,11 @@ class ElectronicMail(ModelSQL, ModelView):
                 result['attachments'][mail.id] = '\n'.join([x['filename'] for x
                         in cls.get_attachments(email)])
                 result['preview'][mail.id] = '''
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                    <meta charset="utf-8">
+                    </head>
                     <div style="font-family: sans-serif">
                     <h1>%(subject)s</h1>
                     <b>Remitent:</b> %(remitent)s<br/>
@@ -334,6 +339,8 @@ class ElectronicMail(ModelSQL, ModelView):
                     %(body)s
                     </div>
                     </div>
+                    </body>
+                    </html>
                     ''' % {
                         'subject': email['Subject'],
                         'remitent': email['From'],

@@ -86,9 +86,12 @@ class ElectronicMail(ModelSQL, ModelView):
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
     body = fields.Function(fields.Text('Body'), 'get_mail')
-    body_html = fields.Function(fields.Text('Body HTML'), 'get_mail')
+    body_html = fields.Function(fields.Binary('Body HTML',
+        filename='body_html_filename'), 'get_mail')
+    body_html_filename = fields.Function(fields.Char("Body HTML File Name"),
+        'get_body_html_filename')
     body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
-    preview = fields.Function(fields.Text('Preview'), 'get_mail')
+    preview = fields.Function(fields.Binary('Preview'), 'get_mail')
     deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
     reply_to = fields.Char('Reply-To')
@@ -112,6 +115,11 @@ class ElectronicMail(ModelSQL, ModelView):
     parent = fields.Function(fields.Many2One('electronic.mail', 'Parent'),
             'get_parent')
 
+    @classmethod
+    def __setup__(cls):
+        super().__setup__()
+        cls._order.insert(0, ('date', 'DESC'))
+
     def get_parent(self, name=None):
         ElectronicMail = Pool().get('electronic.mail')
         referenced_mails = None
@@ -126,11 +134,6 @@ class ElectronicMail(ModelSQL, ModelView):
         if referenced_mails:
             return referenced_mails[0]
 
-    @classmethod
-    def __setup__(cls):
-        super(ElectronicMail, cls).__setup__()
-        cls._order.insert(0, ('date', 'DESC'))
-
     @staticmethod
     def get_resource_models():
         pool = Pool()
@@ -143,6 +146,9 @@ class ElectronicMail(ModelSQL, ModelView):
                 if not m.startswith('babi_execution_')])
             models = [(m, n) for m, n in models if access[m]['read']]
         return [(None, '')] + models
+
+    def get_body_html_filename(self, name):
+        return 'body-html-content.html'
 
     @property
     def all_to(self):
@@ -328,6 +334,7 @@ class ElectronicMail(ModelSQL, ModelView):
                     <head>
                     <meta charset="utf-8">
                     </head>
+                    <body>
                     <div style="font-family: sans-serif">
                     <h1>%(subject)s</h1>
                     <b>Remitent:</b> %(remitent)s<br/>

@@ -55,14 +55,4 @@ def render_email(eml):
 
     for cid, image in images.items():
         html = html.replace('cid:' + cid, image)
-    return ('''
-        <!DOCTYPE html>
-        <html>
-        <head>
-        <meta charset="utf-8">
-        </head>
-        <body>
-        %s
-        </body>
-        </html>
-        ''' % html).encode('utf-8')
+    return html

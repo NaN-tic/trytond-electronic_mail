@@ -144,7 +144,7 @@ class ElectronicMail(ModelSQL, ModelView):
         if Transaction().check_access:
             access = ModelAccess.get_access([m for m, _ in models
                 if not m.startswith('babi_execution_')])
-            models = [(m, n) for m, n in models if access[m]['read']]
+            models = [(m, n) for m, n in models if access.get(m) and access[m]['read']]
         return [(None, '')] + models
 
     def get_body_html_filename(self, name):

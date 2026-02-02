@@ -64,5 +64,16 @@ class ElectronicMailTestCase(ModuleTestCase):
         self.assertEqual(mail.from_, message['From'])
         self.assertEqual(mail.to, message['To'])
 
+    @with_transaction()
+    def test_validate_emails(self):
+        pool = Pool()
+        Mail = pool.get('electronic.mail')
+
+        self.assertEqual(
+            Mail.validate_emails('user@example.com'),
+            'user@example.com')
+        self.assertEqual(
+            Mail.validate_emails('not-an-email'),
+            '')
 
 del ModuleTestCase

@@ -2,7 +2,6 @@
 # The COPYRIGHT file at the top level of this repository contains
 # the full copyright notices and license terms.
 import chardet
-import logging
 import mimetypes
 from datetime import datetime
 from email import message_from_bytes
@@ -11,21 +10,15 @@ from email.header import decode_header, make_header
 import email.policy
 from sys import getsizeof
 from time import mktime
-from trytond.i18n import gettext
-from trytond.exceptions import UserError
-from trytond.transaction import Transaction
-from . import utils
-
-try:
-    from emailvalid import check_email
-    CHECK_EMAIL = True
-except ImportError:
-    CHECK_EMAIL = False
-    msg = "Unable to import emailvalid. Email validation disabled."
-    logging.getLogger('Electronic Mail').warning(msg)
 
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
+from trytond.transaction import Transaction
+from trytond.tools.email_ import validate_email, EmailNotValidError
+
+from . import utils
 
 
 EMAIL_DEFAULT_POLICY = email.policy.default
@@ -463,12 +456,12 @@ class ElectronicMail(ModelSQL, ModelView):
                 return
 
         correct_mails = []
-        if CHECK_EMAIL:
-            for em in emails:
-                if check_email(em):
+        for em in emails:
+            try:
+                if validate_email(em):
                     correct_mails.append(em)
-        else:
-            return email
+            except EmailNotValidError:
+                continue
 
         if isinstance(email, list):
             return correct_mails

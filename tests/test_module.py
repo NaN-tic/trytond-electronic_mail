@@ -75,5 +75,24 @@ class ElectronicMailTestCase(ModuleTestCase):
         self.assertEqual(
             Mail.validate_emails('not-an-email'),
             '')
+        self.assertEqual(
+            Mail.validate_emails('not-an-email; user@example.com'),
+            'user@example.com')
+        self.assertEqual(
+            Mail.validate_emails('not-an-email, user@example.com'),
+            'user@example.com')
+        self.assertEqual(
+            Mail.validate_emails('not-an-email user@example.com'),
+            'user@example.com')
+        self.assertEqual(
+            Mail.validate_emails(
+                'not-an-email; user@example.com, other@example.com'),
+            'user@example.com, other@example.com')
+        self.assertEqual(
+            Mail.validate_emails(
+                ' user@example.com; other@example.com third@example.com,'
+                ' not-an-email ;  fourth@example.com '),
+            'user@example.com, other@example.com, third@example.com, '
+            'fourth@example.com')
 
 del ModuleTestCase

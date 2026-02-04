@@ -3,6 +3,7 @@
 # the full copyright notices and license terms.
 import chardet
 import mimetypes
+import re
 from datetime import datetime
 from email import message_from_bytes
 from email.utils import parsedate, getaddresses
@@ -447,7 +448,8 @@ class ElectronicMail(ModelSQL, ModelView):
         elif isinstance(email, set):
             emails = list(email)
         elif isinstance(email, str):
-            emails = [email]
+            emails = [e.strip() for e in re.split(r"[;,\s]+", email)
+                if e.strip()]
         else:
             if raise_exception:
                 raise UserError(
@@ -466,4 +468,4 @@ class ElectronicMail(ModelSQL, ModelView):
         if isinstance(email, list):
             return correct_mails
         else:
-            return len(correct_mails) == 1 and correct_mails[0] or ""
+            return ", ".join(correct_mails)

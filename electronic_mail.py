@@ -86,11 +86,6 @@ class ElectronicMail(ModelSQL, ModelView):
     date = fields.DateTime('Date')
     subject = fields.Char('Subject')
     body = fields.Function(fields.Text('Body'), 'get_mail')
-    body_html = fields.Function(fields.Binary('Body HTML',
-        filename='body_html_filename'), 'get_mail')
-    body_html_filename = fields.Function(fields.Char("Body HTML File Name"),
-        'get_body_html_filename')
-    body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
     preview = fields.Function(fields.Text('Preview'), 'get_mail')
     deliveredto = fields.Char('Delivered-To')
     reference = fields.Char('References')
@@ -146,9 +141,6 @@ class ElectronicMail(ModelSQL, ModelView):
                 if not m.startswith('babi_execution_')])
             models = [(m, n) for m, n in models if access[m]['read']]
         return [(None, '')] + models
-
-    def get_body_html_filename(self, name):
-        return 'body-html-content.html'
 
     @property
     def all_to(self):
@@ -305,8 +297,8 @@ class ElectronicMail(ModelSQL, ModelView):
     @classmethod
     def get_mail(cls, mails, names):
         result = {}
-        for fname in ['body', 'body_plain', 'body_html', 'num_attach',
-                'mail_file_name', 'attachments', 'preview']:
+        for fname in ['body', 'num_attach', 'mail_file_name', 'attachments',
+                'preview']:
             result[fname] = {}
         with Transaction().set_context({'electronic.mail.mail_file': None}):
             # Ensure that mail_file returns a binary and not its size
@@ -323,19 +315,7 @@ class ElectronicMail(ModelSQL, ModelView):
                 else:
                     result['body'][mail.id] = ('<pre>%s</pre>' %
                         body.get('body_plain'))
-                result['body_plain'][mail.id] = body.get('body_plain')
                 body_html = utils.render_email(email)
-                result['body_html'][mail.id] = ('''
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                    <meta charset="utf-8">
-                    </head>
-                    <body>
-                    %s
-                    </body>
-                    </html>
-                    ''' % body_html).encode('utf-8')
                 result['num_attach'][mail.id] = len(cls.get_attachments(email))
                 result['attachments'][mail.id] = '\n'.join([x['filename'] for x
                         in cls.get_attachments(email)])
@@ -370,12 +350,10 @@ class ElectronicMail(ModelSQL, ModelView):
             else:
                 result['mail_file_name'][mail.id] = None
                 result['body'][mail.id] = None
-                result['body_plain'][mail.id] = None
-                result['body_html'][mail.id] = None
                 result['num_attach'][mail.id] = None
                 result['attachments'][mail.id] = None
                 result['preview'][mail.id] = None
-        for fname in ['body_plain', 'body_html', 'num_attach', 'preview']:
+        for fname in ['num_attach', 'preview']:
             if fname not in names:
                 del result[fname]
         return result

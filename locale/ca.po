@@ -14,14 +14,6 @@ msgctxt "field:electronic.mail,body:"
 msgid "Body"
 msgstr "Cos"
 
-msgctxt "field:electronic.mail,body_html:"
-msgid "Body HTML"
-msgstr "Cos HTML"
-
-msgctxt "field:electronic.mail,body_plain:"
-msgid "Body Plain"
-msgstr "Cos Text Pla"
-
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
 msgstr "CC"

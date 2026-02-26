@@ -98,7 +98,7 @@ msgctxt "field:electronic.mail,num_attach:"
 msgid "Number of attachments"
 msgstr "Número de adjuntos"
 
-msgctxt "field:electronic.mail,reference:"
+msgctxt "field:electronic.mail,references:"
 msgid "References"
 msgstr "Referencias"
 

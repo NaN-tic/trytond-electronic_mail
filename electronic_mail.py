@@ -94,7 +94,8 @@ class ElectronicMail(ModelSQL, ModelView):
     attachments = fields.Function(fields.Text('Attachments'), 'get_mail')
     message_id = fields.Char('Message-ID', help='Unique Message Identifier')
     in_reply_to = fields.Char('In-Reply-To')
-    mail_file = fields.Binary('Mail File', file_id='mail_file_id')
+    mail_file = fields.Binary('Mail File', file_id='mail_file_id',
+        filename='mail_file_name')
     mail_file_id = fields.Char('Mail File ID')
     mail_file_name = fields.Function(fields.Char('Mail File Name'), 'get_mail')
     flag_send = fields.Boolean('Sent', readonly=True)

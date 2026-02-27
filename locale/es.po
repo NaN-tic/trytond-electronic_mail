@@ -14,14 +14,6 @@ msgctxt "field:electronic.mail,body:"
 msgid "Body"
 msgstr "Cuerpo"
 
-msgctxt "field:electronic.mail,body_html:"
-msgid "Body HTML"
-msgstr "Cuerpo HTML"
-
-msgctxt "field:electronic.mail,body_plain:"
-msgid "Body Plain"
-msgstr "Cuerpo Texto Plano"
-
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
 msgstr "CC"

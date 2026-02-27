@@ -6,14 +6,6 @@ msgctxt "field:electronic.mail,bcc:"
 msgid "BCC"
 msgstr "BCC"
 
-msgctxt "field:electronic.mail,body_html:"
-msgid "Body HTML"
-msgstr "Body HTML"
-
-msgctxt "field:electronic.mail,body_plain:"
-msgid "Body Plain"
-msgstr "Body Texto Plano"
-
 msgctxt "field:electronic.mail,cc:"
 msgid "CC"
 msgstr "CC"

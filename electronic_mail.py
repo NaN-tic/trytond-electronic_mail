@@ -12,6 +12,7 @@ import email.policy
 from sys import getsizeof
 from time import mktime
 
+from trytond import backend
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
 from trytond.i18n import gettext
@@ -87,7 +88,7 @@ class ElectronicMail(ModelSQL, ModelView):
     body_plain = fields.Function(fields.Text('Body Plain'), 'get_mail')
     preview = fields.Function(fields.Text('Preview'), 'get_mail')
     deliveredto = fields.Char('Delivered-To')
-    reference = fields.Char('References')
+    references = fields.Char('References')
     reply_to = fields.Char('Reply-To')
     num_attach = fields.Function(fields.Integer('Number of attachments'),
         'get_mail')
@@ -115,6 +116,16 @@ class ElectronicMail(ModelSQL, ModelView):
         super().__setup__()
         cls._order.insert(0, ('date', 'DESC'))
 
+    @classmethod
+    def __register__(cls, module_name):
+        table_h = backend.TableHandler(cls, module_name)
+
+        if (table_h.column_exist('reference')
+                and not table_h.column_exist('references')):
+            table_h.column_rename('reference', 'references')
+
+        super(ElectronicMail, cls).__register__(module_name)
+
     def get_parent(self, name=None):
         ElectronicMail = Pool().get('electronic.mail')
         referenced_mails = None
@@ -122,9 +133,9 @@ class ElectronicMail(ModelSQL, ModelView):
             referenced_mails = ElectronicMail.search([
                 ('message_id', '=', self.in_reply_to)
                 ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
-        if not referenced_mails and self.reference:
+        if not referenced_mails and self.references:
             referenced_mails = ElectronicMail.search([
-                ('message_id', 'in', self.reference)
+                ('message_id', 'in', self.references)
                 ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
         if referenced_mails:
             return referenced_mails[0]
@@ -201,7 +212,7 @@ class ElectronicMail(ModelSQL, ModelView):
         res = {}
         for mail in records:
             # remove \r and \n characters on the subject because SAO
-            # detect that "reference" field is modified
+            # detect that "references" field is modified
             subject = mail.subject and mail.subject.replace( '\r', '') or ''
             subject = subject and subject.replace('\n', '')
             res[mail.id] = '%s (ID: %s)' % (subject, mail.id)
@@ -423,7 +434,7 @@ class ElectronicMail(ModelSQL, ModelView):
             'deliveredto': _decode_header(
                 ",".join(mail.get('delivered-to', '').replace(
                     '\t', '').splitlines())),
-            'reference': _decode_header(
+            'references': _decode_header(
                 ",".join(mail.get('references', '').replace(
                     '\t', '').splitlines())),
             'reply_to': _decode_header(

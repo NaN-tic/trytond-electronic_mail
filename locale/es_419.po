@@ -102,7 +102,7 @@ msgctxt "field:electronic.mail,rec_name:"
 msgid "Record Name"
 msgstr "Nombre"
 
-msgctxt "field:electronic.mail,reference:"
+msgctxt "field:electronic.mail,references:"
 msgid "References"
 msgstr "Referencias"
 

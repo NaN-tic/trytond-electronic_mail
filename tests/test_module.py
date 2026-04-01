@@ -95,4 +95,31 @@ class ElectronicMailTestCase(ModuleTestCase):
             'user@example.com, other@example.com, third@example.com, '
             'fourth@example.com')
 
+    @with_transaction()
+    def test_parent_from_references_header(self):
+        pool = Pool()
+        Mail = pool.get('electronic.mail')
+        Mailbox = pool.get('electronic.mail.mailbox')
+
+        mailbox = Mailbox.create([{
+                    'name': 'Mailbox',
+                    }])[0]
+
+        parent_message = MIMEMultipart('alternative')
+        parent_message['date'] = formatdate()
+        parent_message['Subject'] = "Parent"
+        parent_message['Message-ID'] = "<parent@example.com>"
+        parent_message.attach(MIMEText("Parent body", 'plain'))
+        parent_mail = Mail.create_from_mail(parent_message, mailbox)
+
+        reply_message = MIMEMultipart('alternative')
+        reply_message['date'] = formatdate()
+        reply_message['Subject'] = "Reply"
+        reply_message['Message-ID'] = "<reply@example.com>"
+        reply_message['References'] = "<parent@example.com> <other@example.com>"
+        reply_message.attach(MIMEText("Reply body", 'plain'))
+        reply_mail = Mail.create_from_mail(reply_message, mailbox)
+
+        self.assertEqual(reply_mail.parent, parent_mail)
+
 del ModuleTestCase

@@ -133,9 +133,12 @@ class ElectronicMail(ModelSQL, ModelView):
             referenced_mails = ElectronicMail.search([
                 ('message_id', '=', self.in_reply_to)
                 ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
-        if not referenced_mails and self.references:
+        references = re.findall(r'<[^>]+>', self.references or '')
+        if not references and self.references:
+            references = self.references.split()
+        if not referenced_mails and references:
             referenced_mails = ElectronicMail.search([
-                ('message_id', 'in', self.references)
+                ('message_id', 'in', references)
                 ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
         if referenced_mails:
             return referenced_mails[0]

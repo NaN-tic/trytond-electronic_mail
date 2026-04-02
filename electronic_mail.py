@@ -129,12 +129,12 @@ class ElectronicMail(ModelSQL, ModelView):
     def get_parent(self, name=None):
         ElectronicMail = Pool().get('electronic.mail')
         referenced_mails = None
+        references = []
         if self.in_reply_to:
             referenced_mails = ElectronicMail.search([
                 ('message_id', '=', self.in_reply_to)
                 ], order=[('date', 'DESC'), ('id', 'DESC')], limit=1)
-        references = re.findall(r'<[^>]+>', self.references or '')
-        if not references and self.references:
+        if self.references:
             references = self.references.split()
         if not referenced_mails and references:
             referenced_mails = ElectronicMail.search([

@@ -138,7 +138,7 @@ class ElectronicMail(ModelSQL, ModelView):
         models = Model.get_name_items()
         if Transaction().check_access:
             access = ModelAccess.get_access([m for m, _ in models
-                if not m.startswith('babi_execution_')])
+                if not m.startswith('babi_execution_') or not m.startswith('www.')])
             models = [(m, n) for m, n in models if access.get(m) and access[m]['read']]
         return [(None, '')] + models
 

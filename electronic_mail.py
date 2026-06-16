@@ -12,6 +12,7 @@ import email.policy
 from sys import getsizeof
 from time import mktime
 
+from sql import Null
 from trytond import backend
 from trytond.model import ModelView, ModelSQL, fields
 from trytond.pool import Pool
@@ -73,9 +74,9 @@ class ElectronicMail(ModelSQL, ModelView):
 
     mailbox = fields.Many2One('electronic.mail.mailbox', 'Mailbox',
         required=True)
-    from_ = fields.Char('From')
+    from_ = fields.Char('From', required=True)
     sender = fields.Char('Sender')
-    to = fields.Char('To')
+    to = fields.Char('To', required=True)
     cc = fields.Char('CC')
     bcc = fields.Char('BCC')
     date = fields.DateTime('Date')
@@ -118,11 +119,24 @@ class ElectronicMail(ModelSQL, ModelView):
 
     @classmethod
     def __register__(cls, module_name):
+        exists = backend.TableHandler.table_exist(cls._table)
         table_h = backend.TableHandler(cls, module_name)
 
         if (table_h.column_exist('reference')
                 and not table_h.column_exist('references')):
             table_h.column_rename('reference', 'references')
+
+        if exists:
+            table = cls.__table__()
+            cursor = Transaction().connection.cursor()
+            cursor.execute(*table.update(
+                    columns=[table.to],
+                    values=['<empty>'],
+                    where=table.to == Null))
+            cursor.execute(*table.update(
+                    columns=[table.from_],
+                    values=['<empty>'],
+                    where=table.from_ == Null))
 
         super(ElectronicMail, cls).__register__(module_name)
 

@@ -6,7 +6,7 @@ import mimetypes
 import re
 from datetime import datetime
 from email import message_from_bytes
-from email.utils import parsedate, getaddresses
+from email.utils import parsedate, getaddresses, formataddr
 from email.header import decode_header, make_header
 import email.policy
 from sys import getsizeof
@@ -472,13 +472,13 @@ class ElectronicMail(ModelSQL, ModelView):
         :param emails: list strings
         Return only the correct mails.
         '''
+        as_list = isinstance(email, (list, set))
         if isinstance(email, list):
             emails = email
         elif isinstance(email, set):
             emails = list(email)
         elif isinstance(email, str):
-            emails = [e.strip() for e in re.split(r"[;,\s]+", email)
-                if e.strip()]
+            emails = [email]
         else:
             if raise_exception:
                 raise UserError(
@@ -488,13 +488,29 @@ class ElectronicMail(ModelSQL, ModelView):
 
         correct_mails = []
         for em in emails:
-            try:
-                if validate_email(em):
-                    correct_mails.append(em)
-            except EmailNotValidError:
-                continue
+            segments = [s.strip() for s in re.split(r'[;,]+', em) if s.strip()]
+            addresses = []
+            for segment in segments:
+                if any(c in segment for c in '<>"'):
+                    addresses.extend(getaddresses([segment]))
+                else:
+                    # Backward compatibility for whitespace-separated addresses.
+                    addresses.extend(
+                        ('', e.strip()) for e in re.split(r'\s+', segment)
+                        if e.strip())
+            for name, address in addresses:
+                if not address:
+                    continue
+                try:
+                    if validate_email(address):
+                        if name:
+                            correct_mails.append(formataddr((name, address)))
+                        else:
+                            correct_mails.append(address)
+                except EmailNotValidError:
+                    continue
 
-        if isinstance(email, list):
+        if as_list:
             return correct_mails
         else:
             return ", ".join(correct_mails)

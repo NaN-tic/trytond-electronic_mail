@@ -94,6 +94,19 @@ class ElectronicMailTestCase(ModuleTestCase):
                 ' not-an-email ;  fourth@example.com '),
             'user@example.com, other@example.com, third@example.com, '
             'fourth@example.com')
+        self.assertEqual(
+            Mail.validate_emails('User Example <user@example.com>'),
+            'User Example <user@example.com>')
+        self.assertEqual(
+            Mail.validate_emails(
+                'User Example <user@example.com>; '
+                'Other Example <other@example.com>'),
+            'User Example <user@example.com>, '
+            'Other Example <other@example.com>')
+        self.assertEqual(
+            Mail.validate_emails(
+                'invalid; User Example <user@example.com>'),
+            'User Example <user@example.com>')
 
     @with_transaction()
     def test_parent_from_references_header(self):

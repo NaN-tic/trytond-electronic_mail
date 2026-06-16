@@ -108,6 +108,8 @@ class ElectronicMailTestCase(ModuleTestCase):
         parent_message = MIMEMultipart('alternative')
         parent_message['date'] = formatdate()
         parent_message['Subject'] = "Parent"
+        parent_message['From'] = "parent@example.com"
+        parent_message['To'] = "child@example.com"
         parent_message['Message-ID'] = "<parent@example.com>"
         parent_message.attach(MIMEText("Parent body", 'plain'))
         parent_mail = Mail.create_from_mail(parent_message, mailbox)
@@ -115,6 +117,8 @@ class ElectronicMailTestCase(ModuleTestCase):
         reply_message = MIMEMultipart('alternative')
         reply_message['date'] = formatdate()
         reply_message['Subject'] = "Reply"
+        reply_message['From'] = "child@example.com"
+        reply_message['To'] = "parent@example.com"
         reply_message['Message-ID'] = "<reply@example.com>"
         reply_message['References'] = "<parent@example.com> <other@example.com>"
         reply_message.attach(MIMEText("Reply body", 'plain'))

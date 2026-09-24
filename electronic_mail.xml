@@ -9,14 +9,6 @@ The COPYRIGHT file at the top level of this repository contains the full copyrig
     <record model="res.group" id="group_email_user">
       <field name="name">Electronic Mail User</field>
     </record>
-    <record model="res.user-res.group" id="user_admin_group_email_admin">
-      <field name="user" ref="res.user_admin"/>
-      <field name="group" ref="group_email_admin"/>
-    </record>
-    <record model="res.user-res.group" id="user_admin_group_email_user">
-      <field name="user" ref="res.user_admin"/>
-      <field name="group" ref="group_email_user"/>
-    </record>
 
     <record model="ir.ui.icon" id="mail_icon">
         <field name="name">tryton-mail</field>

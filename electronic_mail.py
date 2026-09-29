@@ -100,7 +100,7 @@ class ElectronicMail(ModelSQL, ModelView):
         filename='mail_file_name')
     mail_file_id = fields.Char('Mail File ID')
     mail_file_name = fields.Function(fields.Char('Mail File Name'), 'get_mail')
-    flag_send = fields.Boolean('Sent', readonly=True)
+    flag_send = fields.Boolean('Sent', states={'editable': False})
     flag_received = fields.Boolean('Received', readonly=True)
     flag_seen = fields.Boolean('Seen')
     flag_answered = fields.Boolean('Answered')

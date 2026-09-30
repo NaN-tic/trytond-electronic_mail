@@ -4,13 +4,12 @@
 import chardet
 import mimetypes
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from email import message_from_bytes
-from email.utils import parsedate, getaddresses, formataddr
+from email.utils import parsedate_to_datetime, getaddresses, formataddr
 from email.header import decode_header, make_header
 import email.policy
 from sys import getsizeof
-from time import mktime
 
 from sql import Null
 from trytond import backend
@@ -57,6 +56,23 @@ def _decode_body(part):
         return payload.decode(charset or 'utf-8').strip()
     except UnicodeDecodeError:
         return ''
+
+
+def parse_mail_date(value):
+    """Return a naive UTC datetime, or None for an unusable Date header.
+
+    RFC 2822 -0000 timestamps and headers without an offset are interpreted as
+    UTC, independently of the server timezone.
+    """
+    if not value:
+        return None
+    try:
+        date = parsedate_to_datetime(str(value))
+        if date.tzinfo is None:
+            date = date.replace(tzinfo=timezone.utc)
+        return date.astimezone(timezone.utc).replace(tzinfo=None)
+    except (TypeError, ValueError, OverflowError):
+        return None
 
 
 class Mailbox(ModelSQL, ModelView):
@@ -412,10 +428,10 @@ class ElectronicMail(ModelSQL, ModelView):
         :param context: dict
         """
 
-        mail_date = None
-        if mail.get('date'):
-            mail_date = (_decode_header(mail.get('date', "")) and
-                datetime.fromtimestamp(mktime(parsedate(mail.get('date')))))
+        mail_date = parse_mail_date(mail.get('date'))
+        if mail_date is None:
+            # Undated or malformed messages still need a usable activity date.
+            mail_date = datetime.now(timezone.utc).replace(tzinfo=None)
 
         # email.message.replace_header may raise 'KeyError' if the header
         # 'content-transfer-encoding' is missing

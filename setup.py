@@ -46,6 +46,8 @@ for dep in info.get('depends', []):
         prefix = MODULE2PREFIX.get(dep, 'trytond')
         requires.append(get_require_version('%s_%s' % (prefix, dep)))
 requires.append(get_require_version('trytond'))
+requires.extend(['bleach[css]>=6.0,<7', 'lxml>=4.9',
+    'premailer>=3.10,<4', 'tinycss2>=1.2'])
 
 tests_require = [
     get_require_version('proteus'),

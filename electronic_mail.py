@@ -355,57 +355,15 @@ class ElectronicMail(ModelSQL, ModelView):
                 result['mail_file_name'][mail.id] = '%d.txt' % mail.id
                 email = message_from_bytes(mail.mail_file, policy=EMAIL_DEFAULT_POLICY)
                 body = mail.get_body(email)
-                html = body.get('body_html').strip()
-                # TODO: Find a better way to know if there's a real HTML body
-                if html.startswith('<html') or html.startswith('<meta'):
-                    result['body'][mail.id] = body.get('body_html')
-                else:
-                    result['body'][mail.id] = ('<pre>%s</pre>' %
-                        body.get('body_plain'))
                 result['body_plain'][mail.id] = body.get('body_plain')
                 body_html = utils.render_email(email)
-                result['body_html'][mail.id] = ('''
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                    <meta charset="utf-8">
-                    </head>
-                    <body>
-                    %s
-                    </body>
-                    </html>
-                    ''' % body_html).encode('utf-8')
+                result['body'][mail.id] = body_html
+                result['body_html'][mail.id] = utils.render_document(
+                    body_html).encode('utf-8')
                 result['num_attach'][mail.id] = len(cls.get_attachments(email))
                 result['attachments'][mail.id] = '\n'.join([x['filename'] for x
                         in cls.get_attachments(email)])
-                result['preview'][mail.id] = '''
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                    <meta charset="utf-8">
-                    </head>
-                    <body>
-                    <div style="font-family: sans-serif">
-                    <h1>%(subject)s</h1>
-                    <b>Remitent:</b> %(remitent)s<br/>
-                    <b>Destinatari:</b> %(destinatari)s<br/>
-                    <b>CC:</b> %(cc)s<br/>
-                    <b>Data:</b> %(data)s<br/>
-                    <hr/>
-                    <div>
-                    %(body)s
-                    </div>
-                    </div>
-                    </body>
-                    </html>
-                    ''' % {
-                        'subject': email['Subject'],
-                        'remitent': email['From'],
-                        'destinatari': email['To'],
-                        'cc': email['Cc'],
-                        'data': email['Date'],
-                        'body': body_html,
-                    }
+                result['preview'][mail.id] = utils.render_document(body_html, email)
             else:
                 result['mail_file_name'][mail.id] = None
                 result['body'][mail.id] = None

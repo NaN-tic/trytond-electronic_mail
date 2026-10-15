@@ -92,7 +92,7 @@ class ElectronicMail(ModelSQL, ModelView):
         required=True)
     from_ = fields.Char('From', required=True)
     sender = fields.Char('Sender')
-    to = fields.Char('To', required=True)
+    to = fields.Char('To')
     cc = fields.Char('CC')
     bcc = fields.Char('BCC')
     date = fields.DateTime('Date')
@@ -143,12 +143,9 @@ class ElectronicMail(ModelSQL, ModelView):
             table_h.column_rename('reference', 'references')
 
         if exists:
+            table_h.not_null_action('to', action='remove')
             table = cls.__table__()
             cursor = Transaction().connection.cursor()
-            cursor.execute(*table.update(
-                    columns=[table.to],
-                    values=['<empty>'],
-                    where=table.to == Null))
             cursor.execute(*table.update(
                     columns=[table.from_],
                     values=['<empty>'],

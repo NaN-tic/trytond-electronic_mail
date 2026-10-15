@@ -266,8 +266,6 @@ class ElectronicMail(ModelSQL, ModelView):
             for part in msg.walk():
                 if part.get_content_maintype() == 'multipart':
                     continue
-                if part.get('Content-Disposition') is None:
-                    continue
                 if part.get_filename():
                     filename = part.get_filename()
                     if not filename:

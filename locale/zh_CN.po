@@ -1,0 +1,357 @@
+#
+msgid ""
+msgstr ""
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "field:electronic.mail,attachments:"
+msgid "Attachments"
+msgstr "附件"
+
+msgctxt "field:electronic.mail,bcc:"
+msgid "BCC"
+msgstr "密送"
+
+msgctxt "field:electronic.mail,body:"
+msgid "Body"
+msgstr "正文"
+
+msgctxt "field:electronic.mail,body_html:"
+msgid "Body HTML"
+msgstr "HTML 正文"
+
+msgctxt "field:electronic.mail,body_plain:"
+msgid "Body Plain"
+msgstr "纯文本正文"
+
+msgctxt "field:electronic.mail,cc:"
+msgid "CC"
+msgstr "抄送"
+
+msgctxt "field:electronic.mail,collision:"
+msgid "Collision"
+msgstr "冲突"
+
+msgctxt "field:electronic.mail,date:"
+msgid "Date"
+msgstr "日期"
+
+msgctxt "field:electronic.mail,deliveredto:"
+msgid "Delivered-To"
+msgstr "投递至"
+
+msgctxt "field:electronic.mail,digest:"
+msgid "MD5 Digest"
+msgstr "MD5 摘要"
+
+msgctxt "field:electronic.mail,flag_answered:"
+msgid "Answered"
+msgstr "已回复"
+
+msgctxt "field:electronic.mail,flag_draft:"
+msgid "Draft"
+msgstr "草案"
+
+msgctxt "field:electronic.mail,flag_flagged:"
+msgid "Flagged"
+msgstr "已标记"
+
+msgctxt "field:electronic.mail,flag_received:"
+msgid "Received"
+msgstr "已收货"
+
+msgctxt "field:electronic.mail,flag_recent:"
+msgid "Recent"
+msgstr "最近"
+
+msgctxt "field:electronic.mail,flag_seen:"
+msgid "Seen"
+msgstr "已读"
+
+msgctxt "field:electronic.mail,flag_send:"
+msgid "Sent"
+msgstr "已发送"
+
+msgctxt "field:electronic.mail,from_:"
+msgid "From"
+msgstr "从"
+
+msgctxt "field:electronic.mail,in_reply_to:"
+msgid "In-Reply-To"
+msgstr "回复关联"
+
+msgctxt "field:electronic.mail,mail_file:"
+msgid "Mail File"
+msgstr "邮件文件"
+
+msgctxt "field:electronic.mail,mail_file_name:"
+msgid "Mail File Name"
+msgstr "邮件文件名"
+
+msgctxt "field:electronic.mail,mailbox:"
+msgid "Mailbox"
+msgstr "邮箱"
+
+msgctxt "field:electronic.mail,message_id:"
+msgid "Message-ID"
+msgstr "邮件 ID"
+
+msgctxt "field:electronic.mail,num_attach:"
+msgid "Number of attachments"
+msgstr "附件数量"
+
+msgctxt "field:electronic.mail,references:"
+msgid "References"
+msgstr "引用"
+
+msgctxt "field:electronic.mail,reply_to:"
+msgid "Reply-To"
+msgstr "回复地址"
+
+msgctxt "field:electronic.mail,resource:"
+msgid "Resource"
+msgstr "资源"
+
+msgctxt "field:electronic.mail,sender:"
+msgid "Sender"
+msgstr "发件人"
+
+msgctxt "field:electronic.mail,size:"
+msgid "Size"
+msgstr "大小"
+
+msgctxt "field:electronic.mail,subject:"
+msgid "Subject"
+msgstr "主题"
+
+msgctxt "field:electronic.mail,to:"
+msgid "To"
+msgstr "到"
+
+msgctxt "field:electronic.mail.configuration,draft:"
+msgid "Draft"
+msgstr "草案"
+
+msgctxt "field:electronic.mail.configuration,error:"
+msgid "Error"
+msgstr "错误"
+
+msgctxt "field:electronic.mail.configuration,outbox:"
+msgid "Outbox"
+msgstr "发件箱"
+
+msgctxt "field:electronic.mail.configuration,send_email_after:"
+msgid "Send Email after"
+msgstr "延迟发送邮件"
+
+msgctxt "field:electronic.mail.configuration,sent:"
+msgid "Sent"
+msgstr "已发送"
+
+msgctxt "field:electronic.mail.configuration.company,company:"
+msgid "Company"
+msgstr "公司"
+
+msgctxt "field:electronic.mail.configuration.company,draft:"
+msgid "Draft"
+msgstr "草案"
+
+msgctxt "field:electronic.mail.configuration.company,error:"
+msgid "Error"
+msgstr "错误"
+
+msgctxt "field:electronic.mail.configuration.company,outbox:"
+msgid "Outbox"
+msgstr "发件箱"
+
+msgctxt "field:electronic.mail.configuration.company,sent:"
+msgid "Sent"
+msgstr "已发送"
+
+msgctxt "field:electronic.mail.mailbox,name:"
+msgid "Name"
+msgstr "名称"
+
+msgctxt "field:res.user,signature_html:"
+msgid "Signature"
+msgstr "签名"
+
+msgctxt "help:electronic.mail,message_id:"
+msgid "Unique Message Identifier"
+msgstr "唯一邮件标识符"
+
+msgctxt "help:electronic.mail.configuration,send_email_after:"
+msgid ""
+"The grace period during which user send email and finally it is sent.\n"
+"Applied if a worker queue is activated."
+msgstr ""
+"用户提交发送邮件到实际发送之间的宽限期。\n"
+"启用工作队列时生效。"
+
+msgctxt "model:electronic.mail,name:"
+msgid "E-mail"
+msgstr "电子邮件"
+
+msgctxt "model:electronic.mail.configuration,name:"
+msgid "Electronic Mail Configuration"
+msgstr "电子邮件配置"
+
+msgctxt "model:electronic.mail.configuration.company,name:"
+msgid "Electronic Mail Configuration Company"
+msgstr "公司电子邮件配置"
+
+msgctxt "model:electronic.mail.mailbox,name:"
+msgid "Mailbox"
+msgstr "邮箱"
+
+msgctxt "model:ir.action,name:act_electronic_mail_configuration"
+msgid "Electronic Mail Configuration"
+msgstr "电子邮件配置"
+
+msgctxt "model:ir.action,name:act_mail_form"
+msgid "Emails"
+msgstr "电子邮件"
+
+msgctxt "model:ir.action,name:act_mailbox_form"
+msgid "Mailboxes"
+msgstr "邮箱"
+
+msgctxt "model:ir.message,text:email_invalid"
+msgid "Please, check the email before save it"
+msgstr "保存前请检查电子邮件"
+
+msgctxt "model:ir.message,text:foreign_model_exist"
+msgid "You can not delete this mailbox because it has electronic mails."
+msgstr "此邮箱包含电子邮件，无法删除。"
+
+msgctxt "model:ir.message,text:menu_exist"
+msgid ""
+"This mailbox has already a menu.\n"
+"Please, refresh the menu to see it."
+msgstr ""
+"此邮箱已有菜单。\n"
+"请刷新菜单以查看。"
+
+msgctxt "model:ir.message,text:not_company"
+msgid ""
+"You have not got the default company configured. And you need it to "
+"configure the default folders."
+msgstr "尚未配置默认公司。配置默认文件夹需要先设置默认公司。"
+
+#, python-format
+msgctxt "model:ir.message,text:not_validate_emails"
+msgid ""
+"Email is not list, set or string. Please, check the e-mail \"%(email)s\" "
+"before to send."
+msgstr "电子邮件不是列表、集合或字符串。发送前请检查电子邮件“%(email)s”。"
+
+msgctxt "model:ir.model.button,string:create_menu_button"
+msgid "Create Menu"
+msgstr "创建菜单"
+
+msgctxt "model:ir.rule.group,name:rule_group_read_mail"
+msgid "Read Mail"
+msgstr "读取邮件"
+
+msgctxt "model:ir.rule.group,name:rule_group_read_mailbox"
+msgid "Read MailBox Rule Group "
+msgstr "读取邮箱规则组 "
+
+msgctxt "model:ir.rule.group,name:rule_group_write_mail"
+msgid "Write Mail"
+msgstr "写入邮件"
+
+msgctxt "model:ir.ui.menu,name:menu_electronic_mail_configuration"
+msgid "Electronic Mail Configuration"
+msgstr "电子邮件配置"
+
+msgctxt "model:ir.ui.menu,name:menu_email_management"
+msgid "Emails"
+msgstr "电子邮件"
+
+msgctxt "model:ir.ui.menu,name:menu_mail"
+msgid "Emails"
+msgstr "电子邮件"
+
+msgctxt "model:ir.ui.menu,name:menu_mailbox"
+msgid "Mailboxes"
+msgstr "邮箱"
+
+msgctxt "model:ir.ui.menu,name:menu_parent_electronic_mail_configuration"
+msgid "Configuration"
+msgstr "设置"
+
+msgctxt "model:res.group,name:group_email_admin"
+msgid "Electronic Mail Administrator"
+msgstr "电子邮件管理员"
+
+msgctxt "model:res.group,name:group_email_user"
+msgid "Electronic Mail User"
+msgstr "电子邮件用户"
+
+msgctxt "view:electronic.mail.configuration:"
+msgid "Electronic Mail Configuration"
+msgstr "电子邮件配置"
+
+msgctxt "view:electronic.mail.mailbox:"
+msgid "Create Menu"
+msgstr "创建菜单"
+
+msgctxt "view:electronic.mail:"
+msgid "Hour"
+msgstr "小时"
+
+msgctxt "view:res.user:"
+msgid "Signature"
+msgstr "签名"
+
+msgctxt "view:res.user:"
+msgid "Signature (HTML)"
+msgstr "签名（HTML）"
+
+msgctxt "field:electronic.mail,body_html_filename:"
+msgid "Body HTML File Name"
+msgstr "HTML 正文文件名"
+
+msgctxt "field:electronic.mail.mailbox,company:"
+msgid "Company"
+msgstr "公司"
+
+msgctxt "field:electronic.mail,mail_file_id:"
+msgid "Mail File ID"
+msgstr "邮件文件 ID"
+
+msgctxt "field:electronic.mail,parent:"
+msgid "Parent"
+msgstr "上级"
+
+msgctxt "field:electronic.mail,preview:"
+msgid "Preview"
+msgstr "预览"
+
+msgctxt "field:electronic.mail,reference:"
+msgid "References"
+msgstr "引用"
+
+msgctxt "model:electronic.mail.configuration.company,string:"
+msgid "Electronic Mail Configuration Company"
+msgstr "公司电子邮件配置"
+
+msgctxt "model:electronic.mail.configuration,string:"
+msgid "Electronic Mail Configuration"
+msgstr "电子邮件配置"
+
+msgctxt "model:electronic.mail,string:"
+msgid "Electronic Mail"
+msgstr "电子邮件"
+
+msgctxt "model:ir.rule.group,name:rule_group_mailbox_rule"
+msgid "Mailbox Company Rule"
+msgstr "邮箱公司规则"
+
+msgctxt "model:ir.rule.group,name:rule_group_electronic_mail_rule"
+msgid "Electronic Mail Company Rule"
+msgstr "电子邮件公司规则"
